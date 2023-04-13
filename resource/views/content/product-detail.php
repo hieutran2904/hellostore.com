@@ -29,36 +29,36 @@
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-2.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-2.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-1.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-1.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-3.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-3.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-4.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-4.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-5.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-5.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-6.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-6.jpg" alt="product image">
                                     </figure>
                                     <figure class="border-radius-10">
-                                        <img src="assets/imgs/shop/product-16-7.jpg" alt="product image">
+                                        <img src="public/assets/imgs/shop/product-16-7.jpg" alt="product image">
                                     </figure>
                                 </div>
                                 <!-- THUMBNAILS -->
                                 <div class="slider-nav-thumbnails pl-15 pr-15">
-                                    <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                    <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
+                                    <div><img src="public/assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
                                 </div>
                             </div>
                             <!-- End Gallery -->
@@ -214,10 +214,10 @@
                                         <ul>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                    <a href="product-detail.php"><img alt="Surfside Media" src="public/public/assets/imgs/shop/thumbnail-3.jpg"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
-                                                    <h4><a href="product-details.html">Daisy Casual Bag</a></h4>
+                                                    <h4><a href="product-detail.php">Daisy Casual Bag</a></h4>
                                                     <h4><span>1 × </span>$800.00</h4>
                                                 </div>
                                                 <div class="shopping-cart-delete">
@@ -226,10 +226,10 @@
                                             </li>
                                             <li>
                                                 <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-2.jpg"></a>
+                                                    <a href="product-detail.php"><img alt="Surfside Media" src="public/public/assets/imgs/shop/thumbnail-2.jpg"></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
-                                                    <h4><a href="product-details.html">Corduroy Shirts</a></h4>
+                                                    <h4><a href="product-detail.php">Corduroy Shirts</a></h4>
                                                     <h4><span>1 × </span>$3200.00</h4>
                                                 </div>
                                                 <div class="shopping-cart-delete">
@@ -453,38 +453,38 @@
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Women's Fashion</a>
                                                 <ul>
-                                                    <li><a href="product-details.html">Dresses</a></li>
-                                                    <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                                    <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                                    <li><a href="product-details.html">Wedding Dresses</a></li>
-                                                    <li><a href="product-details.html">Prom Dresses</a></li>
-                                                    <li><a href="product-details.html">Cosplay Costumes</a></li>
+                                                    <li><a href="product-detail.php">Dresses</a></li>
+                                                    <li><a href="product-detail.php">Blouses & Shirts</a></li>
+                                                    <li><a href="product-detail.php">Hoodies & Sweatshirts</a></li>
+                                                    <li><a href="product-detail.php">Wedding Dresses</a></li>
+                                                    <li><a href="product-detail.php">Prom Dresses</a></li>
+                                                    <li><a href="product-detail.php">Cosplay Costumes</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Men's Fashion</a>
                                                 <ul>
-                                                    <li><a href="product-details.html">Jackets</a></li>
-                                                    <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                                    <li><a href="product-details.html">Genuine Leather</a></li>
-                                                    <li><a href="product-details.html">Casual Pants</a></li>
-                                                    <li><a href="product-details.html">Sweatpants</a></li>
-                                                    <li><a href="product-details.html">Harem Pants</a></li>
+                                                    <li><a href="product-detail.php">Jackets</a></li>
+                                                    <li><a href="product-detail.php">Casual Faux Leather</a></li>
+                                                    <li><a href="product-detail.php">Genuine Leather</a></li>
+                                                    <li><a href="product-detail.php">Casual Pants</a></li>
+                                                    <li><a href="product-detail.php">Sweatpants</a></li>
+                                                    <li><a href="product-detail.php">Harem Pants</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
                                                 <a class="menu-title" href="#">Technology</a>
                                                 <ul>
-                                                    <li><a href="product-details.html">Gaming Laptops</a></li>
-                                                    <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                                    <li><a href="product-details.html">Tablets</a></li>
-                                                    <li><a href="product-details.html">Laptop Accessories</a></li>
-                                                    <li><a href="product-details.html">Tablet Accessories</a></li>
+                                                    <li><a href="product-detail.php">Gaming Laptops</a></li>
+                                                    <li><a href="product-detail.php">Ultraslim Laptops</a></li>
+                                                    <li><a href="product-detail.php">Tablets</a></li>
+                                                    <li><a href="product-detail.php">Laptop Accessories</a></li>
+                                                    <li><a href="product-detail.php">Tablet Accessories</a></li>
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="product-details.html"><img src="assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
+                                                    <a href="product-detail.php"><img src="assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -492,7 +492,7 @@
                                                             <span class="new-price text-success">Save to 50%</span>
                                                         </div>
                                                         <div class="menu-banner-btn">
-                                                            <a href="product-details.html">Shop now</a>
+                                                            <a href="product-detail.php">Shop now</a>
                                                         </div>
                                                     </div>
                                                     <div class="menu-banner-discount">
@@ -543,10 +543,10 @@
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="product-details.html"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-3.jpg"></a>
+                                                <a href="product-detail.php"><img alt="Surfside Media" src="public/public/assets/imgs/shop/thumbnail-3.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="product-details.html">Plain Striola Shirts</a></h4>
+                                                <h4><a href="product-detail.php">Plain Striola Shirts</a></h4>
                                                 <h3><span>1 × </span>$800.00</h3>
                                             </div>
                                             <div class="shopping-cart-delete">
@@ -555,10 +555,10 @@
                                         </li>
                                         <li>
                                             <div class="shopping-cart-img">
-                                                <a href="product-details.html"><img alt="Surfside Media" src="assets/imgs/shop/thumbnail-4.jpg"></a>
+                                                <a href="product-detail.php"><img alt="Surfside Media" src="public/public/assets/imgs/shop/thumbnail-4.jpg"></a>
                                             </div>
                                             <div class="shopping-cart-title">
-                                                <h4><a href="product-details.html">Macbook Pro 2022</a></h4>
+                                                <h4><a href="product-detail.php">Macbook Pro 2022</a></h4>
                                                 <h3><span>1 × </span>$3500.00</h3>
                                             </div>
                                             <div class="shopping-cart-delete">
@@ -638,26 +638,26 @@
                                 <ul class="dropdown">
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="product-details.html">Dresses</a></li>
-                                            <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                            <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="product-details.html">Women's Sets</a></li>
+                                            <li><a href="product-detail.php">Dresses</a></li>
+                                            <li><a href="product-detail.php">Blouses & Shirts</a></li>
+                                            <li><a href="product-detail.php">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="product-detail.php">Women's Sets</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
                                         <ul class="dropdown">
-                                            <li><a href="product-details.html">Jackets</a></li>
-                                            <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                            <li><a href="product-details.html">Genuine Leather</a></li>
+                                            <li><a href="product-detail.php">Jackets</a></li>
+                                            <li><a href="product-detail.php">Casual Faux Leather</a></li>
+                                            <li><a href="product-detail.php">Genuine Leather</a></li>
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Technology</a>
                                         <ul class="dropdown">
-                                            <li><a href="product-details.html">Gaming Laptops</a></li>
-                                            <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                            <li><a href="product-details.html">Tablets</a></li>
-                                            <li><a href="product-details.html">Laptop Accessories</a></li>
-                                            <li><a href="product-details.html">Tablet Accessories</a></li>
+                                            <li><a href="product-detail.php">Gaming Laptops</a></li>
+                                            <li><a href="product-detail.php">Ultraslim Laptops</a></li>
+                                            <li><a href="product-detail.php">Tablets</a></li>
+                                            <li><a href="product-detail.php">Laptop Accessories</a></li>
+                                            <li><a href="product-detail.php">Tablet Accessories</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -721,36 +721,36 @@
                                         <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-2.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-2.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-1.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-1.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-3.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-3.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-4.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-4.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-5.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-5.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-6.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-6.jpg" alt="product image">
                                             </figure>
                                             <figure class="border-radius-10">
-                                                <img src="assets/imgs/shop/product-16-7.jpg" alt="product image">
+                                                <img src="public/public/assets/imgs/shop/product-16-7.jpg" alt="product image">
                                             </figure>
                                         </div>
                                         <!-- THUMBNAILS -->
                                         <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                            <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
+                                            <div><img src="public/public/assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
                                         </div>
                                     </div>
                                     <!-- End Gallery -->
@@ -1134,9 +1134,9 @@
                                             <div class="product-cart-wrap small hover-up">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="product-details.html" tabindex="0">
-                                                            <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="">
-                                                            <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="">
+                                                        <a href="product-detail.php" tabindex="0">
+                                                            <img class="default-img" src="public/public/assets/imgs/shop/product-2-1.jpg" alt="">
+                                                            <img class="hover-img" src="public/public/assets/imgs/shop/product-2-2.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
@@ -1149,7 +1149,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="product-details.html" tabindex="0">Ulstra Bass Headphone</a></h2>
+                                                    <h2><a href="product-detail.php" tabindex="0">Ulstra Bass Headphone</a></h2>
                                                     <div class="rating-result" title="90%">
                                                         <span>
                                                         </span>
@@ -1165,9 +1165,9 @@
                                             <div class="product-cart-wrap small hover-up">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="product-details.html" tabindex="0">
-                                                            <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="">
-                                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
+                                                        <a href="product-detail.php" tabindex="0">
+                                                            <img class="default-img" src="public/public/assets/imgs/shop/product-3-1.jpg" alt="">
+                                                            <img class="hover-img" src="public/public/assets/imgs/shop/product-4-2.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
@@ -1180,7 +1180,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="product-details.html" tabindex="0">Smart Bluetooth Speaker</a></h2>
+                                                    <h2><a href="product-detail.php" tabindex="0">Smart Bluetooth Speaker</a></h2>
                                                     <div class="rating-result" title="90%">
                                                         <span>
                                                         </span>
@@ -1196,9 +1196,9 @@
                                             <div class="product-cart-wrap small hover-up">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="product-details.html" tabindex="0">
-                                                            <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="">
-                                                            <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="">
+                                                        <a href="product-detail.php" tabindex="0">
+                                                            <img class="default-img" src="public/public/assets/imgs/shop/product-4-1.jpg" alt="">
+                                                            <img class="hover-img" src="public/public/assets/imgs/shop/product-4-2.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
@@ -1211,7 +1211,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="product-details.html" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
+                                                    <h2><a href="product-detail.php" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
                                                     <div class="rating-result" title="90%">
                                                         <span>
                                                         </span>
@@ -1227,9 +1227,9 @@
                                             <div class="product-cart-wrap small hover-up mb-0">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="product-details.html" tabindex="0">
-                                                            <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="">
-                                                            <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="">
+                                                        <a href="product-detail.php" tabindex="0">
+                                                            <img class="default-img" src="public/public/assets/imgs/shop/product-5-1.jpg" alt="">
+                                                            <img class="hover-img" src="public/public/assets/imgs/shop/product-3-2.jpg" alt="">
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
@@ -1242,7 +1242,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="product-details.html" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
+                                                    <h2><a href="product-detail.php" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
                                                     <div class="rating-result" title="90%">
                                                         <span>
                                                         </span>
@@ -1324,10 +1324,10 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-3.jpg" alt="#">
+                                    <img src="public/public/assets/imgs/shop/thumbnail-3.jpg" alt="#">
                                 </div>
                                 <div class="content pt-10">
-                                    <h5><a href="product-details.html">Chen Cardigan</a></h5>
+                                    <h5><a href="product-detail.php">Chen Cardigan</a></h5>
                                     <p class="price mb-0 mt-5">$99.50</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:90%"></div>
@@ -1336,10 +1336,10 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-4.jpg" alt="#">
+                                    <img src="public/public/assets/imgs/shop/thumbnail-4.jpg" alt="#">
                                 </div>
                                 <div class="content pt-10">
-                                    <h6><a href="product-details.html">Chen Sweater</a></h6>
+                                    <h6><a href="product-detail.php">Chen Sweater</a></h6>
                                     <p class="price mb-0 mt-5">$89.50</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:80%"></div>
@@ -1348,10 +1348,10 @@
                             </div>
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="assets/imgs/shop/thumbnail-5.jpg" alt="#">
+                                    <img src="public/public/assets/imgs/shop/thumbnail-5.jpg" alt="#">
                                 </div>
                                 <div class="content pt-10">
-                                    <h6><a href="product-details.html">Colorful Jacket</a></h6>
+                                    <h6><a href="product-detail.php">Colorful Jacket</a></h6>
                                     <p class="price mb-0 mt-5">$25</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:60%"></div>

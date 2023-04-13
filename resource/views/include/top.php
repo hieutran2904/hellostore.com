@@ -3,26 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-<title>Hello Store</title>
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="">
-<meta property="og:type" content="">
-<meta property="og:url" content="">
-<meta property="og:image" content="">
-<link rel="shortcut icon" type="image/x-icon" href="public/assets/imgs/theme/favicon.ico">
-<link rel="stylesheet" href="public/assets/css/main.css">
-<link rel="stylesheet" href="public/assets/css/custom.css"></head>
+    <title>Hello Store</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="public/assets/imgs/theme/favicon16.ico">
+    <link rel="stylesheet" href="public/assets/css/main.css">
+    <link rel="stylesheet" href="public/assets/css/custom.css">
+</head>
 
 <body>
-    <header class="header-area header-style-1 header-height-2">
+    <header class="header-area header-style-1 header-height-1">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
-                        <ul>
+                            <ul>
                                 <li>
                                     <!-- <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
@@ -30,25 +31,25 @@
                                         <li><a href="#"><img src="public/assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
                                         <li><a href="#"><img src="public/assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
                                     </ul> -->
-                                </li>                                
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
-                                <ul>
-                                    <li>Get great devices up to 50% off <a href="shop.php">View details</a></li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop.php">Shop now</a></li>
+                                <ul style="line-height: 1.0;">
+                                    <li>Nhận các sản phẩm tuyệt vời giảm giá tới 50% <a href="shop.php">Xem chi tiết</a></li>
+                                    <li>Ưu đãi siêu giá trị - Tiết kiệm nhiều hơn với phiếu giảm giá</li>
+                                    <li>Nổi bật áo Polo đang được giảm 25%<a href="shop.php">Mua ngay</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
-                            <ul>                                
-                                <li><i class="fi-rs-key"></i><a href="login.html">Log In </a>  / <a href="register.html">Sign Up</a></li>
+                            <ul>
+                                <li><i class="fi-rs-key"></i><a href="login.html">Đăng nhập </a> / <a href="register.html">Đăng ký</a></li>
                             </ul>
                         </div>
                     </div>
@@ -63,8 +64,8 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-1">
-                            <form action="#">                                
-                                <input type="text" placeholder="Search for items...">
+                            <form action="#">
+                                <input type="text" placeholder="Tìm kiếm sản phẩm...">
                             </form>
                         </div>
                         <div class="header-action-right">
@@ -133,7 +134,7 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span> Browse Categories
+                                <span class="fi-rs-apps"></span>Danh mục sản phẩm
                             </a>
                             <div class="categori-dropdown-wrap categori-dropdown-active-large">
                                 <ul>
@@ -315,13 +316,13 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="index.html">Home </a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li class="position-static"><a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
+                                    <li><a class="active" href="index.php">Trang chủ</a></li>
+                                    <!-- <li><a href="about.html">Về chúng tôi</a></li> -->
+                                    <li><a href="product.php">Sản phẩm</a></li>
+                                    <li class="position-static"><a href="#">Bộ sưu tập <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Women's Fashion</a>
+                                                <a class="menu-title" href="#">Thời Trang Nữ</a>
                                                 <ul>
                                                     <li><a href="product-details.html">Dresses</a></li>
                                                     <li><a href="product-details.html">Blouses & Shirts</a></li>
@@ -332,7 +333,7 @@
                                                 </ul>
                                             </li>
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Men's Fashion</a>
+                                                <a class="menu-title" href="#">Thời Trang Nam</a>
                                                 <ul>
                                                     <li><a href="product-details.html">Jackets</a></li>
                                                     <li><a href="product-details.html">Casual Faux Leather</a></li>
@@ -375,8 +376,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">Blog </a></li>                                    
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="blog.html">Blog </a></li>
+                                    <li><a href="contact.html">Liên hệ </a></li>
                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Dashboard</a></li>
@@ -385,7 +386,7 @@
                                             <li><a href="#">Coupons</a></li>
                                             <li><a href="#">Orders</a></li>
                                             <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>                                            
+                                            <li><a href="#">Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>
