@@ -9,4 +9,4 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 
 # ErrorDocument 404 /404.php
-ErrorDocument 404 /supershop.com/404.php
+ErrorDocument 404 /hellostore.com/404.php
