@@ -12,8 +12,8 @@ class Eloquent
     }
 
     // SELECT FUNCTION
-    public function selectData($columnName, $tableName, $whereValue = 0, $inColumn = 0, $inValue = 0, 
-    $formatByGroup = 0, $formatByOrder = 0, $paginate = 0, $price = 0)
+    public function selectData($columnName, $tableName, $inColumn = [], $inValue = [], 
+    $formatByGroup = [], $formatByOrder = 0, $paginate = [], $price = ['MIN' => 0, 'MAX' => 0])
     {
         try {
             // select ? form table
@@ -29,47 +29,47 @@ class Eloquent
             }
 
             // where column in ()
-            // if ($inColumn != 0) {
-            //     $sql1 .= " WHERE ";
-            //     foreach ($inColumn as $eachColumn) {
-            //         $sql1 .= $eachColumn . " IN (";
-            //         foreach ($inValue as $eachValue) {
-            //             $sql1 .= $eachValue . ", ";
-            //         }
-            //         $sql1 = rtrim($sql1, ", ");
-            //         $sql1 .= ") AND ";
-            //     }
-            //     $sql1 = rtrim($sql1, "AND ");
-            // }
+            if ($inColumn != []) {
+                $sql1 .= " WHERE ";
+                foreach ($inColumn as $eachColumn) {
+                    $sql1 .= $eachColumn . " IN (";
+                    foreach ($inValue as $eachValue) {
+                        $sql1 .= $eachValue . ", ";
+                    }
+                    $sql1 = rtrim($sql1, ", ");
+                    $sql1 .= ") AND ";
+                }
+                $sql1 = rtrim($sql1, "AND ");
+            }
 
             // where product_price between 1000 and 2000
-            // if ($price['MAX'] != 0)
-            //     $sql1 .= " WHERE product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
+            if ($price['MAX'] != 0)
+                $sql1 .= " WHERE product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
 
-            // group by
-            // if ($formatByGroup != 0) {
-            //     $sql1 .= " GROUP BY ";
-            //     foreach ($formatByGroup as $eachGroup) {
-            //         $sql1 .= $eachGroup . ", ";
-            //     }
-            //     $sql1 = rtrim($sql1, ", ");
-            // }
+            //group by
+            if ($formatByGroup != []) {
+                $sql1 .= " GROUP BY ";
+                foreach ($formatByGroup as $eachGroup) {
+                    $sql1 .= $eachGroup . ", ";
+                }
+                $sql1 = rtrim($sql1, ", ");
+            }
 
             // order by
-            // if (@$formatByOrder['ASC'])
-            //     $sql1 .= " ORDER BY " . $formatByOrder['ASC'] . " ASC";
-            // else if (@$formatByOrder['DESC'])
-            //     $sql1 .= " ORDER BY " . $formatByOrder['DESC'] . " DESC";
+            if (@$formatByOrder['ASC'])
+                $sql1 .= " ORDER BY " . $formatByOrder['ASC'] . " ASC";
+            else if (@$formatByOrder['DESC'])
+                $sql1 .= " ORDER BY " . $formatByOrder['DESC'] . " DESC";
 
-            // paginate
-            // if ($paginate != 0) {
-            //     $sql1 .= " LIMIT " . $paginate['START'] . ", " . $paginate['END'];
-            // }
+            //paginate
+            if ($paginate != []) {
+                $sql1 .= " LIMIT " . $paginate['START'] . ", " . $paginate['END'];
+            }
             $query = $this->connection->prepare($sql1);
 			$query->execute();
 			$dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
 			
-			return $dataSelected;
+			return $dataSelected; //array
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
