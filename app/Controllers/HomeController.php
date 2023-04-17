@@ -13,7 +13,7 @@ class HomeController extends Controller
                     <div class="product-img-action-wrap">
                         <div class="product-img product-img-zoom">
                             <a href="product-detail.php?id=' . $eachProduct['id'] . '">
-                                <img class="default-img" src="public/uploads/products/product-1-1.jpg" alt="">
+                                <img class="default-img" src="'.$productImage.'" alt="">
                             </a>
                         </div>
                         <div class="product-action-1">
@@ -36,8 +36,8 @@ class HomeController extends Controller
                             </span>
                         </div>
                         <div class="product-price">
-                            <span>$' . $eachProduct['product_price'] . ' </span>
-                            <span class="old-price">$' . ($eachProduct['product_price'] *= 1.1) . '</span>
+                            <span>' . number_format($eachProduct['product_price']) . '&#8363; </span>
+                            <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1) . '&#8363; </span>
                         </div>
                         <div class="product-action-1 show">
                             <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>

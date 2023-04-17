@@ -10,11 +10,30 @@ if (isset($_POST['keywords'])) {
     $_SESSION['search_keywords'] = strip_tags($_POST['keywords']);
     //list product search
     $productList = $searchCtrl->searchProduct($_SESSION['search_keywords']);
-} else {
+    $productNameSearch = $_SESSION['search_keywords'];
+} 
+else if(isset($_GET['subCategoryId'])){
+    //tim san pham theo subcategory
+    $columnName = ['*'];
+    $tableName = 'products';
+    $whereValue = ['subcategory_id' => $_GET['subCategoryId']];
+    $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
+    $productNameSearch = $eloquent->selectData(['*'], 'subcategories', ['id' => $_GET['subCategoryId']])[0]['subcategory_name'];
+}
+else if(isset($_GET['categoryId'])){
+    //tim san pham theo category
+    $columnName = ['*'];
+    $tableName = 'products';
+    $whereValue = ['category_id' => $_GET['categoryId']];
+    $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
+    $productNameSearch = $eloquent->selectData(['*'], 'categories', ['id' => $_GET['categoryId']])[0]['category_name'];
+}
+else {
     //ko tim san pham ma click vao trang san pham
     $columnName = ['*'];
     $tableName = 'products';
     $productList = $eloquent->selectData($columnName, $tableName);
+    $productNameSearch = '';
 }
 
 $countItem = $productList != null ? count($productList) : 0;
@@ -43,7 +62,7 @@ $countItem = $productList != null ? count($productList) : 0;
                     <div class="shop-product-fillter">
                         <div class="totall-product">
                             <p>Chúng tôi tìm thấy <strong class="text-brand"><?= $countItem ?></strong> sản phẩm
-                                <strong class="text-brand"><?php echo @$_SESSION['search_keywords'] ?></strong>
+                                <strong class="text-brand"><?php echo $productNameSearch ?></strong>
                             </p>
                         </div>
                         <div class="sort-by-product-area">

@@ -12,7 +12,7 @@ class Eloquent
     }
 
     // SELECT FUNCTION
-    public function selectData($columnName, $tableName, $inColumn = [], $inValue = [], 
+    public function selectData($columnName, $tableName, $whereValue = [], $inColumn = [], $inValue = [], 
     $formatByGroup = [], $formatByOrder = 0, $paginate = [], $price = ['MIN' => 0, 'MAX' => 0])
     {
         try {
@@ -65,6 +65,16 @@ class Eloquent
             if ($paginate != []) {
                 $sql1 .= " LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             }
+
+            //where column = value
+            if ($whereValue != []) {
+                $sql1 .= " WHERE ";
+                foreach ($whereValue as $eachColumn => $eachValue) {
+                    $sql1 .= $eachColumn . " = " . $eachValue . " AND ";
+                }
+                $sql1 = rtrim($sql1, "AND ");
+            }
+
             $query = $this->connection->prepare($sql1);
 			$query->execute();
 			$dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

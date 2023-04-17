@@ -9,20 +9,28 @@ $eloquent = new Eloquent();
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
+$whereValue = [];
 $inColumn = [];
 $inValue = [];
 $formatByGroup = [];
 $formatByOrder = 0;
 
-$paginate = ['START' => 1, 'END' => 8];
+$paginate = ['START' => 0, 'END' => 8];
 
-$productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValue, $formatByGroup, $formatByOrder, $paginate);
-//print_r($productList);
+$productList = $eloquent->selectData($columnName, $tableName, $whereValue, $inColumn, $inValue, $formatByGroup, $formatByOrder, $paginate);
+// foreach($productList as $eachProduct){
+//     echo '<pre>';
+//     echo $eachProduct['product_name'];
+//     echo '</pre>';
+// }
 
+// líst danh muc pho bien
+$subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 6]);
+//print_r($subCategoryList);
 
 ?>
 <main class="main">
-    <section class="home-slider position-relative pt-50">
+    <section class="home-slider position-_status pt-50">
         <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
             <div class="single-hero-slider single-animation-wrap">
                 <div class="container">
@@ -115,13 +123,13 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
             <div class="tab-header">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Featured</button>
+                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Đặc sắc</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
+                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Phổ biến</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
+                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Mới</button>
                     </li>
                 </ul>
                 <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
@@ -131,7 +139,7 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3 ,['best'=>'best sell']);
+                        $homeController->productLister($productList, $col = 3, ['best' => 'best sell']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -140,7 +148,7 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
                 <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3, ['hot'=>'hot']);
+                        $homeController->productLister($productList, $col = 3, ['hot' => 'hot']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -149,7 +157,7 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
                 <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3, ['new'=>'new']);
+                        $homeController->productLister($productList, $col = 3, ['new' => 'new']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -173,58 +181,23 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
     </section>
     <section class="popular-categories section-padding mt-15 mb-25">
         <div class="container wow fadeIn animated">
-            <h3 class="section-title mb-20"><span>Popular</span> Categories</h3>
+            <h3 class="section-title mb-20"><span>Danh Mục</span> Phổ Biến</h3>
             <div class="carausel-6-columns-cover position-relative">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
                 <div class="carausel-6-columns" id="carausel-6-columns">
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">T-Shirt</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"> <img src="public/assets/imgs/shop/category-thumb-2.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Bags</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-3.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Sandan</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-4.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Scarf Cap</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-5.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Shoes</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-6.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Pillowcase</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-7.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Jumpsuits</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="public/assets/imgs/shop/category-thumb-8.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Hats</a></h5>
-                    </div>
+                    <?php
+                    foreach ($subCategoryList as $eachSubCategory) {
+                        $imageSubCategory = $GLOBALS['PRODUCT_DIRECTORY'] . $eachSubCategory['subcategory_banner'];
+                    ?>
+                        <div class="card-1">
+                            <figure class=" img-hover-scale overflow-hidden">
+                                <a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><img src="<?= $imageSubCategory ?>" alt=""></a>
+                            </figure>
+                            <h5><a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><?= $eachSubCategory['subcategory_name'] ?></a></h5>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -267,224 +240,48 @@ $productList = $eloquent->selectData($columnName, $tableName, $inColumn, $inValu
     </section>
     <section class="section-padding">
         <div class="container wow fadeIn animated">
-            <h3 class="section-title mb-20"><span>New</span> Arrivals</h3>
+            <h3 class="section-title mb-20"><span>Sản Phẩm</span> Nổi Bật</h3>
             <div class="carausel-6-columns-cover position-relative">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
                 <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-2-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-2-2.jpg" alt="">
-                                </a>
+                    <?php
+                    foreach ($productList as $eachProduct) {
+                        $imageProductDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
+                        $imageProductHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['products_image_one'];
+                    ?>
+                        <div class="product-cart-wrap small hover-up">
+                            <div class="product-img-action-wrap">
+                                <div class="product-img product-img-zoom">
+                                    <a href="product-detail.php?id=<?= $eachProduct['id'] ?>">
+                                        <img class="default-img" src="<?= $imageProductDefault ?>" alt="">
+                                        <img class="hover-img w-100 h-100" src="<?= $imageProductHover ?>" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-action-1">
+                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                        <i class="fi-rs-eye"></i></a>
+                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="hot">Hot</span>
+                                </div>
                             </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">Hot</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Lorem ipsum dolor</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$238.85 </span>
-                                <span class="old-price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-4-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-4-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="new">New</span>
+                            <div class="product-content-wrap">
+                                <h2><a href="product-detail.php?id=<?= $eachProduct['id'] ?>"><?= $eachProduct['product_name'] ?></a></h2>
+                                <div class="rating-result" title="90%">
+                                    <span>
+                                    </span>
+                                </div>
+                                <div class="product-price">
+                                    <span><?= number_format($eachProduct['product_price']) ?>&#8363;</span>
+                                    <span class="old-price"><?= number_format($eachProduct['product_price'] *= 1.1) ?>&#8363;</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Aliquam posuere</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$173.85 </span>
-                                <span class="old-price">$185.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-15-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-15-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="sale">Sale</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Sed dapibus orci</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$215.85 </span>
-                                <span class="old-price">$235.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-3-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-3-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">.33%</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Donec congue</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$83.8 </span>
-                                <span class="old-price">$125.2</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-9-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-9-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="hot">-25%</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Curabitur porta</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$1238.85 </span>
-                                <span class="old-price">$1245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-7-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-7-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                            <div class="product-badges product-badges-position product-badges-mrg">
-                                <span class="new">New</span>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Praesent maximus</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$123 </span>
-                                <span class="old-price">$156</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
-                    <div class="product-cart-wrap small hover-up">
-                        <div class="product-img-action-wrap">
-                            <div class="product-img product-img-zoom">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="public/assets/imgs/shop/product-1-1.jpg" alt="">
-                                    <img class="hover-img" src="public/assets/imgs/shop/product-1-2.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="product-action-1">
-                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-content-wrap">
-                            <h2><a href="product-details.html">Vestibulum ante</a></h2>
-                            <div class="rating-result" title="90%">
-                                <span>
-                                </span>
-                            </div>
-                            <div class="product-price">
-                                <span>$238.85 </span>
-                                <span class="old-price">$245.8</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End product-cart-wrap-2-->
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

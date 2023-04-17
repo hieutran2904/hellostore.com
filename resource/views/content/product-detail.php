@@ -10,15 +10,17 @@ if (isset($_REQUEST['id'])) {
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
-$inColumn = ['id'];
-$inValue = [$_SESSION['SSCF_product_product_id']];
+$whereValue = ['id' => $_SESSION['SSCF_product_product_id']];
 
 
-$productItem = $eloquent->selectData($columnName, $tableName, $inColumn, $inValue);
+$productList = $eloquent->selectData($columnName, $tableName, $whereValue);
 
-//print_r($productItem);
+//print_r($productList);
 
-$imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_image'];
+$imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
+$imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_one'];
+$imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_two'];
+$imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_three'];
 
 ?>
 <main class="main">
@@ -37,7 +39,7 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                 <div class="col-lg-9">
                     <div class="product-detail accordion-detail">
                         <div class="row mb-50">
-                            <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-5 col-sm-6 col-xs-12">
                                 <div class="detail-gallery">
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
@@ -46,33 +48,24 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                                             <img src="<?= $imageMaster ?>" alt="product image">
                                         </figure>
                                         <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-7-1.jpg" alt="product image">
+                                            <img src="<?= $imageOne ?>" alt="product image" class="w-100 h-100">
                                         </figure>
                                         <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-2-1.jpg" alt="product image">
+                                            <img src="<?= $imageTwo ?>" alt="product image" class="w-100 h-100">
                                         </figure>
                                         <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-3-1.jpg" alt="product image">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-4-1.jpg" alt="product image">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-5-1.jpg" alt="product image">
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="public/uploads/products/product-6-1.jpg" alt="product image">
+                                            <img src="<?= $imageThree ?>" alt="product image" class="w-100 h-100">
                                         </figure>
                                     </div>
                                     <!-- THUMBNAILS -->
-                                    <div class="slider-nav-thumbnails pl-15 pr-15">
-                                        <div><img src="public/assets/imgs/shop/thumbnail-3.jpg" alt="product image"></div>
-                                        <div><img src="public/assets/imgs/shop/thumbnail-4.jpg" alt="product image"></div>
-                                        <div><img src="public/assets/imgs/shop/thumbnail-5.jpg" alt="product image"></div>
-                                        <div><img src="public/assets/imgs/shop/thumbnail-6.jpg" alt="product image"></div>
-                                        <div><img src="public/assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
+                                    <div class="slider-nav-thumbnails pl-15 pr-10">
+                                        <div><img src="<?= $imageMaster ?>" alt="product image"></div>
+                                        <div><img src="<?= $imageOne ?>" alt="product image"></div>
+                                        <div><img src="<?= $imageTwo ?>" alt="product image"></div>
+                                        <div><img src="<?= $imageThree ?>" alt="product image"></div>
+                                        <!-- <div><img src="public/assets/imgs/shop/thumbnail-7.jpg" alt="product image"></div>
                                         <div><img src="public/assets/imgs/shop/thumbnail-8.jpg" alt="product image"></div>
-                                        <div><img src="public/assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div>
+                                        <div><img src="public/assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div> -->
                                     </div>
                                 </div>
                                 <!-- End Gallery -->
@@ -86,9 +79,9 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                                     </ul>
                                 </div> -->
                             </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-7 col-sm-12 col-xs-12">
                                 <div class="detail-info">
-                                    <h2 class="title-detail"><?= $productItem[0]['product_name'] ?></h2>
+                                    <h2 class="title-detail"><?= $productList[0]['product_name'] ?></h2>
                                     <div class="product-detail-rating">
                                         <div class="pro-details-brand">
                                             <span> Brands: <a href="product.php">HTH</a></span>
@@ -103,14 +96,14 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                                     </div>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand"><?= $productItem[0]['product_price'] ?></span></ins>
-                                            <ins><span class="old-price font-md ml-15"><?= $productItem[0]['product_price'] *= 1.1 ?></span></ins>
+                                            <ins><span class="text-brand"><?= number_format($productList[0]['product_price']) ?>&#8363;</span></ins>
+                                            <ins><span class="old-price font-md ml-15"><?= number_format($productList[0]['product_price'] *= 1.1) ?>&#8363;</span></ins>
                                             <span class="save-price  font-md color3 ml-15">10% Off</span>
                                         </div>
                                     </div>
                                     <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                                     <div class="short-desc mb-30">
-                                        <p><?= $productItem[0]['product_summary'] ?></p>
+                                        <p><?= $productList[0]['product_summary'] ?></p>
                                     </div>
                                     <div class="product_sort_info font-xs mb-30">
                                         <ul>
@@ -169,7 +162,7 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                         <div class="tab-style3">
                             <ul class="nav nav-tabs text-uppercase">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
+                                    <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">MÔ TẢ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
@@ -181,7 +174,7 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                             <div class="tab-content shop_info_tab entry-main-content">
                                 <div class="tab-pane fade show active" id="Description">
                                     <div class="">
-                                        <p><?= $productItem[0]['product_details'] ?></p>
+                                        <p><?= $productList[0]['product_details'] ?></p>
                                         <ul class="product-more-infor mt-30">
                                             <li><span>Type Of Packing</span> Bottle</li>
                                             <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
@@ -192,15 +185,13 @@ $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem[0]['product_master_i
                                         <hr class="wp-block-separator is-style-dots">
                                         <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward
                                             energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>
-                                        <h4 class="mt-30">Packaging & Delivery</h4>
+                                        <h4 class="mt-30">Hướng dẫn chọn size</h4>
                                         <hr class="wp-block-separator is-style-wide">
-                                        <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane
-                                            went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.
-                                        </p>
-                                        <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian
-                                            in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively
-                                            dachshund.
-                                        </p>
+                                        <p>Size M: 50-57kg / Cao 1m53 – 1m68</p>
+                                        <p>Size L: 58-64kg / Cao 1m160 – 1m70</p>
+                                        <p>Size XL: 65-70kg / Cao 1m70 – 1m78</p>
+                                        <p>Size XXL: 71-85kg / Cao 1m78 – 1m85</p>
+                                        <p>Tùy mỗi người thích body hoặc vừa người thì tăng hoặc giảm 1 size, chỉ số trên là tương đối mặc</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="Additional-info">

@@ -17,11 +17,19 @@
 </head>
 
 <body>
-<?php
+    <?php
     include 'app/Controllers/Controller.php';
     include 'app/Controllers/HomeController.php';
     include 'app/Models/Eloquent.php';
-?>
+    $homeController = new HomeController();
+    $eloquent = new Eloquent();
+
+    //fetch all products
+    $columnName = ['*'];
+    $tableName = 'categories';
+    $whereValue = ['category_status' => 1];
+    $categoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
+    ?>
     <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
@@ -145,59 +153,35 @@
                                     <li><a href="product-category.php">Sản phẩm </a></li>
                                     <li class="position-static"><a href="#">Danh mục <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Women's Fashion</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Dresses</a></li>
-                                                    <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                                    <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                                    <li><a href="product-details.html">Wedding Dresses</a></li>
-                                                    <li><a href="product-details.html">Prom Dresses</a></li>
-                                                    <li><a href="product-details.html">Cosplay Costumes</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Men's Fashion</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Jackets</a></li>
-                                                    <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                                    <li><a href="product-details.html">Genuine Leather</a></li>
-                                                    <li><a href="product-details.html">Casual Pants</a></li>
-                                                    <li><a href="product-details.html">Sweatpants</a></li>
-                                                    <li><a href="product-details.html">Harem Pants</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Technology</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Gaming Laptops</a></li>
-                                                    <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                                    <li><a href="product-details.html">Tablets</a></li>
-                                                    <li><a href="product-details.html">Laptop Accessories</a></li>
-                                                    <li><a href="product-details.html">Tablet Accessories</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-34">
-                                                <div class="menu-banner-wrap">
-                                                    <a href="product-details.html"><img src="public/assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
-                                                    <div class="menu-banner-content">
-                                                        <h4>Hot deals</h4>
-                                                        <h3>Don't miss<br> Trending</h3>
-                                                        <div class="menu-banner-price">
-                                                            <span class="new-price text-success">Save to 50%</span>
-                                                        </div>
-                                                        <div class="menu-banner-btn">
-                                                            <a href="product-details.html">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="menu-banner-discount">
-                                                        <h3>
-                                                            <span>35%</span>
-                                                            off
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <?php
+                                            foreach ($categoryList as $eachCategory) {
+                                            ?>
+                                                <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                    <a class="menu-title" href="product-category.php?categoryId=<?= $eachCategory['id'] ?>">
+                                                        <?= $eachCategory['category_name'] ?>
+                                                    </a>
+                                                    <?php
+                                                    $columnName = ['*'];
+                                                    $tableName = 'subcategories';
+                                                    $whereValue = [
+                                                        'subcategory_status' => 1,
+                                                        'category_id' => $eachCategory['id']
+                                                    ];
+                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
+                                                    ?>
+                                                    <ul>
+                                                        <?php
+                                                        foreach ($subCategoryList as $eachSubCategory) {
+                                                        ?>
+                                                            <li><a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><?= $eachSubCategory['subcategory_name'] ?></a></li>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
