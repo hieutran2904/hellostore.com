@@ -29,7 +29,7 @@ class HomeController extends Controller
                         <div class="product-category">
                             <a href="shop.html">Clothing</a>
                         </div>
-                        <h2><a href="product-details.html">' . $eachProduct['product_name'] . '</a></h2>
+                        <h2><a href="product-detail.php?id=' . $eachProduct['id'] . '">' . $eachProduct['product_name'] . '</a></h2>
                         <div class="rating-result" title="90%">
                             <span>
                                 <span>90%</span>
@@ -40,7 +40,7 @@ class HomeController extends Controller
                             <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1) . '&#8363; </span>
                         </div>
                         <div class="product-action-1 show">
-                            <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                            <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.php"><i class="fi-rs-shopping-bag-add"></i></a>
                         </div>
                     </div>
                 </div>

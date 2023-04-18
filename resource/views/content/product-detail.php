@@ -6,22 +6,28 @@ if (isset($_REQUEST['id'])) {
     $_SESSION['SSCF_product_product_id'] = $_REQUEST['id'];
 }
 
-
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
 $whereValue = ['id' => $_SESSION['SSCF_product_product_id']];
-
-
 $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
-
-//print_r($productList);
 
 $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
 $imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_one'];
 $imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_two'];
 $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_three'];
 
+//fetch 3 items product add new
+$newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
+//print_r($newProductList);
+
+//fetch all categories hot (product best sell)
+$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 7]);
+//print_r($subCategoryList);
+
+//san pham co lien quan
+$relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0, ['START' => 0, 'END' => 4]);
+//print_r($relateProductList);
 ?>
 <main class="main">
     <div class="page-header breadcrumb-wrap">
@@ -39,7 +45,7 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                 <div class="col-lg-9">
                     <div class="product-detail accordion-detail">
                         <div class="row mb-50">
-                            <div class="col-md-5 col-sm-6 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="detail-gallery">
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
@@ -79,7 +85,7 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                                     </ul>
                                 </div> -->
                             </div>
-                            <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info">
                                     <h2 class="title-detail"><?= $productList[0]['product_name'] ?></h2>
                                     <div class="product-detail-rating">
@@ -438,11 +444,54 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                         </div>
                         <div class="row mt-60">
                             <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Related products</h3>
+                                <h3 class="section-title style-1 mb-30">Sản phẩm liên quan</h3>
                             </div>
                             <div class="col-12">
                                 <div class="row related-products">
-                                    <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                    <?php
+                                    if($relateProductList != [])
+                                    foreach ($relateProductList as $eachRelateProduct) {
+                                        $imageDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_master_image'];
+                                        $iamgeHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['products_image_one'];
+                                    ?>
+                                        <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                            <div class="product-cart-wrap small hover-up">
+                                                <div class="product-img-action-wrap">
+                                                    <div class="product-img product-img-zoom">
+                                                        <a href="product-detail.php?id=<?= $eachRelateProduct['id'] ?>" tabindex="0">
+                                                            <img class="default-img" src="<?= $imageDefault ?>" alt="">
+                                                            <img class="hover-img" src="<?= $iamgeHover ?>" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-action-1">
+                                                        <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
+                                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                                        <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                        <span class="hot">Hot</span>
+                                                    </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                    <h2><a href="product-detail.php?id=<?= $eachRelateProduct['id'] ?>" tabindex="0"><?= $eachRelateProduct['product_name'] ?></a></h2>
+                                                    <div class="rating-result" title="90%">
+                                                        <span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span><?= number_format($eachRelateProduct['product_price']) ?>&#8363;</span>
+                                                        <span class="old-price"><?= number_format($eachRelateProduct['product_price'] *= 1.1) ?>&#8363;</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    else {
+                                        echo '<h3>Không có sản phẩm liên quan</h3>';
+                                    }
+                                    ?>
+                                    <!-- <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap small hover-up">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -565,7 +614,7 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -573,15 +622,13 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                 </div>
                 <div class="col-lg-3 primary-sidebar sticky-sidebar">
                     <div class="widget-category mb-30">
-                        <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                        <h5 class="section-title style-1 mb-30 wow fadeIn animated">DANH MỤC NỔI BẬT</h5>
                         <ul class="categories">
-                            <li><a href="shop.html">Shoes & Bags</a></li>
-                            <li><a href="shop.html">Blouses & Shirts</a></li>
-                            <li><a href="shop.html">Dresses</a></li>
-                            <li><a href="shop.html">Swimwear</a></li>
-                            <li><a href="shop.html">Beauty</a></li>
-                            <li><a href="shop.html">Jewelry & Watch</a></li>
-                            <li><a href="shop.html">Accessories</a></li>
+                            <?php
+                            foreach ($subCategoryList as $eachSubCategory) {
+                                echo '<li><a href="product-category.php?subCategoryId=' . $eachSubCategory['id'] . '">' . $eachSubCategory['subcategory_name'] . '</a></li>';
+                            }
+                            ?>
                         </ul>
                     </div>
                     <!-- Fillter By Price -->
@@ -631,45 +678,28 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_th
                     <!-- Product sidebar Widget -->
                     <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                         <div class="widget-header position-relative mb-20 pb-10">
-                            <h5 class="widget-title mb-10">New products</h5>
+                            <h5 class="widget-title mb-10">Sản Phẩm Mới</h5>
                             <div class="bt-1 border-color-1"></div>
                         </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="public/assets/imgs/shop/thumbnail-3.jpg" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h5><a href="product-detail.php">Chen Cardigan</a></h5>
-                                <p class="price mb-0 mt-5">$99.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:90%"></div>
+                        <?php
+                        foreach ($newProductList as $eachNewProduct) {
+                            $newProductImage = $GLOBALS['PRODUCT_DIRECTORY'] . $eachNewProduct['product_master_image'];
+                        ?>
+                            <div class="single-post clearfix">
+                                <div class="image">
+                                    <img src="<?= $newProductImage ?>" alt="#">
+                                </div>
+                                <div class="content pt-10">
+                                    <h5><a href="product-detail.php?id=<?= $eachNewProduct['id'] ?>"><?php echo $eachNewProduct['product_name'] ?></a></h5>
+                                    <p class="price mb-0 mt-5"><?php echo number_format($eachNewProduct['product_price']) ?>&#8363;</p>
+                                    <div class="product-rate">
+                                        <div class="product-rating" style="width:90%"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="public/assets/imgs/shop/thumbnail-4.jpg" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="product-detail.php">Chen Sweater</a></h6>
-                                <p class="price mb-0 mt-5">$89.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="public/assets/imgs/shop/thumbnail-5.jpg" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="product-detail.php">Colorful Jacket</a></h6>
-                                <p class="price mb-0 mt-5">$25</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:60%"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

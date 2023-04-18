@@ -11,7 +11,7 @@
     <meta property="og:type" content="">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="public/assets/imgs/theme/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="public/assets/imgs/theme/favicon16.ico">
     <link rel="stylesheet" href="public/assets/css/main.css">
     <link rel="stylesheet" href="public/assets/css/custom.css">
 </head>
@@ -27,8 +27,9 @@
     //fetch all products
     $columnName = ['*'];
     $tableName = 'categories';
-    $whereValue = ['category_status' => 1];
-    $categoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
+    $inColumn = ['category_status'];
+    $inValue = [1];
+    $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
     ?>
     <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
@@ -52,9 +53,9 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul style="line-height: 1.1;">
-                                    <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="shop.html">Chi tiết</a></li>
+                                    <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="product-detail.php">Chi tiết</a></li>
                                     <li>Deals siêu khủng - Phiếu giảm giá siêu hời</li>
-                                    <li>Áo thun basic giảm giá lên đến 35% <a href="shop.html">Mua ngay!</a></li>
+                                    <li>Áo thun basic giảm giá lên đến 35% <a href="product-category.php">Mua ngay!</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -62,7 +63,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li><i class="fi-rs-key"></i><a href="login.html">Log In </a> / <a href="register.html">Sign Up</a></li>
+                                <li><i class="fi-rs-key"></i><a href="login.php">Đăng nhập </a> / <a href="register.php">Đăng kí</a></li>
                             </ul>
                         </div>
                     </div>
@@ -167,7 +168,9 @@
                                                         'subcategory_status' => 1,
                                                         'category_id' => $eachCategory['id']
                                                     ];
-                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
+                                                    $inColumn = ['category_id', 'subcategory_status'];
+                                                    $inValue = [$eachCategory['id'], 1];
+                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
                                                     ?>
                                                     <ul>
                                                         <?php
@@ -182,19 +185,39 @@
                                             <?php
                                             }
                                             ?>
+                                            <li class="sub-mega-menu sub-mega-menu-width-34">
+                                                <div class="menu-banner-wrap">
+                                                    <a href="product-detail.php"><img src="public/assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
+                                                    <div class="menu-banner-content">
+                                                        <h4>Hot deals</h4>
+                                                        <h3>Don't miss<br> Trending</h3>
+                                                        <div class="menu-banner-price">
+                                                            <span class="new-price text-success">Save to 50%</span>
+                                                        </div>
+                                                        <div class="menu-banner-btn">
+                                                            <a href="product-details.html">Shop now</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="menu-banner-discount">
+                                                        <h3>
+                                                            <span>35%</span>
+                                                            off
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Liên hệ </a></li>
-                                    <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>" ><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Dashboard</a></li>
-                                            <li><a href="#">Products</a></li>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>
+                                            <li><a href="#">Thông tin</a></li>
+                                            <li><a href="#">Đơn hàng</a></li>
+                                            <li><a href="#">Sản phẩm yêu thích</a></li>
+                                            <li><a href="#">Đánh giá</a></li>
+                                            <?php echo '<li><a href="?exit=yes">Đăng xuất</a></li>'; ?>
+                                            <!-- <li><a href="?exit=yes">Logout</a></li> -->
                                         </ul>
                                     </li>
                                 </ul>
@@ -202,7 +225,15 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
+                        <p>🤗<span>Xin Chào</span>
+                            <?php
+                            if (@$_SESSION['SSCF_login_id'] > 0) {
+                                echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                            } else {
+                                echo '<b> khách hàng </b>';
+                            }
+                            ?>
+                        </p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
@@ -365,7 +396,14 @@
                         <a href="register.html">Sign Up</a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#">(+1) 0000-000-000 </a>
+                        <!-- <a href="#">Xin chào HieuDev </a> -->
+                        <?php
+                        if (@$_SESSION['SSCF_login_id'] > 0) {
+                            echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                        } else {
+                            echo '<b> khách hàng </b>';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="mobile-social-icon">

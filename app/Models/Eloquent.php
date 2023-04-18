@@ -6,15 +6,23 @@ class Eloquent
     public function __construct()
     {
         $this->connection = new PDO('mysql:host=' . $GLOBALS['DBHOST'] . ';dbname=' . $GLOBALS['DBNAME'] . ';charset=utf8', $GLOBALS['DBUSER'], $GLOBALS['DBPASS']);
-		//$this->connection = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.';charset=utf8', DBUSER, DBPASS);
+        //$this->connection = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.';charset=utf8', DBUSER, DBPASS);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
     // SELECT FUNCTION
-    public function selectData($columnName, $tableName, $whereValue = [], $inColumn = [], $inValue = [], 
-    $formatByGroup = [], $formatByOrder = 0, $paginate = [], $price = ['MIN' => 0, 'MAX' => 0])
-    {
+    public function selectData(
+        $columnName,
+        $tableName,
+        $whereValue = [],
+        $inColumn = [],
+        $inValue = [],
+        $formatByGroup = [],
+        $formatByOrder = 0,
+        $paginate = [],
+        $price = ['MIN' => 0, 'MAX' => 0]
+    ) {
         try {
             // select ? form table
             if ($columnName == "*")
@@ -31,13 +39,19 @@ class Eloquent
             // where column in ()
             if ($inColumn != []) {
                 $sql1 .= " WHERE ";
+                $i = $j = 0;
                 foreach ($inColumn as $eachColumn) {
                     $sql1 .= $eachColumn . " IN (";
                     foreach ($inValue as $eachValue) {
-                        $sql1 .= $eachValue . ", ";
+                        if ($i == $j){
+                            $sql1 .= $eachValue . ", ";
+                            break;
+                        }
+                        $j++;
                     }
                     $sql1 = rtrim($sql1, ", ");
                     $sql1 .= ") AND ";
+                    $i++;
                 }
                 $sql1 = rtrim($sql1, "AND ");
             }
@@ -69,17 +83,21 @@ class Eloquent
             //where column = value
             if ($whereValue != []) {
                 $sql1 .= " WHERE ";
+                if (array_key_exists('operator', $whereValue)) {
+                    $operator = $whereValue['operator'] == '=' ? ' = ' : ' <> ';
+                } else $operator = ' = ';
                 foreach ($whereValue as $eachColumn => $eachValue) {
-                    $sql1 .= $eachColumn . " = " . $eachValue . " AND ";
+                    if ($eachColumn == 'operator') continue;
+                    $sql1 .= $eachColumn . $operator . '\'' . $eachValue . '\'' . " AND ";
                 }
                 $sql1 = rtrim($sql1, "AND ");
             }
 
             $query = $this->connection->prepare($sql1);
-			$query->execute();
-			$dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
-			
-			return $dataSelected; //array
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $dataSelected; //array
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

@@ -609,7 +609,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Spartan", sans-serif;
+  /* font-family: "", sans-serif; */
+  font-family: monospace;
   color: #222222;
   font-weight: 600;
   line-height: 1.2;
