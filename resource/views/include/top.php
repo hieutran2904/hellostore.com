@@ -14,6 +14,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="public/assets/imgs/theme/favicon16.ico">
     <link rel="stylesheet" href="public/assets/css/main.css">
     <link rel="stylesheet" href="public/assets/css/custom.css">
+    <link rel="stylesheet" href="public/assets/css/toastr.css">
 </head>
 
 <body>
@@ -74,7 +75,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="public/assets/imgs/logo/logoshop.png" alt="logo"></a>
+                        <a href="index.php"><img src="public/assets/imgs/logo/logoshop2023.png" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-1">
@@ -143,7 +144,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="public/assets/imgs/logo/logoshop.png" alt="logo"></a>
+                        <a href="index.php"><img src="public/assets/imgs/logo/logoshop2023.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -304,7 +305,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="public/assets/imgs/logo/logoshop.png" alt="logo"></a>
+                    <a href="index.php"><img src="public/assets/imgs/logo/logoshop2023.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">

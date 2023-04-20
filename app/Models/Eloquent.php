@@ -11,6 +11,37 @@ class Eloquent
         $this->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
+    // INSERT FUNCTION => tra ve id cua phan tu vua duoc them vao
+    function insertData($tableName, $data)
+    {
+        try {
+            $sql = "INSERT INTO $tableName (";
+            foreach ($data as $key => $value) {
+                $sql .= $key . ", ";
+            }
+            $sql = rtrim($sql, ", ");
+            $sql .= ") VALUES (";
+            foreach ($data as $key => $value) {
+                $sql .= ":" . $key . ", ";
+            }
+            $sql = rtrim($sql, ", ");
+            $sql .= ")";
+            $stmt = $this->connection->prepare($sql);
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(':' . $key, $value); //gan gia tri cho cac bien dinh danh
+            }
+            $stmt->execute();
+            return $this->connection->lastInsertId();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // UPDATE FUNCTION
+
+    // DELETE FUNCTION
+
+
     // SELECT FUNCTION
     public function selectData(
         $columnName,
@@ -102,4 +133,18 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    // function alter message
+    public function alertMessage($message, $type)
+    {
+        //custom alert message
+
+        echo "<script>alert('$message')</script>";
+        // if ($type == 'success') {
+        //     echo "<script>window.location.href = 'index.php'</script>";
+        // } else if ($type == 'error') {
+        //     echo "<script>window.location.href = 'index.php'</script>";
+        // } 
+    }
+
 }
