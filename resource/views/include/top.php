@@ -22,7 +22,6 @@
     include 'app/Controllers/Controller.php';
     include 'app/Controllers/HomeController.php';
     include 'app/Models/Eloquent.php';
-    $homeController = new HomeController();
     $eloquent = new Eloquent();
 
     //fetch all products
@@ -31,6 +30,19 @@
     $inColumn = ['category_status'];
     $inValue = [1];
     $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
+
+    //insert to cart
+    if (isset($_POST['add_to_cart'])) {
+        if (isset($_SESSION['SSCF_login_id']) > 0) {
+            echo '<script>console.log("add to cart")</script>';
+            $_SESSION['ADD_TO_CART_RESULT'] = 1;
+        } else {
+            //khach hang ko dang nhap thi ko them duoc san pham vao gio hang
+            echo '<script>console.log("not login")</script>';
+            $_SESSION['ADD_TO_CART_RESULT'] = 0;
+        }
+    }
+
     ?>
     <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
@@ -211,7 +223,7 @@
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Liên hệ </a></li>
-                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>" ><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
+                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Thông tin</a></li>
                                             <li><a href="#">Đơn hàng</a></li>

@@ -52,7 +52,7 @@ if (isset($_POST['user_login'])) {
                             <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
                                 <div class="padding_eight_all bg-white">
                                     <div class="heading_s1">
-                                        <h3 class="mb-30">Login</h3>
+                                        <h3 class="mb-30">Đăng nhập</h3>
                                     </div>
                                     <form action="login.php" method="post">
                                         <div class="form-group">
@@ -68,10 +68,10 @@ if (isset($_POST['user_login'])) {
                                                     <label class="form-check-label" for="exampleCheckbox1"><span>Nhớ mật khẩu</span></label>
                                                 </div>
                                             </div>
-                                            <a class="text-muted" href="#">Forgot password?</a>
+                                            <a class="text-muted" href="#">Quên mật khẩu?</a>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-fill-out btn-block hover-up" name="user_login">Log in</button>
+                                            <button type="submit" class="btn btn-fill-out btn-block hover-up" name="user_login">Đăng nhập</button>
                                         </div>
                                     </form>
                                 </div>

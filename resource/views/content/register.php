@@ -1,14 +1,7 @@
 ﻿<?php
 $eloquent = new Eloquent;
 $customerList = $eloquent->selectData(['*'], 'customers');
-// print_r($customerList);
 if (isset($_POST['userRegistration'])) {
-    // echo $_POST['last-name'] . ' ' . $_POST['first-name'];
-    // echo $_POST['email'];
-    // echo $_POST['password'];
-    // echo $_POST['password-confirm'];
-    // echo $_POST['phone'];
-    // echo $_POST['address'];
     $tableName = "customers";
     $registerData = [
         'customer_name' => trim($_POST['last-name'] . ' ' . $_POST['first-name']),

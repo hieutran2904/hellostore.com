@@ -5,19 +5,19 @@
                 <div class="col-lg-7 mb-md-3 mb-lg-0">
                     <div class="row align-items-center">
                         <div class="col flex-horizontal-center">
-                            <img class="icon-email" src="assets/imgs/theme/icons/icon-email.svg" alt="">
-                            <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
+                            <img class="icon-email" src="public/assets/imgs/theme/icons/icon-email.svg" alt="">
+                            <h4 class="font-size-20 mb-0 ml-3">Đăng kí ngay để nhận các thông báo từ HelloStore's</h4>
                         </div>
                         <div class="col my-4 my-md-0 des">
-                            <h5 class="font-size-15 ml-4 mb-0">...and receive <strong>$25 coupon for first shopping.</strong></h5>
+                            <h5 class="font-size-15 ml-4 mb-0">...Nhận ngay <strong>25.000&#8363; cho đơn hàng đầu tiên</strong></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <!-- Subscribe Form -->
                     <form class="form-subcriber d-flex wow fadeIn animated">
-                        <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-                        <button class="btn bg-dark text-white" type="submit">Subscribe</button>
+                        <input type="email" class="form-control bg-white font-small" placeholder="Nhập email của bạn">
+                        <button class="btn bg-dark text-white" type="submit">Đăng kí</button>
                     </form>
                     <!-- End Subscribe Form -->
                 </div>
@@ -32,59 +32,59 @@
                         <div class="logo logo-width-1 wow fadeIn animated">
                             <a href="index.php"><img src="./public/assets/imgs/logo/logoshop2023.png" alt="logo"></a>
                         </div>
-                        <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                        <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Liên hệ</h5>
                         <p class="wow fadeIn animated">
-                            <strong>Address: </strong>562 Wellington Road
+                            <strong>Địa chỉ: </strong>68 Giải Phóng, Hà Nội
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Phone: </strong>+1 0000-000-000
+                            <strong>Số điện thoại: </strong>+84 123 456 789
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Email: </strong>contact@surfsidemedia.in
+                            <strong>Email: </strong>hellostore@gmail.com
                         </p>
-                        <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
+                        <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow HelloStore's</h5>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            <a href="#"><img src="public/assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                            <a href="#"><img src="public/assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                            <a href="#"><img src="public/assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                            <a href="#"><img src="public/assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                            <a href="#"><img src="public/assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">About</h5>
+                    <h5 class="widget-title wow fadeIn animated">HelloStore's</h5>
                     <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Thông tin giao hàng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều kiện</a></li>
+                        <li><a href="#">Liên hệ chúng tôi</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2  col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">My Account</h5>
+                    <h5 class="widget-title wow fadeIn animated">Tài khoản của tôi</h5>
                     <ul class="footer-list wow fadeIn animated">
-                        <li><a href="my-account.html">My Account</a></li>
-                        <li><a href="#">View Cart</a></li>
-                        <li><a href="#">My Wishlist</a></li>
-                        <li><a href="#">Track My Order</a></li>
-                        <li><a href="#">Order</a></li>
+                        <li><a href="my-account.html">Thông tin</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
+                        <li><a href="#">Danh sách yêu thích</a></li>
+                        <li><a href="#">Đơn hàng</a></li>
+                        <li><a href="#">Đánh giá</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 mob-center">
-                    <h5 class="widget-title wow fadeIn animated">Install App</h5>
+                    <h5 class="widget-title wow fadeIn animated">Tải App</h5>
                     <div class="row">
                         <div class="col-md-8 col-lg-12">
-                            <p class="wow fadeIn animated">From App Store or Google Play</p>
+                            <p class="wow fadeIn animated">Từ App Store hoặc Google Play</p>
                             <div class="download-app wow fadeIn animated mob-app">
                                 <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active" src="./public/assets/imgs/theme/app-store.jpg" alt=""></a>
                                 <a href="#" class="hover-up"><img src="./public/assets/imgs/theme/google-play.jpg" alt=""></a>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
-                            <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
-                            <img class="wow fadeIn animated" src="assets/imgs/theme/payment-method.png" alt="">
+                            <p class="mb-20 wow fadeIn animated">Các phương thức thanh toán</p>
+                            <img class="wow fadeIn animated" src="public/assets/imgs/theme/payment-method.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -133,6 +133,72 @@
 <!-- Template  JS -->
 <script src="public/assets/js/main.js?v=3.3"></script>
 <script src="public/assets/js/shop.js?v=3.3"></script>
+<script src="public/assets/js/toastr.min.js"></script>
+
+
+<!--# ADD TO CART MESSAGE #-->
+<script type="text/javascript">
+    function success_toast(details, title) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        //toastr["success"]("Your product is added to cart successfully!", "Congratulation")
+        toastr["success"](details, title)
+    }
+
+    function warning_toast(details, title) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["warning"](details, title)
+    }
+</script>
+
+<?php
+
+//message added to cart
+if (isset($_POST['add_to_cart'])) {
+    if ($_SESSION['ADD_TO_CART_RESULT'] > 0) {
+        echo '<script type="text/javascript"> 
+				success_toast("Sản phẩm đã được thêm vào giỏ hàng!", "CHÚC MỪNG")
+				</script>';
+    } else {
+        echo '<script type="text/javascript"> 
+                warning_toast("Bạn chưa đăng nhập!", "CẢNH BÁO")
+				</script>';
+    }
+}
+
+?>
+
 </body>
 
 </html>

@@ -38,6 +38,37 @@ class Eloquent
     }
 
     // UPDATE FUNCTION
+    function updateData($tableName, $data, $whereValue = [])
+    {
+        try {
+            $sql = "UPDATE $tableName SET ";
+            foreach ($data as $key => $value) {
+                $sql .= $key . " = :" . $key . ", ";
+            }
+            $sql = rtrim($sql, ", ");
+            if ($whereValue != []) {
+                $sql .= " WHERE ";
+                foreach ($whereValue as $key => $value) {
+                    $sql .= $key . " = :" . $key . " AND ";
+                }
+                $sql = rtrim($sql, " AND ");
+            }
+            $stmt = $this->connection->prepare($sql);
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            if ($whereValue != []) {
+                foreach ($whereValue as $key => $value) {
+                    $stmt->bindValue(':' . $key, $value);
+                }
+            }
+            $stmt->execute();
+            $dataAdded = $stmt->rowCount();
+            return $dataAdded;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     // DELETE FUNCTION
 

@@ -5,7 +5,7 @@ class HomeController extends Controller
     {
         foreach ($productList as $eachProduct) {
             if (empty($eachProduct['product_master_image']))
-                $productImage = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image";
+                $productImage = $GLOBALS['PRODUCT_DIRECTORY'] . "Image_not_available.png";
             else
                 $productImage = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
             echo '<div class="col-lg-' . $col . ' col-md-4 col-sm-6 col-xs-6 col-6">
@@ -13,14 +13,22 @@ class HomeController extends Controller
                     <div class="product-img-action-wrap">
                         <div class="product-img product-img-zoom">
                             <a href="product-detail.php?id=' . $eachProduct['id'] . '">
-                                <img class="default-img" src="'.$productImage.'" alt="">
+                                <img class="default-img" src="' . $productImage . '" alt="">
                             </a>
                         </div>
-                        <div class="product-action-1">
-                            <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                        </div>
+                        <form method="post" action="" class="product-action-1">
+                            <input type="hidden" name="cart_product_id" value="' . $eachProduct['id'] . '"/>
+                            <input type="hidden" name="cart_product_quantity" value="1"/>
+                            <button name="quick_view" aria-label="Xem nhanh" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                <i class="fi-rs-eye"></i>
+                            </button>
+                            <button name="add_to_favourite" aria-label="Yêu thích" class="action-btn hover-up">
+                                <i class="fi-rs-heart"></i>
+                            </button>
+                            <button name="add_to_cart" aria-label="Thêm vào giỏ hàng" class="action-btn hover-up">
+                                <i class="fi-rs-shopping-bag-add"></i>
+                            </button>
+                        </form>
                         <div class="product-badges product-badges-position product-badges-mrg">
                             <span class="' . key($typeCard) . '">' . ucwords($typeCard[key($typeCard)]) . '</span>
                         </div>
@@ -38,9 +46,6 @@ class HomeController extends Controller
                         <div class="product-price">
                             <span>' . number_format($eachProduct['product_price']) . '&#8363; </span>
                             <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1) . '&#8363; </span>
-                        </div>
-                        <div class="product-action-1 show">
-                            <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.php"><i class="fi-rs-shopping-bag-add"></i></a>
                         </div>
                     </div>
                 </div>

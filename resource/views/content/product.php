@@ -45,13 +45,24 @@ $countItem = $productList != null ? count($productList) : 0;
 // }
 
 //print_r($productList);
+//fetch 3 items product add new
+$newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
+//print_r($newProductList);
+
+//fetch all categories hot (product best sell)
+$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 7]);
+//print_r($subCategoryList);
+
+//san pham co lien quan
+$relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0, ['START' => 0, 'END' => 4]);
+//print_r($relateProductList);
 ?>
 <main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow">Home</a>
-                <span></span> Shop
+                <a href="index.html" rel="nofollow">Trang chủ</a>
+                <span></span> Sản phẩm
             </div>
         </div>
     </div>
@@ -127,7 +138,7 @@ $countItem = $productList != null ? count($productList) : 0;
                         </nav>
                     </div>
                 </div>
-                <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                <!-- <div class="col-lg-3 primary-sidebar sticky-sidebar">
                     <div class="row">
                         <div class="col-lg-12 col-mg-6"></div>
                         <div class="col-lg-12 col-mg-6"></div>
@@ -144,7 +155,7 @@ $countItem = $productList != null ? count($productList) : 0;
                             <li><a href="shop.html">Accessories</a></li>
                         </ul>
                     </div>
-                    <!-- Fillter By Price -->
+                    Fillter By Price
                     <div class="sidebar-widget price_range range mb-30">
                         <div class="widget-header position-relative mb-20 pb-10">
                             <h5 class="widget-title mb-10">Fill by price</h5>
@@ -195,7 +206,7 @@ $countItem = $productList != null ? count($productList) : 0;
                         <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
                             Fillter</a>
                     </div>
-                    <!-- Product sidebar Widget -->
+                    Product sidebar Widget
                     <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                         <div class="widget-header position-relative mb-20 pb-10">
                             <h5 class="widget-title mb-10">New products</h5>
@@ -238,15 +249,8 @@ $countItem = $productList != null ? count($productList) : 0;
                             </div>
                         </div>
                     </div>
-                    <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
-                        <img src="public/assets/imgs/banner/banner-11.jpg" alt="">
-                        <div class="banner-text">
-                            <span>Women Zone</span>
-                            <h4>Save 17% on <br>Office Dress</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
+                <?php include("./resource/views/include/site-bar.php")?>
             </div>
         </div>
     </section>
