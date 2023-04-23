@@ -1,7 +1,7 @@
 <?php
 include('app/Controllers/View.php');
 $view = new View();
-$view->loadContent("include", "session");
 $view->loadContent('include', 'top');
-$view->loadContent('content', 'coming-soon');
+$view->loadContent('content', 'product-detail');
 $view->loadContent('include', 'tail');
+?>

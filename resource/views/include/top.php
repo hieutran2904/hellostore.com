@@ -17,31 +17,45 @@
 </head>
 
 <body>
-    <header class="header-area header-style-1 header-height-1">
+    <?php
+    include 'app/Controllers/Controller.php';
+    include 'app/Controllers/HomeController.php';
+    include 'app/Models/Eloquent.php';
+    $homeController = new HomeController();
+    $eloquent = new Eloquent();
+
+    //fetch all products
+    $columnName = ['*'];
+    $tableName = 'categories';
+    $inColumn = ['category_status'];
+    $inValue = [1];
+    $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
+    ?>
+    <header class="header-area header-style-1 header-height-2">
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
-                        <div class="header-info">
-                            <ul>
+                        <!-- <div class="header-info">
+                        <ul>
                                 <li>
-                                    <!-- <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
+                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
                                         <li><a href="#"><img src="public/assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
                                         <li><a href="#"><img src="public/assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
                                         <li><a href="#"><img src="public/assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                    </ul> -->
-                                </li>
+                                    </ul>
+                                </li>                                
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
-                                <ul style="line-height: 1.0;">
-                                    <li>Nhận các sản phẩm tuyệt vời giảm giá tới 50% <a href="shop.php">Xem chi tiết</a></li>
-                                    <li>Ưu đãi siêu giá trị - Tiết kiệm nhiều hơn với phiếu giảm giá</li>
-                                    <li>Nổi bật áo Polo đang được giảm 25%<a href="shop.php">Mua ngay</a></li>
+                                <ul style="line-height: 1.1;">
+                                    <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="product-detail.php">Chi tiết</a></li>
+                                    <li>Deals siêu khủng - Phiếu giảm giá siêu hời</li>
+                                    <li>Áo thun basic giảm giá lên đến 35% <a href="product-category.php">Mua ngay!</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,7 +63,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li><i class="fi-rs-key"></i><a href="login.html">Đăng nhập </a> / <a href="register.html">Đăng ký</a></li>
+                                <li><i class="fi-rs-key"></i><a href="login.php">Đăng nhập </a> / <a href="register.php">Đăng kí</a></li>
                             </ul>
                         </div>
                     </div>
@@ -64,20 +78,20 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-1">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                            <form action="product-category.php" method="POST">
+                                <input type="text" name="keywords" placeholder="Tìm kiếm sản phẩm..." required>
                             </form>
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.php">
+                                    <a href="favorites-list.php">
                                         <img class="svgInject" alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
                                         <span class="pro-count blue">4</span>
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="cart.html">
+                                    <a class="mini-cart-icon" href="cart.php">
                                         <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
                                         <span class="pro-count blue">2</span>
                                     </a>
@@ -113,7 +127,7 @@
                                                 <h4>Total <span>$4000.00</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
-                                                <a href="cart.html" class="outline">View cart</a>
+                                                <a href="cart.php" class="outline">View cart</a>
                                                 <a href="checkout.html">Checkout</a>
                                             </div>
                                         </div>
@@ -129,233 +143,51 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="public/assets/imgs/logo/logo.png" alt="logo"></a>
+                        <a href="index.html"><img src="public/assets/imgs/logo/logoshop.png" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
-                        <div class="main-categori-wrap d-none d-lg-block">
-                            <a class="categori-button-active" href="#">
-                                <span class="fi-rs-apps"></span>Danh mục sản phẩm
-                            </a>
-                            <div class="categori-dropdown-wrap categori-dropdown-active-large">
-                                <ul>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Hot & Trending</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Dresses</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Blouses & Shirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Hoodies & Sweatshirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Women's Sets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Suits & Blazers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Bodysuits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Tanks & Camis</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Coats & Jackets</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Bottoms</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Leggings</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Skirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Shorts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Jeans</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Pants & Capris</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Bikini Sets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Cover-Ups</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Swimwear</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="public/assets/imgs/banner/menu-banner-2.jpg" alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="header-banner2">
-                                                        <img src="public/assets/imgs/banner/menu-banner-3.jpg" alt="menu_banner2">
-                                                        <div class="banne_info">
-                                                            <h6>15% Off</h6>
-                                                            <h4>Hot Deals</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Jackets & Coats</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Down Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Parkas</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Faux Leather Coats</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Trench</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Wool & Blends</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Vests & Waistcoats</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Leather Coats</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Suits & Blazers</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Blazers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Suit Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Suit Pants</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Suits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Vests</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Tailor-made Suits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Cover-Ups</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="public/assets/imgs/banner/menu-banner-4.jpg" alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Hot & Trending</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Cellphones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">iPhones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Refurbished Phones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Mobile Phone</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Mobile Phone Parts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Phone Bags & Cases</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Communication Equipments</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Walkie Talkie</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Accessories</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Screen Protectors</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Wire Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Wireless Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Car Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Power Bank</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Armbands</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Dust Plug</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item" href="#">Signal Boosters</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="public/assets/imgs/banner/menu-banner-5.jpg" alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="header-banner2">
-                                                        <img src="public/assets/imgs/banner/menu-banner-6.jpg" alt="menu_banner2">
-                                                        <div class="banne_info">
-                                                            <h6>15% Off</h6>
-                                                            <h4>Hot Deals</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer & Office</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-diamond"></i>Jewelry & Accessories</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-high-heels"></i>Shoes</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-teddy-bear"></i>Mother & Kids</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a></li>
-                                    <li>
-                                        <ul class="more_slide_open" style="display: none;">
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Beauty, Health</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Bags and Shoes</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-diamond"></i>Consumer Electronics</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Automobiles & Motorcycles</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                                <div class="more_categories">Show more...</div>
-                            </div>
-                        </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="index.php">Trang chủ</a></li>
-                                    <!-- <li><a href="about.html">Về chúng tôi</a></li> -->
-                                    <li><a href="product.php">Sản phẩm</a></li>
-                                    <li class="position-static"><a href="#">Bộ sưu tập <i class="fi-rs-angle-down"></i></a>
+                                    <li><a class="active" href="index.php">Trang chủ </a></li>
+                                    <!-- <li><a href="about.html">About</a></li> -->
+                                    <li><a href="product-category.php">Sản phẩm </a></li>
+                                    <li class="position-static"><a href="#">Danh mục <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Thời Trang Nữ</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Dresses</a></li>
-                                                    <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                                    <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                                    <li><a href="product-details.html">Wedding Dresses</a></li>
-                                                    <li><a href="product-details.html">Prom Dresses</a></li>
-                                                    <li><a href="product-details.html">Cosplay Costumes</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Thời Trang Nam</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Jackets</a></li>
-                                                    <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                                    <li><a href="product-details.html">Genuine Leather</a></li>
-                                                    <li><a href="product-details.html">Casual Pants</a></li>
-                                                    <li><a href="product-details.html">Sweatpants</a></li>
-                                                    <li><a href="product-details.html">Harem Pants</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Technology</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Gaming Laptops</a></li>
-                                                    <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                                    <li><a href="product-details.html">Tablets</a></li>
-                                                    <li><a href="product-details.html">Laptop Accessories</a></li>
-                                                    <li><a href="product-details.html">Tablet Accessories</a></li>
-                                                </ul>
-                                            </li>
+                                            <?php
+                                            foreach ($categoryList as $eachCategory) {
+                                            ?>
+                                                <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                    <a class="menu-title" href="product-category.php?categoryId=<?= $eachCategory['id'] ?>">
+                                                        <?= $eachCategory['category_name'] ?>
+                                                    </a>
+                                                    <?php
+                                                    $columnName = ['*'];
+                                                    $tableName = 'subcategories';
+                                                    $whereValue = [
+                                                        'subcategory_status' => 1,
+                                                        'category_id' => $eachCategory['id']
+                                                    ];
+                                                    $inColumn = ['category_id', 'subcategory_status'];
+                                                    $inValue = [$eachCategory['id'], 1];
+                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
+                                                    ?>
+                                                    <ul>
+                                                        <?php
+                                                        foreach ($subCategoryList as $eachSubCategory) {
+                                                        ?>
+                                                            <li><a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><?= $eachSubCategory['subcategory_name'] ?></a></li>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="product-details.html"><img src="public/assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
+                                                    <a href="product-detail.php"><img src="public/assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -378,15 +210,14 @@
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Liên hệ </a></li>
-                                    <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>" ><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Dashboard</a></li>
-                                            <li><a href="#">Products</a></li>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>
+                                            <li><a href="#">Thông tin</a></li>
+                                            <li><a href="#">Đơn hàng</a></li>
+                                            <li><a href="#">Sản phẩm yêu thích</a></li>
+                                            <li><a href="#">Đánh giá</a></li>
+                                            <?php echo '<li><a href="?exit=yes">Đăng xuất</a></li>'; ?>
+                                            <!-- <li><a href="?exit=yes">Logout</a></li> -->
                                         </ul>
                                     </li>
                                 </ul>
@@ -394,19 +225,27 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
+                        <p>🤗<span>Xin Chào</span>
+                            <?php
+                            if (@$_SESSION['SSCF_login_id'] > 0) {
+                                echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                            } else {
+                                echo '<b> khách hàng </b>';
+                            }
+                            ?>
+                        </p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.php">
+                                <a href="favorites-list.php">
                                     <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
                                     <span class="pro-count white">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="cart.html">
+                                <a class="mini-cart-icon" href="cart.php">
                                     <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count white">2</span>
                                 </a>
@@ -442,7 +281,7 @@
                                             <h4>Total <span>$383.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="cart.html">View cart</a>
+                                            <a href="cart.php">View cart</a>
                                             <a href="shop-checkout.php">Checkout</a>
                                         </div>
                                     </div>
@@ -461,3 +300,120 @@
             </div>
         </div>
     </header>
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="index.html"><img src="public/assets/imgs/logo/logoshop.png" alt="logo"></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="#">
+                        <input type="text" placeholder="Search for items…">
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+                    <div class="main-categori-wrap mobile-header-border">
+                        <a class="categori-button-active-2" href="#">
+                            <span class="fi-rs-apps"></span> Browse Categories
+                        </a>
+                        <div class="categori-dropdown-wrap categori-dropdown-active-small">
+                            <ul>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a></li>
+                                <li> <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer & Office</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-high-heels"></i>Shoes</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-teddy-bear"></i>Mother & Kids</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- mobile menu start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="index.html">Home</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop.html">Sản phẩm</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Danh mục</a>
+                                <ul class="dropdown">
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">Dresses</a></li>
+                                            <li><a href="product-details.html">Blouses & Shirts</a></li>
+                                            <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="product-details.html">Women's Sets</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">Jackets</a></li>
+                                            <li><a href="product-details.html">Casual Faux Leather</a></li>
+                                            <li><a href="product-details.html">Genuine Leather</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Technology</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">Gaming Laptops</a></li>
+                                            <li><a href="product-details.html">Ultraslim Laptops</a></li>
+                                            <li><a href="product-details.html">Tablets</a></li>
+                                            <li><a href="product-details.html">Laptop Accessories</a></li>
+                                            <li><a href="product-details.html">Tablet Accessories</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">French</a></li>
+                                    <li><a href="#">German</a></li>
+                                    <li><a href="#">Spanish</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
+                <div class="mobile-header-info-wrap mobile-header-border">
+                    <div class="single-mobile-header-info mt-30">
+                        <a href="contact.html"> Our location </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="login.html">Log In </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="register.html">Sign Up</a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <!-- <a href="#">Xin chào HieuDev </a> -->
+                        <?php
+                        if (@$_SESSION['SSCF_login_id'] > 0) {
+                            echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                        } else {
+                            echo '<b> khách hàng </b>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="mobile-social-icon">
+                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <a href="#"><img src="public/assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href="#"><img src="public/assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href="#"><img src="public/assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href="#"><img src="public/assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href="#"><img src="public/assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
