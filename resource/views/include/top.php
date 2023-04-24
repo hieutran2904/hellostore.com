@@ -31,17 +31,34 @@
     $inValue = [1];
     $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
 
-    //insert to cart
-    if (isset($_POST['add_to_cart'])) {
-        if (isset($_SESSION['SSCF_login_id']) > 0) {
-            echo '<script>console.log("add to cart")</script>';
-            $_SESSION['ADD_TO_CART_RESULT'] = 1;
-        } else {
-            //khach hang ko dang nhap thi ko them duoc san pham vao gio hang
-            echo '<script>console.log("not login")</script>';
-            $_SESSION['ADD_TO_CART_RESULT'] = 0;
+    //fetch list product in cart
+    if (isset($_SESSION['SSCF_login_id'])) {
+        $productListCart = $eloquent->selectData(['*'], 'shopcarts', ['customer_id' => $_SESSION['SSCF_login_id']]);
+        // print_r($productListCart);
+        // foreach ($productListCart as $key => $product) {
+        //     $itemProduct = $eloquent->selectData(['product_name', 'product_price'], 'products', ['id' => $product['product_id']]);
+        //     echo '<pre>';
+        //     print_r($itemProduct[0]);
+        //     echo '</pre>';
+        // }
+        $count_product_cart = count($productListCart);
+        if (isset($_SESSION['COUNT_PRODUCT_CART'])) {
+            $count_product_cart = $_SESSION['COUNT_PRODUCT_CART'];
         }
+    } else {
+        $productListCart = [];
+        $count_product_cart = 0;
     }
+
+    // //insert to cart
+    // if (isset($_POST['add_to_cart'])) {
+    //     if (isset($_SESSION['SSCF_login_id']) > 0) {
+    //         $_SESSION['ADD_TO_CART_RESULT'] = 1;
+    //     } else {
+    //         echo '<script>console.log("not login")</script>';
+    //         $_SESSION['ADD_TO_CART_RESULT'] = 0;
+    //     }
+    // }
 
     ?>
     <header class="header-area header-style-1 header-height-2">
@@ -100,48 +117,58 @@
                                 <div class="header-action-icon-2">
                                     <a href="favorites-list.php">
                                         <img class="svgInject" alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
-                                        <span class="pro-count blue">4</span>
+                                        <span class="pro-count blue">...</span>
                                     </a>
                                 </div>
-                                <div class="header-action-icon-2">
+                                <div class="header-action-icon-2 cart_product">
                                     <a class="mini-cart-icon" href="cart.php">
                                         <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue">2</span>
+                                        <span class="pro-count blue"><?= $count_product_cart; ?></span>
                                     </a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="public/assets/imgs/shop/thumbnail-3.jpg"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="product-details.html">Daisy Casual Bag</a></h4>
-                                                    <h4><span>1 × </span>$800.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="product-details.html"><img alt="Surfside Media" src="public/assets/imgs/shop/thumbnail-2.jpg"></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="product-details.html">Corduroy Shirts</a></h4>
-                                                    <h4><span>1 × </span>$3200.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
+                                            <?php
+                                            $priceTotal = 0;
+                                            if ($productListCart != [])
+                                                foreach ($productListCart as $key => $product) {
+                                                    $productItems = $eloquent->selectData(['*'], 'products', ['id' => $product['product_id']]);
+                                                    $productItem = $productItems[0];
+                                                    $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem['product_master_image'];
+                                                    $priceTotal += $productItem['product_price'] * $product['quantity'];
+
+                                            ?>
+                                                <li>
+                                                    <div class="shopping-cart-img">
+                                                        <a href="product-detail.php?id=<?= $productItem['id'] ?>"><img alt="" src="<?= $productImageItem ?>"></a>
+                                                    </div>
+                                                    <div class="shopping-cart-title">
+                                                        <h4><a href="product-detail.php?id=<?= $productItem['id'] ?>"><?= $productItem['product_name'] ?></a></h4>
+                                                        <h4><span><?= $product['quantity'] ?> × </span><?php echo number_format($productItem['product_price']) . $GLOBALS['CURRENCY'] ?></h4>
+                                                    </div>
+                                                    <div class="shopping-cart-delete">
+                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                    </div>
+                                                </li>
+                                            <?php
+                                                }
+                                            else {
+                                            ?>
+                                                <li>
+                                                    <div class="shopping-cart-title">
+                                                        <h4>Không có sản phẩm nào trong giỏ hàng</h4>
+                                                    </div>
+                                                </li>
+                                            <?php
+                                            }
+                                            ?>
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>$4000.00</span></h4>
+                                                <h4>Tổng: <span><?php echo number_format($priceTotal) . $GLOBALS['CURRENCY'] ?></span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
-                                                <a href="cart.php" class="outline">View cart</a>
-                                                <a href="checkout.html">Checkout</a>
+                                                <a href="cart.php" class="outline">Giỏ hàng</a>
+                                                <a href="checkout.html">Thanh toán</a>
                                             </div>
                                         </div>
                                     </div>
@@ -342,7 +369,7 @@
                             <ul>
                                 <li><a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a></li>
                                 <li><a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a></li>
-                                <li> <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a></li>
+                                <li><a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a></li>
                                 <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer & Office</a></li>
                                 <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a></li>
                                 <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>

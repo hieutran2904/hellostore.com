@@ -108,6 +108,11 @@
             </div>
         </div>
     </div>
+
+    <div class="toastr_notification">
+        <h1>haha</h1>
+    </div>
+
 </footer>
 <!-- Vendor JS-->
 <script src="public/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -137,7 +142,7 @@
 
 
 <!--# ADD TO CART MESSAGE #-->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function success_toast(details, title) {
         toastr.options = {
             "closeButton": true,
@@ -180,25 +185,29 @@
         }
         toastr["warning"](details, title)
     }
+</script> -->
+
+<script>
+    $(document).ready(function() {
+        $('.add_to_cart').click(function(e) {
+            e.preventDefault();
+            var id = $(this).data('itemid');
+            var name = $('#cart_product_name_' + id).val();
+            var qty = $('#qty_' + id).val();
+            $.ajax({
+                url: 'app/Handle/addToCart.php',
+                type: 'POST',
+                data: {
+                    product_id: id,
+                    product_name: name,
+                    product_qty: qty
+                },
+                success: function(data) {
+                    $('.cart_product').html(data);
+                }
+            });
+        });
+    });
 </script>
-
-<?php
-
-//message added to cart
-if (isset($_POST['add_to_cart'])) {
-    if ($_SESSION['ADD_TO_CART_RESULT'] > 0) {
-        echo '<script type="text/javascript"> 
-				success_toast("Sản phẩm đã được thêm vào giỏ hàng!", "CHÚC MỪNG")
-				</script>';
-    } else {
-        echo '<script type="text/javascript"> 
-                warning_toast("Bạn chưa đăng nhập!", "CẢNH BÁO")
-				</script>';
-    }
-}
-
-?>
-
 </body>
-
 </html>

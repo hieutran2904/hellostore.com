@@ -165,17 +165,4 @@ class Eloquent
         }
     }
 
-    // function alter message
-    public function alertMessage($message, $type)
-    {
-        //custom alert message
-
-        echo "<script>alert('$message')</script>";
-        // if ($type == 'success') {
-        //     echo "<script>window.location.href = 'index.php'</script>";
-        // } else if ($type == 'error') {
-        //     echo "<script>window.location.href = 'index.php'</script>";
-        // } 
-    }
-
 }

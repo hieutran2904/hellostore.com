@@ -16,19 +16,7 @@ class HomeController extends Controller
                                 <img class="default-img" src="' . $productImage . '" alt="">
                             </a>
                         </div>
-                        <form method="post" action="" class="product-action-1">
-                            <input type="hidden" name="cart_product_id" value="' . $eachProduct['id'] . '"/>
-                            <input type="hidden" name="cart_product_quantity" value="1"/>
-                            <button name="quick_view" aria-label="Xem nhanh" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <i class="fi-rs-eye"></i>
-                            </button>
-                            <button name="add_to_favourite" aria-label="Yêu thích" class="action-btn hover-up">
-                                <i class="fi-rs-heart"></i>
-                            </button>
-                            <button name="add_to_cart" aria-label="Thêm vào giỏ hàng" class="action-btn hover-up">
-                                <i class="fi-rs-shopping-bag-add"></i>
-                            </button>
-                        </form>
+                        
                         <div class="product-badges product-badges-position product-badges-mrg">
                             <span class="' . key($typeCard) . '">' . ucwords($typeCard[key($typeCard)]) . '</span>
                         </div>
@@ -47,6 +35,16 @@ class HomeController extends Controller
                             <span>' . number_format($eachProduct['product_price']) . '&#8363; </span>
                             <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1) . '&#8363; </span>
                         </div>
+                        <form class="product-action-1 show">
+                            <input type="hidden" id="cart_product_name_'.$eachProduct['id'].'" value="'.$eachProduct['product_name'].'"/>
+                            <input type="hidden" id="qty_'.$eachProduct['id'].'" value="1"/>
+                            <button data-itemid="'.$eachProduct['id'].'" aria-label="Thêm giỏ hàng" class="action-btn hover-up add_to_cart">
+                                <i class="fi-rs-shopping-bag-add"></i>
+                            </button>
+                            <button data-itemid="'.$eachProduct['id'].'" aria-label="Yêu thích" class="action-btn hover-up add_to_favourite">
+                                <i class="fi-rs-heart"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>';
