@@ -71,6 +71,30 @@ class Eloquent
     }
 
     // DELETE FUNCTION
+    function deleteData($tableName, $whereValue = [])
+    {
+        try {
+            $sql = "DELETE FROM $tableName";
+            if ($whereValue != []) {
+                $sql .= " WHERE ";
+                foreach ($whereValue as $key => $value) {
+                    $sql .= $key . " = :" . $key . " AND ";
+                }
+                $sql = rtrim($sql, " AND ");
+            }
+            $stmt = $this->connection->prepare($sql);
+            if ($whereValue != []) {
+                foreach ($whereValue as $key => $value) {
+                    $stmt->bindValue(':' . $key, $value);
+                }
+            }
+            $stmt->execute();
+            $dataAdded = $stmt->rowCount();
+            return $dataAdded;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
 
     // SELECT FUNCTION

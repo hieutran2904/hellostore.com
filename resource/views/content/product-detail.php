@@ -13,9 +13,9 @@ $whereValue = ['id' => $_SESSION['SSCF_product_product_id']];
 $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
 
 $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
-$imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_one'];
-$imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_two'];
-$imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['products_image_three'];
+$imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_one'];
+$imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_two'];
+$imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_three'];
 
 //fetch 3 items product add new
 $newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
@@ -33,9 +33,9 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.php" rel="nofollow">Home</a>
-                <span></span> Fashion
-                <span></span> Abstract Print Patchwork Dress
+                <a href="index.php" rel="nofollow">Trang chủ</a>
+                <span></span> Sản phẩm chi tiết
+                <span></span> <?= $productList[0]['product_name'] ?>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                 </div> -->
                             </div>
                             <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="detail-info">
+                                <form class="detail-info">
                                     <h2 class="title-detail"><?= $productList[0]['product_name'] ?></h2>
                                     <div class="product-detail-rating">
                                         <div class="pro-details-brand">
@@ -151,7 +151,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                         <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Thêm vào giỏ hàng</button>
+                                            <button type="submit" class="button button-add-to-cart add_to_cart">Thêm vào giỏ hàng</button>
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                         </div>
@@ -161,7 +161,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                         <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
                                         <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
                                     </ul> -->
-                                </div>
+                                </form>
                                 <!-- Detail Info -->
                             </div>
                         </div>
@@ -174,7 +174,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                     <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Đánh giá (3)</a>
                                 </li>
                             </ul>
                             <div class="tab-content shop_info_tab entry-main-content">
@@ -452,7 +452,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                     if($relateProductList != [])
                                     foreach ($relateProductList as $eachRelateProduct) {
                                         $imageDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_master_image'];
-                                        $iamgeHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['products_image_one'];
+                                        $iamgeHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_image_one'];
                                     ?>
                                         <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                             <div class="product-cart-wrap small hover-up">

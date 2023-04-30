@@ -110,8 +110,8 @@
     </div>
 
     <div class="toastr_notification">
-        <h1>haha</h1>
     </div>
+    
 
 </footer>
 <!-- Vendor JS-->
@@ -120,7 +120,7 @@
 <script src="public/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
 <script src="public/assets/js/vendor/bootstrap.bundle.min.js"></script>
 <script src="public/assets/js/plugins/slick.js"></script>
-<script src="public/assets/js/plugins/jquery.syotimer.min.js"></script>
+<!-- <script src="public/assets/js/plugins/jquery.syotimer.min.js"></script> -->
 <script src="public/assets/js/plugins/wow.js"></script>
 <script src="public/assets/js/plugins/jquery-ui.js"></script>
 <script src="public/assets/js/plugins/perfect-scrollbar.js"></script>
@@ -188,7 +188,12 @@
 </script> -->
 
 <script>
+    $(window).on('load', function() {
+        $('body').removeClass('preloading');
+        $('.load-customer').delay(1).fadeOut('fast');
+    });
     $(document).ready(function() {
+        $('.cart_product').load("app/Handle/loadCart.php");
         $('.add_to_cart').click(function(e) {
             e.preventDefault();
             var id = $(this).data('itemid');
@@ -203,7 +208,8 @@
                     product_qty: qty
                 },
                 success: function(data) {
-                    $('.cart_product').html(data);
+                    $('.cart_product').load("app/Handle/loadCart.php");
+                    $('.toastr_notification').html(data);
                 }
             });
         });

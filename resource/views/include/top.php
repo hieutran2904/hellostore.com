@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
+<!-- no-js -->
 
 <head>
     <meta charset="utf-8">
@@ -15,9 +16,41 @@
     <link rel="stylesheet" href="public/assets/css/main.css">
     <link rel="stylesheet" href="public/assets/css/custom.css">
     <link rel="stylesheet" href="public/assets/css/toastr.css">
+    <style>
+        /* === LOADER === */
+        /* body .preloading {
+            display: none;
+            overflow: hidden;
+        } */
+        .load-customer {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999999;
+            display: block;
+            overflow: hidden;
+        }
+
+        .load-customer img {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 
-<body>
+<body class="preloading">
+    <div class="load-customer">
+        <img src="public/assets/imgs/loading/load70px.gif" alt="">
+    </div>
     <?php
     include 'app/Controllers/Controller.php';
     include 'app/Controllers/HomeController.php';
@@ -66,18 +99,6 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
-                        <!-- <div class="header-info">
-                        <ul>
-                                <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li><a href="#"><img src="public/assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                        <li><a href="#"><img src="public/assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="public/assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                    </ul>
-                                </li>                                
-                            </ul>
-                        </div> -->
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
@@ -121,7 +142,7 @@
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2 cart_product">
-                                    <a class="mini-cart-icon" href="cart.php">
+                                    <!-- <a class="mini-cart-icon" href="cart.php">
                                         <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
                                         <span class="pro-count blue"><?= $count_product_cart; ?></span>
                                     </a>
@@ -145,9 +166,10 @@
                                                         <h4><a href="product-detail.php?id=<?= $productItem['id'] ?>"><?= $productItem['product_name'] ?></a></h4>
                                                         <h4><span><?= $product['quantity'] ?> × </span><?php echo number_format($productItem['product_price']) . $GLOBALS['CURRENCY'] ?></h4>
                                                     </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                    </div>
+                                                    <form class="shopping-cart-delete">
+                                                        <input type="hidden" id="delete_product_cart_name<?= $productItem['id'] ?>" value="<?= $productItem['product_name'] ?>">
+                                                        <a class="delete_product_cart" data-itemid="<?= $productItem['id'] ?>" ><i class="fi-rs-cross-small"></i></a>
+                                                    </form>
                                                 </li>
                                             <?php
                                                 }
@@ -168,10 +190,10 @@
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="cart.php" class="outline">Giỏ hàng</a>
-                                                <a href="checkout.html">Thanh toán</a>
+                                                <a href="checkout.php">Thanh toán</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -191,7 +213,7 @@
                                 <ul>
                                     <li><a class="active" href="index.php">Trang chủ </a></li>
                                     <!-- <li><a href="about.html">About</a></li> -->
-                                    <li><a href="product-category.php">Sản phẩm </a></li>
+                                    <li><a id="main_product_id" href="product-category.php">Sản phẩm </a></li>
                                     <li class="position-static"><a href="#">Danh mục <i class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
                                             <?php
@@ -250,14 +272,13 @@
                                     </li>
                                     <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Liên hệ </a></li>
-                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
+                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="my-account.php">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Thông tin</a></li>
                                             <li><a href="#">Đơn hàng</a></li>
                                             <li><a href="#">Sản phẩm yêu thích</a></li>
                                             <li><a href="#">Đánh giá</a></li>
                                             <?php echo '<li><a href="?exit=yes">Đăng xuất</a></li>'; ?>
-                                            <!-- <li><a href="?exit=yes">Logout</a></li> -->
                                         </ul>
                                     </li>
                                 </ul>

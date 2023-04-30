@@ -247,7 +247,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                     <?php
                     foreach ($productList as $eachProduct) {
                         $imageProductDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
-                        $imageProductHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['products_image_one'];
+                        $imageProductHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_image_one'];
                     ?>
                         <div class="product-cart-wrap small hover-up">
                             <div class="product-img-action-wrap">
