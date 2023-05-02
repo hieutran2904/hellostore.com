@@ -38,9 +38,6 @@ class HomeController extends Controller
                         <form class="product-action-1 show">
                             <input type="hidden" id="cart_product_name_'.$eachProduct['id'].'" value="'.$eachProduct['product_name'].'"/>
                             <input type="hidden" id="qty_'.$eachProduct['id'].'" value="1"/>
-                            <button data-itemid="'.$eachProduct['id'].'" aria-label="Thêm giỏ hàng" class="action-btn hover-up add_to_cart">
-                                <i class="fi-rs-shopping-bag-add"></i>
-                            </button>
                             <button data-itemid="'.$eachProduct['id'].'" aria-label="Yêu thích" class="action-btn hover-up add_to_favourite">
                                 <i class="fi-rs-heart"></i>
                             </button>
@@ -51,3 +48,7 @@ class HomeController extends Controller
         }
     }
 }
+
+// <button data-itemid="'.$eachProduct['id'].'" aria-label="Thêm giỏ hàng" class="action-btn hover-up add_to_cart">
+//                                 <i class="fi-rs-shopping-bag-add"></i>
+//                             </button>

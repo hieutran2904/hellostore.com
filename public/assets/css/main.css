@@ -4471,8 +4471,8 @@ table .product-thumbnail img {
   background: #ff596d;
 }
 
-.product-color-yellow {
-  background: #ffdb33;
+.product-color-beige {
+  background: #F5F5DC;
 }
 
 .product-color-white {
@@ -4493,6 +4493,14 @@ table .product-thumbnail img {
 
 .product-color-purple {
   background: #ff8ff8;
+}
+
+.product-color-black {
+  background: #141314;
+}
+
+.product-color-brown {
+  background: #8B4513;
 }
 
 .detail-gallery .slick-slider {
@@ -5622,7 +5630,7 @@ h6.post-title {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 80px;
   flex: 0 0 80px;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .cart-dropdown-wrap ul li .shopping-cart-img a img {

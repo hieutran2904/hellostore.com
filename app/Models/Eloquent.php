@@ -122,6 +122,19 @@ class Eloquent
                 $sql1 .= " FROM $tableName";
             }
 
+            //where column = value
+            if ($whereValue != []) {
+                $sql1 .= " WHERE ";
+                if (array_key_exists('operator', $whereValue)) {
+                    $operator = $whereValue['operator'] == '=' ? ' = ' : ' <> ';
+                } else $operator = ' = ';
+                foreach ($whereValue as $eachColumn => $eachValue) {
+                    if ($eachColumn == 'operator') continue;
+                    $sql1 .= $eachColumn . $operator . '\'' . $eachValue . '\'' . " AND ";
+                }
+                $sql1 = rtrim($sql1, "AND ");
+            }
+
             // where column in ()
             if ($inColumn != []) {
                 $sql1 .= " WHERE ";
@@ -166,18 +179,7 @@ class Eloquent
                 $sql1 .= " LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             }
 
-            //where column = value
-            if ($whereValue != []) {
-                $sql1 .= " WHERE ";
-                if (array_key_exists('operator', $whereValue)) {
-                    $operator = $whereValue['operator'] == '=' ? ' = ' : ' <> ';
-                } else $operator = ' = ';
-                foreach ($whereValue as $eachColumn => $eachValue) {
-                    if ($eachColumn == 'operator') continue;
-                    $sql1 .= $eachColumn . $operator . '\'' . $eachValue . '\'' . " AND ";
-                }
-                $sql1 = rtrim($sql1, "AND ");
-            }
+            
 
             $query = $this->connection->prepare($sql1);
             $query->execute();
@@ -188,5 +190,16 @@ class Eloquent
             echo $e->getMessage();
         }
     }
-
+    // SELECT CART INFO
+    public function loadCartInfo($customerId){
+        try {
+            $sql = "SELECT `products`.`id`, `shopcarts`.`id` as `idShopCarts`, `quantity`, `product_color`, `product_size`, `product_name`, `product_master_image`, `product_price` from `shopcarts` LEFT JOIN `products_sc` ON `shopcarts`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = ".$customerId;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

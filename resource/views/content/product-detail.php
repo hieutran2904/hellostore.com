@@ -28,6 +28,14 @@ $subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategor
 //san pham co lien quan
 $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0, ['START' => 0, 'END' => 4]);
 //print_r($relateProductList);
+
+//fetch all color for product id
+$colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['product_id' => $_SESSION['SSCF_product_product_id']], [], [], ['product_color' => 'product_color']);
+//print_r($colorProductList);
+
+//fetch all size for product id
+$productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $_SESSION['SSCF_product_product_id']], [], [], ['product_size' => 'product_size']);
+//print_r($productSizeList);
 ?>
 <main class="main">
     <div class="page-header breadcrumb-wrap">
@@ -78,10 +86,10 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                 <!-- <div class="social-icons single-share">
                                     <ul class="text-grey-5 d-inline-block">
                                         <li><strong class="mr-10">Share this:</strong></li>
-                                        <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
-                                        <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
-                                        <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
-                                        <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                        <li class="social-facebook"><a href="#"><img src="public/assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                        <li class="social-twitter"> <a href="#"><img src="public/assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                        <li class="social-instagram"><a href="#"><img src="public/assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                        <li class="social-linkedin"><a href="#"><img src="public/assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
                                     </ul>
                                 </div> -->
                             </div>
@@ -111,37 +119,49 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                     <div class="short-desc mb-30">
                                         <p><?= $productList[0]['product_summary'] ?></p>
                                     </div>
-                                    <div class="product_sort_info font-xs mb-30">
+                                    <!-- <div class="product_sort_info font-xs mb-30">
                                         <ul>
                                             <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
                                             <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return Policy</li>
                                             <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                     <div class="attr-detail attr-color mb-15">
-                                        <strong class="mr-10">Color</strong>
+                                        <strong class="mr-10">Màu</strong>
                                         <ul class="list-filter color-filter">
-                                            <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
+                                            <?php
+                                            foreach ($colorProductList as $eachColor) {
+                                                echo '<li class=""><a class="choice-color" data-color="' . $eachColor['product_color'] . '"><span class="product-color-' . $eachColor['product_color'] . '"></span></a></li>';
+                                            }
+                                            ?>
+                                            <!-- <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
                                             <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                            <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
+                                            <li class=""><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
                                             <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
                                             <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
                                             <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                            <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
+                                            <li><a href="#" data-color="Black"><span class="product-color-black"></span></a></li>
+                                            <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li> -->
                                         </ul>
                                     </div>
                                     <div class="attr-detail attr-size">
                                         <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">S</a></li>
+                                        <ul class="list-filter size-filter font-small load-size">
+                                            <?php
+                                            foreach ($productSizeList as $eachSize) {
+                                                echo '<li class="mr-5"><a class="choice-size" data-size="' . $eachSize['product_size'] . '">' . $eachSize['product_size'] . '</a></li>';
+                                            }
+                                            ?>
+                                            <!-- <li><a href="#">S</a></li>
                                             <li class="active"><a href="#">M</a></li>
                                             <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li>
-                                            <li class="disabled"><a href="#">XXL</a></li>
+                                            <li><a href="#">XL</a></li> -->
+                                            <!-- <li class="disabled"><a href="#">XXL</a></li> -->
                                         </ul>
                                     </div>
                                     <div class="attr-detail mt-10">
-                                        <span class="in-stock text-success">123(db) sản phẩm có sẵn</span>
+                                        <span class="in-stock text-success load-status-quantity">
+                                        </span>
                                     </div>
                                     <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                     <div class="detail-extralink">
@@ -300,7 +320,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                                     <div class="single-comment justify-content-between d-flex">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
-                                                                <img src="assets/imgs/page/avatar-6.jpg" alt="">
+                                                                <img src="public/assets/imgs/page/avatar-6.jpg" alt="">
                                                                 <h6><a href="#">Jacky Chan</a></h6>
                                                                 <p class="font-xxs">Since 2012</p>
                                                             </div>
@@ -323,7 +343,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                                     <div class="single-comment justify-content-between d-flex">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
-                                                                <img src="assets/imgs/page/avatar-7.jpg" alt="">
+                                                                <img src="public/assets/imgs/page/avatar-7.jpg" alt="">
                                                                 <h6><a href="#">Ana Rosie</a></h6>
                                                                 <p class="font-xxs">Since 2008</p>
                                                             </div>
@@ -346,7 +366,7 @@ $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0,
                                                     <div class="single-comment justify-content-between d-flex">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
-                                                                <img src="assets/imgs/page/avatar-8.jpg" alt="">
+                                                                <img src="public/assets/imgs/page/avatar-8.jpg" alt="">
                                                                 <h6><a href="#">Steven Keny</a></h6>
                                                                 <p class="font-xxs">Since 2010</p>
                                                             </div>

@@ -5,9 +5,8 @@ include '../../config/database.php';
 include '../../config/site.php';
 $eloquent = new Eloquent();
 
-$tableName = "shopcarts";
 if (isset($_SESSION['SSCF_login_id'])) {
-    $productListCart = $eloquent->selectData(['*'], $tableName, ['customer_id' => $_SESSION['SSCF_login_id']]);
+    $productListCart = $eloquent->loadCartInfo($_SESSION['SSCF_login_id']);
     $count_product_cart = count($productListCart);
 } else {
     $count_product_cart = 0;
@@ -26,23 +25,21 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
         $priceTotal = 0;
         if ($productListCart != [])
             foreach ($productListCart as $key => $product) {
-                $productItems = $eloquent->selectData(['*'], 'products', ['id' => $product['product_id']]);
-                $productItem = $productItems[0];
-                $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem['product_master_image'];
-                $priceTotal += $productItem['product_price'] * $product['quantity'];
-
+                $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $product['product_master_image'];
+                $priceTotal += $product['product_price'] * $product['quantity'];
         ?>
             <li>
                 <div class="shopping-cart-img">
-                    <a href="product-detail.php?id=<?= $productItem['id'] ?>"><img alt="" src="<?= $productImageItem ?>"></a>
+                    <a href="product-detail.php?id=<?= $product['id'] ?>"><img alt="" src="<?= $productImageItem ?>"></a>
                 </div>
                 <div class="shopping-cart-title">
-                    <h4><a href="product-detail.php?id=<?= $productItem['id'] ?>"><?= $productItem['product_name'] ?></a></h4>
-                    <h4><span><?= $product['quantity'] ?> × </span><?php echo number_format($productItem['product_price']) . $GLOBALS['CURRENCY'] ?></h4>
+                    <h5><a style="font-weight: bold;" href="product-detail.php?id=<?= $product['id'] ?>"><?= $product['product_name'] ?></a></h5>
+                    <h5><span><?= $product['quantity'] ?> × </span><?php echo number_format($product['product_price']) . $GLOBALS['CURRENCY'] ?></h5>
+                    <h5><span>Màu: <?= $product['product_color'] ?> , Size: <?= $product['product_size'] ?></span></h5>
                 </div>
                 <form class="shopping-cart-delete">
-                    <input type="hidden" id="delete_product_cart_name<?= $productItem['id'] ?>" value="<?= $productItem['product_name'] ?>">
-                    <a class="delete_product_cart" data-itemid="<?= $productItem['id'] ?>"><i class="fi-rs-cross-small"></i></a>
+                    <input type="hidden" id="delete_product_cart_name<?= $product['idShopCarts'] ?>" value="<?= $product['product_name'] ?>">
+                    <a class="delete_product_cart" data-itemid="<?= $product['idShopCarts'] ?>"><i class="fi-rs-cross-small"></i></a>
                 </form>
             </li>
         <?php
@@ -78,6 +75,7 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
         var id = $(this).data('itemid');
         console.log(id);
         var name = $('#delete_product_cart_name' + id).val();
+        console.log(name);
         $.ajax({
             url: 'app/Handle/deleteToCart.php',
             type: 'POST',

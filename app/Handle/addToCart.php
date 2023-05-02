@@ -7,7 +7,7 @@ $toastr = new Toastr();
 $eloquent = new Eloquent();
 
 
-$id = $_POST['product_id'];
+$id = $_POST['product_sc_id'];
 $name = $_POST['product_name'];
 $qty = $_POST['product_qty'];
 
@@ -16,7 +16,7 @@ if (isset($_SESSION['SSCF_login_id'])) {
     $columnName = ['*'];
     $tableName = "shopcarts";
     $whereValue = [
-        'product_id' => $_POST['product_id'],
+        'product_sc_id' => $id,
         'customer_id' => $_SESSION['SSCF_login_id']
     ];
     $availabilityInCart = $eloquent->selectData($columnName, $tableName, @$whereValue);
@@ -25,10 +25,10 @@ if (isset($_SESSION['SSCF_login_id'])) {
     if (!empty($availabilityInCart)) {
         // update so luong san pham trong gio hang
         $tableName = "shopcarts";
-        $columnValue["quantity"] = $_POST['product_qty'] + $availabilityInCart[0]['quantity'];
+        $columnValue["quantity"] = $qty + $availabilityInCart[0]['quantity'];
         $whereValue = [
             'customer_id' => $_SESSION['SSCF_login_id'],
-            'product_id' => $_POST['product_id']
+            'product_sc_id' => $id
         ];
         $updateCartResult = $eloquent->updateData($tableName, $columnValue, $whereValue);
         // $productListCart = $eloquent->selectData(['*'], $tableName, ['customer_id' => $_SESSION['SSCF_login_id']]);
@@ -41,7 +41,7 @@ if (isset($_SESSION['SSCF_login_id'])) {
         $tableName = "shopcarts";
         $columnValue = [
             'customer_id' => $_SESSION['SSCF_login_id'],
-            'product_id' => $_POST['product_id'],
+            'product_sc_id' => $id,
             'quantity' => $_POST['product_qty'],
             'created_at' => date("Y-m-d H:i:s")
         ];

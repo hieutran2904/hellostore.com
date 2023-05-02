@@ -111,8 +111,6 @@
 
     <div class="toastr_notification">
     </div>
-    
-
 </footer>
 <!-- Vendor JS-->
 <script src="public/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -196,16 +194,19 @@
         $('.cart_product').load("app/Handle/loadCart.php");
         $('.add_to_cart').click(function(e) {
             e.preventDefault();
-            var id = $(this).data('itemid');
-            var name = $('#cart_product_name_' + id).val();
-            var qty = $('#qty_' + id).val();
+            let product_sc_id = $('#idProductsSC').val();
+            let product_name = $('.title-detail').text();
+            let product_qty = $('.qty-val').text();
+            console.log(product_sc_id);
+            console.log(product_name);
+            console.log(product_qty);
             $.ajax({
                 url: 'app/Handle/addToCart.php',
                 type: 'POST',
                 data: {
-                    product_id: id,
-                    product_name: name,
-                    product_qty: qty
+                    product_sc_id: $('#idProductsSC').val(),
+                    product_name: $('.title-detail').text(),
+                    product_qty: $('.qty-val').text(),
                 },
                 success: function(data) {
                     $('.cart_product').load("app/Handle/loadCart.php");

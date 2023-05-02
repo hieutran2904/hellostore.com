@@ -198,7 +198,7 @@
 
 ul,
 .list-unstyled {
-	padding-left: 30px;
+	padding-left: 0px;
 }
 
 ul.amounts li {
@@ -250,7 +250,7 @@ ul.amounts li.grand-total {
 
 .logo-newsletter {
 	height: 56px !important;
-	widht: 140px !important;
+	width: 140px !important;
 }
 
 .modal-header,
