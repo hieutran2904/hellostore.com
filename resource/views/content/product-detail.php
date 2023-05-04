@@ -134,14 +134,6 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                                 echo '<li class=""><a class="choice-color" data-color="' . $eachColor['product_color'] . '"><span class="product-color-' . $eachColor['product_color'] . '"></span></a></li>';
                                             }
                                             ?>
-                                            <!-- <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
-                                            <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                            <li class=""><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                            <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                            <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                            <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                            <li><a href="#" data-color="Black"><span class="product-color-black"></span></a></li>
-                                            <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li> -->
                                         </ul>
                                     </div>
                                     <div class="attr-detail attr-size">
@@ -152,11 +144,6 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                                 echo '<li class="mr-5"><a class="choice-size" data-size="' . $eachSize['product_size'] . '">' . $eachSize['product_size'] . '</a></li>';
                                             }
                                             ?>
-                                            <!-- <li><a href="#">S</a></li>
-                                            <li class="active"><a href="#">M</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li> -->
-                                            <!-- <li class="disabled"><a href="#">XXL</a></li> -->
                                         </ul>
                                     </div>
                                     <div class="attr-detail mt-10">

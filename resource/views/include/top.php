@@ -17,11 +17,6 @@
     <link rel="stylesheet" href="public/assets/css/custom.css">
     <link rel="stylesheet" href="public/assets/css/toastr.css">
     <style>
-        /* === LOADER === */
-        /* body .preloading {
-            display: none;
-            overflow: hidden;
-        } */
         .load-customer {
             width: 100%;
             height: 100%;
@@ -60,38 +55,10 @@
     //fetch all products
     $columnName = ['*'];
     $tableName = 'categories';
+
     $inColumn = ['category_status'];
     $inValue = [1];
     $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
-
-    //fetch list product in cart
-    if (isset($_SESSION['SSCF_login_id'])) {
-        $productListCart = $eloquent->selectData(['*'], 'shopcarts', ['customer_id' => $_SESSION['SSCF_login_id']]);
-        // print_r($productListCart);
-        // foreach ($productListCart as $key => $product) {
-        //     $itemProduct = $eloquent->selectData(['product_name', 'product_price'], 'products', ['id' => $product['product_id']]);
-        //     echo '<pre>';
-        //     print_r($itemProduct[0]);
-        //     echo '</pre>';
-        // }
-        $count_product_cart = count($productListCart);
-        if (isset($_SESSION['COUNT_PRODUCT_CART'])) {
-            $count_product_cart = $_SESSION['COUNT_PRODUCT_CART'];
-        }
-    } else {
-        $productListCart = [];
-        $count_product_cart = 0;
-    }
-
-    // //insert to cart
-    // if (isset($_POST['add_to_cart'])) {
-    //     if (isset($_SESSION['SSCF_login_id']) > 0) {
-    //         $_SESSION['ADD_TO_CART_RESULT'] = 1;
-    //     } else {
-    //         echo '<script>console.log("not login")</script>';
-    //         $_SESSION['ADD_TO_CART_RESULT'] = 0;
-    //     }
-    // }
 
     ?>
     <header class="header-area header-style-1 header-height-2">
@@ -105,7 +72,7 @@
                             <div id="news-flash" class="d-inline-block">
                                 <ul style="line-height: 1.1;">
                                     <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="product-detail.php">Chi tiết</a></li>
-                                    <li>Deals siêu khủng - Phiếu giảm giá siêu hời</li>
+                                    <li>Free Ship - Đơn hàng trên 200k</li>
                                     <li>Áo thun basic giảm giá lên đến 35% <a href="product-category.php">Mua ngay!</a></li>
                                 </ul>
                             </div>
@@ -114,7 +81,19 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li><i class="fi-rs-key"></i><a href="login.php">Đăng nhập </a> / <a href="register.php">Đăng kí</a></li>
+                                <li>
+                                    <?php
+                                    if (isset($_SESSION['SSCF_login_id'])) {
+                                        echo '<i class="fi-rs-user"></i><a href="my-account.php">' . $_SESSION['SSCF_login_user_name'] . '</a>';
+                                        echo '<span>/</span>';
+                                        echo '<a href="?exit=yes">Đăng xuất</a>';
+                                    } else {
+                                        echo '<i class="fi-rs-key"></i><a href="login.php">Đăng nhập</a>';
+                                        echo '<span>/</span>';
+                                        echo '<a href="register.php">Đăng ký</a>';
+                                    }
+                                    ?>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -134,7 +113,17 @@
                             </form>
                         </div>
                         <div class="header-action-right">
-                            <div class="header-action-2">
+                            <p><span>Xin Chào</span>
+                                <?php
+                                if (@$_SESSION['SSCF_login_id'] > 0) {
+                                    echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                                } else {
+                                    echo '<b> khách hàng </b>';
+                                }
+                                ?>
+                                <span>&#9829;</span>
+                            </p>
+                            <!-- <div class="header-action-2">
                                 <div class="header-action-icon-2">
                                     <a href="favorites-list.php">
                                         <img class="svgInject" alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
@@ -142,60 +131,8 @@
                                     </a>
                                 </div>
                                 <div class="header-action-icon-2 cart_product">
-                                    <!-- <a class="mini-cart-icon" href="cart.php">
-                                        <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
-                                        <span class="pro-count blue"><?= $count_product_cart; ?></span>
-                                    </a>
-                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                        <ul>
-                                            <?php
-                                            $priceTotal = 0;
-                                            if ($productListCart != [])
-                                                foreach ($productListCart as $key => $product) {
-                                                    $productItems = $eloquent->selectData(['*'], 'products', ['id' => $product['product_id']]);
-                                                    $productItem = $productItems[0];
-                                                    $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $productItem['product_master_image'];
-                                                    $priceTotal += $productItem['product_price'] * $product['quantity'];
-
-                                            ?>
-                                                <li>
-                                                    <div class="shopping-cart-img">
-                                                        <a href="product-detail.php?id=<?= $productItem['id'] ?>"><img alt="" src="<?= $productImageItem ?>"></a>
-                                                    </div>
-                                                    <div class="shopping-cart-title">
-                                                        <h4><a href="product-detail.php?id=<?= $productItem['id'] ?>"><?= $productItem['product_name'] ?></a></h4>
-                                                        <h4><span><?= $product['quantity'] ?> × </span><?php echo number_format($productItem['product_price']) . $GLOBALS['CURRENCY'] ?></h4>
-                                                    </div>
-                                                    <form class="shopping-cart-delete">
-                                                        <input type="hidden" id="delete_product_cart_name<?= $productItem['id'] ?>" value="<?= $productItem['product_name'] ?>">
-                                                        <a class="delete_product_cart" data-itemid="<?= $productItem['id'] ?>" ><i class="fi-rs-cross-small"></i></a>
-                                                    </form>
-                                                </li>
-                                            <?php
-                                                }
-                                            else {
-                                            ?>
-                                                <li>
-                                                    <div class="shopping-cart-title">
-                                                        <h4>Không có sản phẩm nào trong giỏ hàng</h4>
-                                                    </div>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
-                                        </ul>
-                                        <div class="shopping-cart-footer">
-                                            <div class="shopping-cart-total">
-                                                <h4>Tổng: <span><?php echo number_format($priceTotal) . $GLOBALS['CURRENCY'] ?></span></h4>
-                                            </div>
-                                            <div class="shopping-cart-button">
-                                                <a href="cart.php" class="outline">Giỏ hàng</a>
-                                                <a href="checkout.php">Thanh toán</a>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -286,7 +223,7 @@
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p>🤗<span>Xin Chào</span>
+                        <!-- <p>🤗<span>Xin Chào</span>
                             <?php
                             if (@$_SESSION['SSCF_login_id'] > 0) {
                                 echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
@@ -294,7 +231,21 @@
                                 echo '<b> khách hàng </b>';
                             }
                             ?>
-                        </p>
+                        </p> -->
+
+                        <!-- cart and wishlish -->
+                        <div class="header-action-right">
+                            <div class="header-action-2">
+                                <div class="header-action-icon-2">
+                                    <a href="favorites-list.php">
+                                        <img class="svgInject" alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
+                                        <span class="pro-count blue">...</span>
+                                    </a>
+                                </div>
+                                <div class="header-action-icon-2 cart_product">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">

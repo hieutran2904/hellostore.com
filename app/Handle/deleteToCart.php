@@ -1,7 +1,5 @@
 <?php
 include '../Controllers/Toastr.php';
-//da goi sesstion_start(), globals database, eloquent trong class Toastr
-include '../../config/site.php';
 $toastr = new Toastr();
 $eloquent = new Eloquent();
 
