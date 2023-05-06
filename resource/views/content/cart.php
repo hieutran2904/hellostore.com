@@ -82,18 +82,8 @@ if ($productListCart != [])
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <div class="border p-md-4 p-30 border-radius cart-totals">
-                                <div class="heading_s1 mb-3">
-                                    <h4>Tổng giỏ hàng</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody id="load_price_cart">
-                                            <!-- giá giỏ hàng -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <a href="<?= isset($_SESSION['SSCF_login_id']) ? "checkout.php": "login.php" ?>" class="btn <?= $priceSub == 0 ? "d-none" : ""?>"> <i class="fi-rs-box-alt mr-10"></i> Thanh Toán</a>
+                            <div class="border p-md-4 p-30 border-radius cart-totals" id="load_price_cart">
+                                <!-- load price cart -->
                             </div>
                         </div>
                     </div>
