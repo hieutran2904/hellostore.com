@@ -42,8 +42,8 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.php" rel="nofollow">Trang chủ</a>
-                <span></span> Sản phẩm chi tiết
-                <span></span> <?= $productList[0]['product_name'] ?>
+                <a href="product-category.php"><span></span>Sản phẩm</a>
+                <span></span><?= $productList[0]['product_name'] ?>
             </div>
         </div>
     </div>
@@ -102,7 +102,7 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                         </div>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width:90%">
+                                                <div class="product-rating" style="width:50%">
                                                 </div>
                                             </div>
                                             <span class="font-small ml-5 text-muted">(db load reviews)</span>
@@ -110,8 +110,8 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                     </div>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand"><?= number_format($productList[0]['product_price']) ?>&#8363;</span></ins>
-                                            <ins><span class="old-price font-md ml-15"><?= number_format($productList[0]['product_price'] *= 1.1) ?>&#8363;</span></ins>
+                                            <ins><span class="text-brand"><?= number_format($productList[0]['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span></ins>
+                                            <ins><span class="old-price font-md ml-15"><?= number_format($productList[0]['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span></ins>
                                             <span class="save-price  font-md color3 ml-15">10% Off</span>
                                         </div>
                                     </div>
@@ -456,10 +456,10 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                             <div class="col-12">
                                 <div class="row related-products">
                                     <?php
-                                    if($relateProductList != [])
-                                    foreach ($relateProductList as $eachRelateProduct) {
-                                        $imageDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_master_image'];
-                                        $iamgeHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_image_one'];
+                                    if ($relateProductList != [])
+                                        foreach ($relateProductList as $eachRelateProduct) {
+                                            $imageDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_master_image'];
+                                            $iamgeHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachRelateProduct['product_image_one'];
                                     ?>
                                         <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                             <div class="product-cart-wrap small hover-up">
@@ -470,11 +470,11 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                                             <img class="hover-img" src="<?= $iamgeHover ?>" alt="">
                                                         </a>
                                                     </div>
-                                                    <div class="product-action-1">
+                                                    <!-- <div class="product-action-1">
                                                         <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
                                                         <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
                                                         <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="product-badges product-badges-position product-badges-mrg">
                                                         <span class="hot">Hot</span>
                                                     </div>
@@ -486,14 +486,14 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                                         </span>
                                                     </div>
                                                     <div class="product-price">
-                                                        <span><?= number_format($eachRelateProduct['product_price']) ?>&#8363;</span>
-                                                        <span class="old-price"><?= number_format($eachRelateProduct['product_price'] *= 1.1) ?>&#8363;</span>
+                                                        <span><?= number_format($eachRelateProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
+                                                        <span class="old-price"><?= number_format($eachRelateProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     <?php
-                                    }
+                                        }
                                     else {
                                         echo '<h3>Không có sản phẩm liên quan</h3>';
                                     }
@@ -710,7 +710,7 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                     </div>
                 </div> -->
                 <!-- add sitebar -->
-                <?php include("./resource/views/include/site-bar.php")?>
+                <?php include("./resource/views/include/site-bar.php") ?>
             </div>
         </div>
     </section>

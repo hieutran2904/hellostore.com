@@ -32,13 +32,13 @@ class HomeController extends Controller
                             </span>
                         </div>
                         <div class="product-price">
-                            <span>' . number_format($eachProduct['product_price']) . '&#8363; </span>
-                            <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1) . '&#8363; </span>
+                            <span>' . number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
+                            <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
                         </div>
                         <form class="product-action-1 show">
-                            <input type="hidden" id="cart_product_name_'.$eachProduct['id'].'" value="'.$eachProduct['product_name'].'"/>
-                            <input type="hidden" id="qty_'.$eachProduct['id'].'" value="1"/>
-                            <button data-itemid="'.$eachProduct['id'].'" aria-label="Yêu thích" class="action-btn hover-up add_to_favourite">
+                            <input type="hidden" id="cart_product_name_' . $eachProduct['id'] . '" value="' . $eachProduct['product_name'] . '"/>
+                            <input type="hidden" id="qty_' . $eachProduct['id'] . '" value="1"/>
+                            <button data-itemid="' . $eachProduct['id'] . '" aria-label="Yêu thích" class="action-btn hover-up add_to_favourite">
                                 <i class="fi-rs-heart"></i>
                             </button>
                         </form>

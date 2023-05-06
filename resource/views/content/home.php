@@ -257,12 +257,12 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                                         <img class="hover-img w-100 h-100" src="<?= $imageProductHover ?>" alt="">
                                     </a>
                                 </div>
-                                <div class="product-action-1">
+                                <!-- <div class="product-action-1">
                                     <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
                                         <i class="fi-rs-eye"></i></a>
                                     <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                </div>
+                                </div> -->
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
                                 </div>
@@ -274,8 +274,8 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                                     </span>
                                 </div>
                                 <div class="product-price">
-                                    <span><?= number_format($eachProduct['product_price']) ?>&#8363;</span>
-                                    <span class="old-price"><?= number_format($eachProduct['product_price'] *= 1.1) ?>&#8363;</span>
+                                    <span><?= number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
+                                    <span class="old-price"><?= number_format($eachProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
                                 </div>
                             </div>
                         </div>

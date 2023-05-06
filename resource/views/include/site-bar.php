@@ -69,7 +69,7 @@
                 </div>
                 <div class="content pt-10">
                     <h5><a href="product-detail.php?id=<?= $eachNewProduct['id'] ?>"><?php echo $eachNewProduct['product_name'] ?></a></h5>
-                    <p class="price mb-0 mt-5"><?php echo number_format($eachNewProduct['product_price']) ?>&#8363;</p>
+                    <p class="price mb-0 mt-5"><?php echo number_format($eachNewProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></p>
                     <div class="product-rate">
                         <div class="product-rating" style="width:90%"></div>
                     </div>
