@@ -5605,7 +5605,7 @@ h6.post-title {
   right: 0;
   top: calc(100% + 20px);
   z-index: 99;
-  width: 320px;
+  width: 360px;
   background-color: #fff;
   -webkit-box-shadow: 0 8px 8px rgba(0, 0, 0, 0.05);
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.05);
@@ -5630,7 +5630,7 @@ h6.post-title {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 80px;
   flex: 0 0 80px;
-  margin-right: 5px;
+  margin-right: 20px;
 }
 
 .cart-dropdown-wrap ul li .shopping-cart-img a img {

@@ -33,7 +33,7 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
                     <a href="product-detail.php?id=<?= $product['id'] ?>"><img alt="" src="<?= $productImageItem ?>"></a>
                 </div>
                 <div class="shopping-cart-title">
-                    <h5><a style="font-weight: bold;" href="product-detail.php?id=<?= $product['id'] ?>"><?= $product['product_name'] ?></a></h5>
+                    <h4><a style="font-weight: bold;" href="product-detail.php?id=<?= $product['id'] ?>"><?= $product['product_name'] ?></a></h4>
                     <h5><span><?= $product['quantity'] ?> × </span><?php echo number_format($product['product_price']) . $GLOBALS['CURRENCY'] ?></h5>
                     <h5><span>Màu: <?= $product['product_color'] ?> , Size: <?= $product['product_size'] ?></span></h5>
                 </div>
