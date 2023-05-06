@@ -24,6 +24,10 @@ if ($productListCart != []) {
         $priceDiscount = $_SESSION['PRICE_DISCOUNT_AMOUNT'];
     }
     $priceTotal = $priceSub + $priceShip - $priceDiscount;
+    $_SESSION['priceSub'] = $priceSub;
+    $_SESSION['priceShip'] = $priceShip;
+    $_SESSION['priceDiscount'] = $priceDiscount;
+    $_SESSION['priceTotal'] = $priceTotal;
 }
 ?>
 <tr>

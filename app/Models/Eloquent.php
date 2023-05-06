@@ -193,7 +193,20 @@ class Eloquent
     // SELECT CART INFO
     public function loadCartInfo($customerId){
         try {
-            $sql = "SELECT `products`.`id`, `shopcarts`.`id` as `idShopCarts`, `quantity`, `product_color`, `product_size`, `product_name`, `product_master_image`, `product_price` from `shopcarts` LEFT JOIN `products_sc` ON `shopcarts`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = ".$customerId;
+            $sql = "SELECT `products`.`id`, `products_sc`.`id` as `idProductSC`, `shopcarts`.`id` as `idShopCarts`, `quantity`, `product_color`, `product_size`, `product_name`, `product_master_image`, `product_price` from `shopcarts` LEFT JOIN `products_sc` ON `shopcarts`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = ".$customerId;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // SELECT ORDER ITEMS
+    public function selectOrderItems($customerId, $orderId){
+        try {
+            $sql = "SELECT `product_name`, `product_size`, `product_color`, `order_items`.`product_quantity`, `order_items`.`product_price`, (`order_items`.`product_quantity` * `order_items`.`product_price`) as `sub_price` from `order_items` LEFT JOIN `products_sc` ON `order_items`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = ".$customerId ." AND `order_id` = ".$orderId;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

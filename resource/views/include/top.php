@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="public/assets/css/main.css">
     <link rel="stylesheet" href="public/assets/css/custom.css">
     <link rel="stylesheet" href="public/assets/css/toastr.css">
+    <link rel="stylesheet" href="public/assets/css/invoice.css">
     <style>
         .load-customer {
             width: 100%;
@@ -207,8 +208,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="blog.html">Blog </a></li>
-                                    <li><a href="contact.html">Liên hệ </a></li>
+                                    <!-- <li><a href="blog.html">Blog </a></li>
+                                    <li><a href="contact.html">Liên hệ </a></li> -->
                                     <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="my-account.php">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Thông tin</a></li>

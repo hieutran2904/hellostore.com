@@ -13,7 +13,7 @@ if (isset($_SESSION['SSCF_login_id'])) {
     $productListCart = [];
 }
 $priceTotal = 0;
-$SESSION['LIST_PRODUCT_CART'] = $productListCart;
+$_SESSION['LIST_PRODUCT_CART'] = $productListCart;
 
 if ($productListCart != [])
     foreach ($productListCart as $eachProduct) {
@@ -23,8 +23,8 @@ if ($productListCart != [])
     <tr>
         <td class="image product-thumbnail"><img src="<?= $productImageItem ?>" alt="#"></td>
         <td class="product-des product-name">
-            <h5 class="product-name"><a href="product-details.php?id=<?= $eachProduct['id'] ?>"><?= $eachProduct['product_name'] ?></a></h5>
-            <p class="font-xs">Size: <?= $eachProduct['product_size'] ?> | Color: <?= $eachProduct['product_color'] ?>
+            <h5 class="product-name"><a href="product-detail.php?id=<?= $eachProduct['id'] ?>"><?= $eachProduct['product_name'] ?></a></h5>
+            <p class="font-xs">Size: <?= $eachProduct['product_size'] ?> | Màu: <?= $eachProduct['product_color'] ?>
             </p>
         </td>
         <td class="price" data-title="Price"><span><?= number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span></td>

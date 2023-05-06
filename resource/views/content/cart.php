@@ -7,12 +7,10 @@ if (isset($_SESSION['SSCF_login_id'])) {
 }
 
 $priceSub = 0;
-$priceTotal = 0;
 if ($productListCart != [])
     foreach ($productListCart as $eachProduct) {
         $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
         $priceSub += $eachProduct['product_price'] * $eachProduct['quantity'];
-        $priceTotal += $priceSub;
     }
 ?>
 <main class="main">
@@ -21,7 +19,7 @@ if ($productListCart != [])
             <div class="breadcrumb">
                 <a href="index.php" rel="nofollow">Trang chủ</a>
                 <span></span> <a href="product-category.php" rel="nofollow">Sản phẩm</a>
-                <span></span> Giỏ hàng của bạn
+                <span></span> Giỏ hàng
             </div>
         </div>
     </div>
@@ -91,11 +89,11 @@ if ($productListCart != [])
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody id="load_price_cart">
-                                            <!-- Tổng giỏ hàng -->
+                                            <!-- giá giỏ hàng -->
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="<?= isset($_SESSION['SSCF_login_id']) ? "checkout.php": "login.php" ?>" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Thanh Toán</a>
+                                <a href="<?= isset($_SESSION['SSCF_login_id']) ? "checkout.php": "login.php" ?>" class="btn <?= $priceSub == 0 ? "d-none" : ""?>"> <i class="fi-rs-box-alt mr-10"></i> Thanh Toán</a>
                             </div>
                         </div>
                     </div>
