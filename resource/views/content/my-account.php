@@ -15,6 +15,33 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
     </div>
     <section class="pt-50 pb-50">
         <div class="container">
+            <!-- start popup review -->
+            <div id="popup-main" class="">
+                <div id="backdrop" class=""></div>
+                <div class="row m-auto popup" id="popup">
+                    <div class="card-body text-center">
+                        <img src="public/assets/imgs/logo/logoshop2023.png" alt="">
+                        <a id="close-popup" class="text-right" href="">X</a>
+                        <h2 class="text-brand">Đánh giá của bạn</h2>
+                        <br>
+                        <div class="rating">
+                            <input type="radio" name="rating" value="5" id="5">
+                            <label for="5">☆</label>
+                            <input type="radio" name="rating" value="4" id="4">
+                            <label for="4">☆</label>
+                            <input type="radio" name="rating" value="3" id="3">
+                            <label for="3">☆</label>
+                            <input type="radio" name="rating" value="2" id="2">
+                            <label for="2">☆</label>
+                            <input type="radio" name="rating" value="1" id="1">
+                            <label for="1">☆</label>
+                        </div>
+                        <div class="comment-area"> <textarea class="form-control" placeholder="Bình luận ..." rows="30"></textarea> </div>
+                        <button id="btn-submit-review" type="button">OK</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end popup review -->
             <div class="row">
                 <div class="col-lg-12 m-auto">
                     <div class="row">
@@ -22,10 +49,10 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                        <a class="nav-link" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Đơn hàng</a>
+                                        <a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Đơn hàng</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
@@ -44,7 +71,7 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                         </div>
                         <div class="col-md-9">
                             <div class="tab-content dashboard-content">
-                                <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                                <div class="tab-pane fade" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0">Hello Rosie! </h5>
@@ -54,7 +81,7 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                                <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="card">
                                         <div class="card-header">
                                             <h5 class="mb-0">Đơn hàng của bạn</h5>

@@ -23,4 +23,12 @@ $view->loadContent('include', 'tail');
             }
         });
     });
+    $('#btn-submit-review').click(function(e) {
+        e.preventDefault();
+        console.log("đã click");
+        // let productSC = $(this).data('itemid');
+        // console.log(productSC);
+        // $('body').addClass('blur-customer');
+        $('#popup').removeClass('open-popup');
+    });
 </script>

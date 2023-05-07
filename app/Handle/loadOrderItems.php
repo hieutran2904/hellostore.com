@@ -38,7 +38,7 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
                         <td><?= number_format($eachOrder['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
                         <td><?= $eachOrder['product_quantity'] ?></td>
                         <td><?= number_format($eachOrder['product_price'] * $eachOrder['product_quantity'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
-                        <td><a href="#" class="d-block">Đánh giá</a></td>
+                        <td><a data-itemid="<?= $eachOrder['idProductSC'] ?> " class="d-block review-customer">Đánh giá</a></td>
                     </tr>
                 <?php
                 }
@@ -51,3 +51,29 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
 <?php
 
 ?>
+<script>
+    $('.review-customer').click(function(e) {
+        e.preventDefault();
+        let productSC = $(this).data('itemid');
+        console.log(productSC);
+        // $('body').addClass('blur-customer');
+        $('#popup-main').addClass('popup-main');
+        $('#backdrop').addClass('backdrop');
+        $('#popup').addClass('open-popup');
+    });
+    $('#btn-submit-review').click(function(e) {
+        e.preventDefault();
+        console.log("đã click");
+        $('#popup-main').removeClass('popup-main');
+        $('#popup').removeClass('open-popup');
+        $('#backdrop').removeClass('backdrop');
+    });
+
+    $('#close-popup').click(function(e) {
+        e.preventDefault();
+        console.log("đã click");
+        $('#popup-main').removeClass('popup-main');
+        $('#popup').removeClass('open-popup');
+        $('#backdrop').removeClass('backdrop');
+    });
+</script>
