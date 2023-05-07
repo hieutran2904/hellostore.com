@@ -1,4 +1,10 @@
-﻿<main class="main">
+﻿<?php
+$eloquent = new Eloquent();
+//get order
+$orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION['SSCF_login_id']]);
+// print_r($orderList);
+?>
+<main class="main">
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -10,16 +16,16 @@
     <section class="pt-50 pb-50">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 m-auto">
+                <div class="col-lg-12 m-auto">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                        <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Đơn hàng</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
@@ -31,12 +37,12 @@
                                         <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                        <a class="nav-link" href="?exit=yes"><i class="fi-rs-sign-out mr-10"></i>Đăng xuất</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="tab-content dashboard-content">
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
@@ -51,46 +57,41 @@
                                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Your Orders</h5>
+                                            <h5 class="mb-0">Đơn hàng của bạn</h5>
                                         </div>
                                         <div class="card-body">
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
-                                                            <th>Total</th>
-                                                            <th>Actions</th>
+                                                            <th>Mã</th>
+                                                            <th>Ngày đặt hàng</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Tổng</th>
+                                                            <th>Xem chi tiết</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>#1357</td>
-                                                            <td>March 45, 2022</td>
-                                                            <td>Processing</td>
-                                                            <td>$125.00 for 2 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#2468</td>
-                                                            <td>June 29, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$364.00 for 5 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#2366</td>
-                                                            <td>August 02, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$280.00 for 3 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
+                                                        <?php
+                                                        foreach ($orderList as $eachOrder) {
+                                                        ?>
+                                                            <tr>
+                                                                <td>#<?php echo $eachOrder['id']; ?></td>
+                                                                <td><?php echo $eachOrder['order_date']; ?></td>
+                                                                <td><?php echo $eachOrder['order_item_status']; ?></td>
+                                                                <td><?php echo number_format($eachOrder['grand_total'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
+                                                                <td><a data-itemid="<?= $eachOrder['id'] ?>" class="btn-small d-block view-detail">👀</a></td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="card mt-10" id="load-order-items">
+                                        <!-- load order items -->
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
