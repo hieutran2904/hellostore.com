@@ -1,15 +1,9 @@
 ﻿<?php
-// print_r($_SESSION['LIST_PRODUCT_CART']);
-// $orderItems = $_SESSION['LIST_PRODUCT_CART'];
-// foreach ($orderItems as $orderItem) {
-//     print_r($orderItem['idShopCarts']);
-//     echo "<br>";
-// }
 $eloquent = new Eloquent();
 
 //get shipping last info
 $lastShippings = $eloquent->selectData(['*'], 'shippings', ['customer_id' => $_SESSION['SSCF_login_id']], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 1]);
-if($lastShippings != []) $lastShipping = $lastShippings[0];
+if ($lastShippings != []) $lastShipping = $lastShippings[0];
 else $lastShipping = [];
 
 if (isset($_POST['submit'])) {
@@ -31,18 +25,19 @@ if (isset($_POST['submit'])) {
     if ($lastInsertOrderId > 0) {
         //INSERT order_items
         $dataOrderItems = $_SESSION['LIST_PRODUCT_CART'];
-        print_r($dataOrderItems);
+        // print_r($dataOrderItems);
         $tableName = "order_items";
-        foreach ($dataOrderItems as $orderItem) {
-            $dataOrderItem = [
-                'customer_id' => $_SESSION['SSCF_login_id'],
-                'product_sc_id' => $orderItem['idProductSC'],
-                'order_id' => $lastInsertOrderId,
-                'product_price' => $orderItem['product_price'],
-                'product_quantity' => $orderItem['quantity'],
-            ];
-            $eloquent->insertData($tableName, $dataOrderItem);
-        }
+        if ($dataOrderItems != [])
+            foreach ($dataOrderItems as $orderItem) {
+                $dataOrderItem = [
+                    'customer_id' => $_SESSION['SSCF_login_id'],
+                    'product_sc_id' => $orderItem['idProductSC'],
+                    'order_id' => $lastInsertOrderId,
+                    'product_price' => $orderItem['product_price'],
+                    'product_quantity' => $orderItem['quantity'],
+                ];
+                $eloquent->insertData($tableName, $dataOrderItem);
+            }
 
         //INSERT shippings
         $tableName = "shippings";
@@ -74,6 +69,12 @@ if (isset($_POST['submit'])) {
         echo '<script>window.location="status.php"</script>';
     }
 }
+
+if (isset($_POST['vppay'])) {
+    // echo '<script>window.location="app/Handle/VnPay/vnpay_pay.php"</script>';
+    // header('Location: app/Handle/VnPay/vnpay_pay.php');
+    echo "hihi";
+}
 ?>
 
 <main class="main">
@@ -96,28 +97,28 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div>
                         <div class="form-group">
-                            <input type="text" required="" name="lfname" placeholder="Họ & Tên *" value="<?= $_SESSION['SSCF_login_user_name'] ?>">
+                            <input type="text" required="" class="lfname-session" name="lfname" placeholder="Họ & Tên *" value="<?= $_SESSION['SSCF_login_user_name'] ?>">
                         </div>
                         <div class="form-group">
-                            <input type="email" required="" name="email" placeholder="Email *" value="<?= $_SESSION['SSCF_login_user_email'] ?>">
+                            <input type="email" required="" class="email-session" name="email" placeholder="Email *" value="<?= $_SESSION['SSCF_login_user_email'] ?>">
                         </div>
                         <div class="form-group">
-                            <input required="" type="text" name="phone" placeholder="Số điện thoại *" value="<?= $_SESSION['SSCF_login_user_mobile'] ?>">
+                            <input required="" type="text" class="phone-session" name="phone" placeholder="Số điện thoại *" value="<?= $_SESSION['SSCF_login_user_mobile'] ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="address" required="" placeholder="Địa chỉ *" value="<?= $lastShipping!=[] ? $lastShipping['shipping_address'] : "" ?>">
+                            <input required="" type="text" class="address-session" name="address" placeholder="Địa chỉ *" value="<?= $lastShipping != [] ? $lastShipping['shipping_address'] : "" ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="address-city" required="" placeholder="Thành Phố *" value="<?= $lastShipping!=[] ? $lastShipping['shipping_city'] : "" ?>">
+                            <input type="text" class="address-city-session" name="address-city" required="" placeholder="Thành Phố *" value="<?= $lastShipping != [] ? $lastShipping['shipping_city'] : "" ?>">
                         </div>
                         <div class="form-group">
-                            <input required="" type="text" name="zipcode" placeholder="Mã bưu chính(ZIP) *" value="<?= $lastShipping!=[] ? $lastShipping['shipping_zipcode'] : "" ?>">
+                            <input required="" type="text" class="zipcode-session" name="zipcode" placeholder="Mã bưu chính(ZIP) *" value="<?= $lastShipping != [] ? $lastShipping['shipping_zipcode'] : "" ?>">
                         </div>
                         <div class="mb-20">
                             <h5>Ghi chú</h5>
                         </div>
                         <div class="form-group mb-30">
-                            <textarea name="note" rows="5" placeholder="Nhập điều gì đó ..."></textarea>
+                            <textarea name="note" rows="5" class="note-session" placeholder="Nhập điều gì đó ..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -137,8 +138,9 @@ if (isset($_POST['submit'])) {
                                 <tbody>
                                     <?php
                                     $productListCart = $_SESSION['LIST_PRODUCT_CART'];
-                                    foreach ($productListCart as $eachProduct) {
-                                        $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
+                                    if ($productListCart != [])
+                                        foreach ($productListCart as $eachProduct) {
+                                            $productImageItem = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
                                     ?>
                                         <tr>
                                             <td class="image product-thumbnail"><img src="<?= $productImageItem ?>" alt="#"></td>
@@ -156,8 +158,12 @@ if (isset($_POST['submit'])) {
                                             <td><?= number_format($eachProduct['product_price'] * $eachProduct['quantity'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
                                         </tr>
                                     <?php
-                                    }
+                                        }
+                                        else {
+                                            echo '<tr><td colspan="3" class="text-brand">Không có sản phẩm nào trong giỏ hàng</td></tr>';
+                                        }
                                     ?>
+                                    
                                     <tr>
                                         <th>Tổng tiền hàng</th>
                                         <td class="product-subtotal" colspan="2">
@@ -196,28 +202,17 @@ if (isset($_POST['submit'])) {
                                 <table>
                                     <tr>
                                         <td>Cod</td>
-                                        <td id="payment-cod"><a href=""><img style="width:50px;" src="public/assets/imgs/payment_cod.png" alt=""></a></td>
+                                        <td id="payment-cod"><button style="border: 0;"><img style="width:50px;" src="public/assets/imgs/payment_cod.png" alt=""></button></td>
                                     </tr>
                                     <tr>
                                         <td>VNPAY</td>
-                                        <td><a><img src="https://pay.vnpay.vn/images/brands/logo-en.svg" alt=""></a></td>
+                                        <!-- <td><a href="app/Handle/VnPay/vnpay_pay.php"><img src="https://pay.vnpay.vn/images/brands/logo-en.svg" alt=""></a></td> -->
+                                        <td id="payment-vnpay">
+                                            <button style="border: 0;" name="vppay"><img src="https://pay.vnpay.vn/images/brands/logo-en.svg" alt=""></button>
+                                        </td>
                                     </tr>
                                 </table>
-                                <div class="text-brand choice-payment-cod"></div>
-                                <!-- <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3">
-                                    <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#cashOnDelivery" aria-controls="cashOnDelivery">Cash On Delivery</label>
-                                    <img class="w-1" src="public/assets/imgs/payment_cod.png" alt="">
-                                </div>
-                                <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios4">
-                                    <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#cardPayment" aria-controls="cardPayment">Card Payment</label>
-                                </div>
-                                <div class="custome-radio">
-                                    <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios5">
-                                    <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Paypal</label>
-                                    <img src="https://pay.vnpay.vn/images/brands/logo-en.svg" alt="">
-                                </div> -->
+                                <div class="text-brand choice-payment-cod">Vui lòng chọn phương thức thanh toán</div>
                             </div>
                         </div>
                         <button name="submit" class="btn btn-fill-out btn-block mt-30 book_now <?= $_SESSION['priceSub'] == 0 ? "d-none" : "" ?>">Đặt ngay!</button>

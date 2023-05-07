@@ -6,9 +6,12 @@ $eloquent = new Eloquent();
 $lastInsertOrderId = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION['SSCF_login_id']], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 1]);
 // print_r($lastInsertOrderId);
 
+//get id invoice
+$lastInsertInvoiceId = $eloquent->selectData(['*'], 'invoices', ['customer_id' => $_SESSION['SSCF_login_id'], 'order_id' => $lastInsertOrderId[0]['id']]);
+//print_r($lastInsertInvoiceId);
+
 //get order items detail
 $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $lastInsertOrderId[0]['id']);
-//print_r($orderItems);
 
 //get shipping info
 $shippings = $eloquent->selectData(['*'], 'shippings', ['customer_id' => $_SESSION['SSCF_login_id']], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 1]);
@@ -20,12 +23,24 @@ $invoice = $lastInsertOrderId[0];
 //delete cart
 $deleteCart = $eloquent->deleteData('shopcarts', ['customer_id' => $_SESSION['SSCF_login_id']]);
 
-//set price session return 0
+//set session price return 0
 $_SESSION['priceSub'] = 0;
 $_SESSION['priceShip'] = 0;
 $_SESSION['priceDiscount'] = 0;
 $_SESSION['priceTotal'] = 0;
 $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
+
+//set session cart return 0
+$_SESSION['LIST_PRODUCT_CART'] = [];
+
+//unset session shipping
+unset($_SESSION['lfname-session']);
+unset($_SESSION['email-session']);
+unset($_SESSION['phone-session']);
+unset($_SESSION['address-session']);
+unset($_SESSION['address-city-session']);
+unset($_SESSION['zipcode-session']);
+unset($_SESSION['note-session']);
 
 ?>
 <div class="container">
@@ -45,10 +60,6 @@ $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
                         <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
                         In
                     </a>
-                    <!-- <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                        <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                        Export
-                    </a> -->
                 </div>
             </div>
         </div>
@@ -97,7 +108,7 @@ $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
                                     Hóa đơn
                                 </div>
 
-                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">ID: </span>#<?= $invoice['transaction_id'] ?></div>
+                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">ID: </span>#<?= $lastInsertInvoiceId[0]['invoice_id'] ?></div>
 
                                 <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Ngày đặt hàng: </span><?= $invoice['order_date'] ?></div>
 
@@ -134,45 +145,8 @@ $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
                                 $i++;
                             }
                             ?>
-                            <!-- <div class="row mb-2 mb-sm-0 py-25">
-                                <div class="d-none d-sm-block col-1">1</div>
-                                <div class="col-5 col-sm-3">Áo T-Shirt Glaxy</div>
-                                <div class="d-none d-sm-block col-2 col-sm-2">XL | Black</div>
-                                <div class="col-4 col-sm-2">1</div>
-                                <div class="d-none d-sm-block col-sm-2">159.000đ</div>
-                                <div class="col-2">159.000đ</div>
-                            </div> -->
                         </div>
                         <div class="row border-b-2 brc-default-l2"></div>
-
-                        <!-- or use a table instead -->
-                        <!--
-            <div class="table-responsive">
-                <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-                    <thead class="bg-none bgc-default-tp1">
-                        <tr class="text-white">
-                            <th class="opacity-2">#</th>
-                            <th>Description</th>
-                            <th>Qty</th>
-                            <th>Unit Price</th>
-                            <th width="140">Amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="text-95 text-secondary-d3">
-                        <tr></tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Domain registration</td>
-                            <td>2</td>
-                            <td class="text-95">$10</td>
-                            <td class="text-secondary-d2">$20</td>
-                        </tr> 
-                    </tbody>
-                </table>
-            </div>
-            -->
-
                         <div class="row mt-3">
                             <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
                                 <!-- Extra note such as company or payment information... -->
@@ -216,18 +190,12 @@ $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
                                 </div>
                             </div>
                         </div>
-
                         <hr />
-
-                        <!-- <div>
-                        <span class="text-secondary-d1 text-105">Thank you for your business</span>
-                        <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
-                    </div> -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="text-center text-150">
                                     <i class="fa fa-book fa-2x text-success-m2 mr-1"></i>
-                                    <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0 mb-10">Xong</a>
+                                    <a href="index.php" class="btn mb-10" style="background-color: #84b0ca;">Xong&#10004;</a>
                                 </div>
                             </div>
                         </div>
