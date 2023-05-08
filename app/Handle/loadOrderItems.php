@@ -38,7 +38,11 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
                         <td><?= number_format($eachOrder['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
                         <td><?= $eachOrder['product_quantity'] ?></td>
                         <td><?= number_format($eachOrder['product_price'] * $eachOrder['product_quantity'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
-                        <td><a data-itemid="<?= $eachOrder['idProductSC'] ?> " class="d-block review-customer">Đánh giá</a></td>
+                        <td>
+                            <a data-itemid="<?= $eachOrder['idProductSC'] ?> " class="d-block review-customer">
+                                <?= $eachOrder['review_details'] == "" ? "Đánh giá" : "Sửa đánh giá" ?>
+                            </a>
+                        </td>
                     </tr>
                 <?php
                 }
@@ -52,35 +56,13 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
 
 ?>
 <script>
-    // $('.review-customer').click(function(e) {
-    //     e.preventDefault();
-    //     let productSC = $(this).data('itemid');
-    //     console.log(productSC);
-    //     $('#popup-main').addClass('popup-main');
-    //     $('#backdrop').addClass('backdrop');
-    //     $('#popup').addClass('open-popup');
-    // });
-    // $('#btn-submit-review').click(function(e) {
-    //     e.preventDefault();
-    //     console.log("click submit");
-    //     $('#popup-main').removeClass('popup-main');
-    //     $('#popup').removeClass('open-popup');
-    //     $('#backdrop').removeClass('backdrop');
-    // });
-
-    // $('#close-popup').click(function(e) {
-    //     e.preventDefault();
-    //     console.log("click close");
-    //     $('#popup-main').removeClass('popup-main');
-    //     $('#popup').removeClass('open-popup');
-    //     $('#backdrop').removeClass('backdrop');
-    // });
     $(document).ready(function() {
         let reviews = document.querySelectorAll('.review-customer');
         reviews.forEach(review => {
             review.addEventListener('click', function(e) {
                 e.preventDefault();
                 let productSC = this.getAttribute('data-itemid');
+                sessionStorage.setItem("product_sc_id_review", productSC);
                 console.log(productSC);
                 $('#popup-main').addClass('popup-main');
                 $('#backdrop').addClass('backdrop');
