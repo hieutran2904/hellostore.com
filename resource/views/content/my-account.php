@@ -94,7 +94,9 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                                                             <th>Mã</th>
                                                             <th>Ngày đặt hàng</th>
                                                             <th>Trạng thái</th>
-                                                            <th>Tổng</th>
+                                                            <th>Phí giao hàng</th>
+                                                            <th>Giảm giá</th>
+                                                            <th>Tổng thanh toán</th>
                                                             <th>Xem chi tiết</th>
                                                         </tr>
                                                     </thead>
@@ -106,6 +108,8 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                                                                 <td>#<?php echo $eachOrder['id']; ?></td>
                                                                 <td><?php echo $eachOrder['order_date']; ?></td>
                                                                 <td><?php echo $eachOrder['order_item_status']; ?></td>
+                                                                <td><?php echo number_format($eachOrder['delivery_charge'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
+                                                                <td><?php echo number_format($eachOrder['discount_amount'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
                                                                 <td><?php echo number_format($eachOrder['grand_total'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>
                                                                 <td><a data-itemid="<?= $eachOrder['id'] ?>" class="btn-small d-block view-detail">👀</a></td>
                                                             </tr>
