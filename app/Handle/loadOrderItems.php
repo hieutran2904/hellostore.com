@@ -52,28 +52,41 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
 
 ?>
 <script>
-    $('.review-customer').click(function(e) {
-        e.preventDefault();
-        let productSC = $(this).data('itemid');
-        console.log(productSC);
-        // $('body').addClass('blur-customer');
-        $('#popup-main').addClass('popup-main');
-        $('#backdrop').addClass('backdrop');
-        $('#popup').addClass('open-popup');
-    });
-    $('#btn-submit-review').click(function(e) {
-        e.preventDefault();
-        console.log("đã click");
-        $('#popup-main').removeClass('popup-main');
-        $('#popup').removeClass('open-popup');
-        $('#backdrop').removeClass('backdrop');
-    });
+    // $('.review-customer').click(function(e) {
+    //     e.preventDefault();
+    //     let productSC = $(this).data('itemid');
+    //     console.log(productSC);
+    //     $('#popup-main').addClass('popup-main');
+    //     $('#backdrop').addClass('backdrop');
+    //     $('#popup').addClass('open-popup');
+    // });
+    // $('#btn-submit-review').click(function(e) {
+    //     e.preventDefault();
+    //     console.log("click submit");
+    //     $('#popup-main').removeClass('popup-main');
+    //     $('#popup').removeClass('open-popup');
+    //     $('#backdrop').removeClass('backdrop');
+    // });
 
-    $('#close-popup').click(function(e) {
-        e.preventDefault();
-        console.log("đã click");
-        $('#popup-main').removeClass('popup-main');
-        $('#popup').removeClass('open-popup');
-        $('#backdrop').removeClass('backdrop');
-    });
+    // $('#close-popup').click(function(e) {
+    //     e.preventDefault();
+    //     console.log("click close");
+    //     $('#popup-main').removeClass('popup-main');
+    //     $('#popup').removeClass('open-popup');
+    //     $('#backdrop').removeClass('backdrop');
+    // });
+    $(document).ready(function() {
+        let reviews = document.querySelectorAll('.review-customer');
+        reviews.forEach(review => {
+            review.addEventListener('click', function(e) {
+                e.preventDefault();
+                let productSC = this.getAttribute('data-itemid');
+                console.log(productSC);
+                $('#popup-main').addClass('popup-main');
+                $('#backdrop').addClass('backdrop');
+                $('#popup').addClass('open-popup');
+            });
+
+        });
+    })
 </script>

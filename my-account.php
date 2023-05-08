@@ -25,10 +25,16 @@ $view->loadContent('include', 'tail');
     });
     $('#btn-submit-review').click(function(e) {
         e.preventDefault();
-        console.log("đã click");
-        // let productSC = $(this).data('itemid');
-        // console.log(productSC);
-        // $('body').addClass('blur-customer');
+        console.log("click submit");
+        $('#popup-main').removeClass('popup-main');
         $('#popup').removeClass('open-popup');
+        $('#backdrop').removeClass('backdrop');
+    });
+    $('#close-popup').click(function(e) {
+        e.preventDefault();
+        console.log("click close");
+        $('#popup-main').removeClass('popup-main');
+        $('#popup').removeClass('open-popup');
+        $('#backdrop').removeClass('backdrop');
     });
 </script>
