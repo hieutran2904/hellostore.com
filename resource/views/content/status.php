@@ -154,7 +154,7 @@ unset($_SESSION['note-session']);
 
                             <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
                                 <div class="row my-2">
-                                    <div class="col-7 text-right">
+                                    <div class="col-7">
                                         Tổng tiền hàng
                                     </div>
                                     <div class="col-5">
@@ -163,7 +163,7 @@ unset($_SESSION['note-session']);
                                 </div>
 
                                 <div class="row my-2">
-                                    <div class="col-7 text-right">
+                                    <div class="col-7">
                                         Phí vận chuyển
                                     </div>
                                     <div class="col-5">
@@ -172,7 +172,7 @@ unset($_SESSION['note-session']);
                                 </div>
 
                                 <div class="row my-2">
-                                    <div class="col-7 text-right">
+                                    <div class="col-7">
                                         Giảm giá
                                     </div>
                                     <div class="col-5">
@@ -181,7 +181,7 @@ unset($_SESSION['note-session']);
                                 </div>
 
                                 <div class="row my-2 align-items-center bgc-primary-l3">
-                                    <div class="col-7 text-right">
+                                    <div class="col-7">
                                         Tổng thanh toán
                                     </div>
                                     <div class="col-5">

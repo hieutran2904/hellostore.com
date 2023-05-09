@@ -206,7 +206,7 @@ class Eloquent
     // SELECT ORDER ITEMS
     public function selectOrderItems($customerId, $orderId){
         try {
-            $sql = "SELECT `products_sc`.`id` as `idProductSC`, `product_name`, `product_size`, `product_color`, `order_items`.`product_quantity`, `order_items`.`product_price`, (`order_items`.`product_quantity` * `order_items`.`product_price`) as `sub_price`, `product_master_image`, `review_details`, `rating`, `order_item_status` from `order_items` LEFT JOIN `orders` ON `order_items`.`order_id` = `orders`.`id` LEFT JOIN `products_sc` ON `order_items`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` LEFT JOIN `reviews` ON `products_sc`.`id` = `reviews`.`product_sc_id` WHERE `order_items`.`customer_id` = ".$customerId ." AND `order_items`.`order_id` = ".$orderId;
+            $sql = "SELECT `products_sc`.`id` as `idProductSC`, `product_name`, `product_size`, `product_color`, `order_items`.`product_quantity`, `order_items`.`product_price`, (`order_items`.`product_quantity` * `order_items`.`product_price`) as `sub_price`, `product_master_image`, `review_details`, `rating`, `reviews`.`id` as `idReview` from `order_items` LEFT JOIN `orders` ON `order_items`.`order_id` = `orders`.`id` LEFT JOIN `products_sc` ON `order_items`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` LEFT JOIN `reviews` ON `products_sc`.`id` = `reviews`.`product_sc_id` WHERE `order_items`.`customer_id` = ".$customerId ." AND `order_items`.`order_id` = ".$orderId;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
