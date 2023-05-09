@@ -12,11 +12,12 @@ $review_detail = $_POST['review_detail'];
 $rating = $_POST['rating'];
 $id_reivew_check = $_POST['id_reivew_check'];
 
-if ($review_detail == "") {
-    $toastr->error_toast("Bạn chưa nhập đánh giá :((", "THẤT BẠI", "2000");
-    exit();
-} else if ($rating == 0) {
+if ($rating == 0) {
     $toastr->error_toast("Bạn chưa vote sao cho shop :((", "THẤT BẠI", "2000");
+    exit();
+}
+else if ($review_detail == "") {
+    $toastr->error_toast("Bạn chưa nhập đánh giá :((", "THẤT BẠI", "2000");
     exit();
 }
 

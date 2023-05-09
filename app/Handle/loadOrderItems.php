@@ -81,6 +81,10 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
                 $('#' + rating).val(rating);
                 if (rating == "") {
                     $('#5').prop('checked', false);
+                    $('#4').prop('checked', false);
+                    $('#3').prop('checked', false);
+                    $('#2').prop('checked', false);
+                    $('#1').prop('checked', false);
                     sessionStorage.setItem("rating_session", 0);
                 } else {
                     $('#' + rating).prop('checked', true);

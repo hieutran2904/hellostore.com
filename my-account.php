@@ -52,6 +52,9 @@ $view->loadContent('include', 'tail');
             },
             success: function(data) {
                 $('.toastr_notification').html(data);
+                $('#load-order-items').load('app/Handle/loadOrderItems.php', {
+                    order_id: order_id,
+                });
             }
         })
     });
