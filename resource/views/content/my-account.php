@@ -21,7 +21,7 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                 <div class="row m-auto popup" id="popup">
                     <div class="card-body text-center">
                         <img src="public/assets/imgs/logo/logoshop2023.png" alt="">
-                        <a id="close-popup" class="text-right" href="">X</a>
+                        <a id="close-popup" class="text-right-btn-close" href="">X</a>
                         <h2 class="text-brand">Đánh giá của bạn</h2>
                         <br>
                         <div class="rating">
