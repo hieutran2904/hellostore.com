@@ -37,7 +37,9 @@ $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION[
                             <label for="1">☆</label>
                         </div>
                         <!-- lay id cua bang review de so sanh sau do thuc hien add or update -->
-                        <input type="text" name="" id="idReviewDB" value="">
+                        <input type="hidden" name="" id="idReviewDB" value="">
+                        <!-- lay ra id san pham danh gia -->
+                        <input type="hidden" name="" id="idProductSC" value="">
                         <div class="comment-area"> <textarea id="review-detail" class="form-control" placeholder="Bình luận ..." rows="30"></textarea> </div>
                         <button id="btn-submit-review" type="button">OK</button>
                     </div>

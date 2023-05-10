@@ -25,7 +25,7 @@ $view->loadContent('include', 'tail');
         });
     });
 
-    var starValue = sessionStorage.getItem("rating_session");
+    var starValue = 0;
     const stars = document.querySelectorAll('.stars-rating');
     stars.forEach(star => {
         star.addEventListener('click', function() {
@@ -45,7 +45,7 @@ $view->loadContent('include', 'tail');
             type: 'POST',
             data: {
                 order_id: order_id,
-                product_sc_id: sessionStorage.getItem("product_sc_id_review"),
+                product_sc_id: $('#idProductSC').val(),
                 review_detail: $('#review-detail').val(),
                 id_reivew_check: $('#idReviewDB').val(),
                 rating: starValue,
