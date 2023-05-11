@@ -17,14 +17,6 @@ $imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_one']
 $imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_two'];
 $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_three'];
 
-//fetch 3 items product add new
-$newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
-//print_r($newProductList);
-
-//fetch all categories hot (product best sell)
-$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 7]);
-//print_r($subCategoryList);
-
 //san pham co lien quan
 $relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0, ['START' => 0, 'END' => 4]);
 //print_r($relateProductList);

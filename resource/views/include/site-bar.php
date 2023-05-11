@@ -1,3 +1,10 @@
+<?php
+//fetch all categories hot (product best sell)
+$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 7]);
+
+//fetch 3 items product add new
+$newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
+?>
 <div class="col-lg-3 primary-sidebar sticky-sidebar">
     <div class="widget-category mb-30">
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">DANH MỤC NỔI BẬT</h5>
