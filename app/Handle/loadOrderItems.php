@@ -32,7 +32,7 @@ $orderItems = $eloquent->selectOrderItems($_SESSION['SSCF_login_id'], $_POST['or
                     <tr>
                         <td class="image product-thumbnail"><img src="<?= $productImageItem ?>" alt="#"></td>
                         <td>
-                            <a href="#"><?= $eachOrder['product_name'] ?></a>
+                            <a href="product-detail.php?id=<?= $eachOrder['idProduct'] ?>"><?= $eachOrder['product_name'] ?></a>
                             <p class="font-xs">Size: <?= $eachOrder['product_size'] ?> | Màu: <?= $eachOrder['product_color'] ?>
                         </td>
                         <td><?= number_format($eachOrder['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></td>

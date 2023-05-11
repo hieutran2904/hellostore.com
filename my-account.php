@@ -37,6 +37,12 @@ $view->loadContent('include', 'tail');
     $('#btn-submit-review').click(function(e) {
         e.preventDefault();
         console.log("click submit");
+        for (let i = 0; i < stars.length; i++) {
+            if (stars[i].checked) {
+                starValue = stars[i].value;
+                break;
+            }
+        }
         $('#popup-main').removeClass('popup-main');
         $('#popup').removeClass('open-popup');
         $('#backdrop').removeClass('backdrop');
