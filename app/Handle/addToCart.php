@@ -11,6 +11,11 @@ $id = $_POST['product_sc_id'];
 $name = $_POST['product_name'];
 $qty = $_POST['product_qty'];
 
+if ($id == ""){
+    $toastr->error_toast('Sản phầm '. $name . ' đã hết hàng' , 'THẤT BẠI');
+    exit();
+}
+
 if (isset($_SESSION['SSCF_login_id'])) {
     //check1: kiem tra xem san pham da co trong gio hang chua?
     $columnName = ['*'];

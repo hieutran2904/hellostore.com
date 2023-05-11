@@ -247,6 +247,9 @@ INSERT INTO `products` (`id`, `category_id`, `subcategory_id`, `product_name`, `
 (8, 2, 23, 'Quần Short Thêu Symbol', 'Quần short đùi mang kiểu dáng unisex, form rộng, dáng suông.', 'Phần túi được kẻ chéo kèm hình in logo thương hiệu của shop, cạp chun kết hợp dây rút điều chỉnh độ rộng của quần, là kiểu quần ngắn suông treddy của genz.', 'img-product-symbol.jpg', 'img-product-symbol-1.jpg', 'img-product-symbol-2.jpg', 'img-product-symbol-3.jpg', 249000, NULL, NULL, NULL, 'Active', 'NO', 'Quần Short Nam', '0', NULL, NULL),
 (9, 2, 24, 'Quần Baggy Jean Rách', 'Quần jean đùi mang kiểu dáng unisex, form rộng, dáng suông.', 'Phần túi được kẻ chéo kèm hình in logo thương hiệu của shop, cạp chun kết hợp dây rút điều chỉnh độ rộng của quần, là kiểu quần ngắn suông treddy của genz.', 'img-product-baggy-jean.jpg', 'img-product-baggy-jean-1.jpg', 'img-product-baggy-jean-2.jpg', 'img-product-baggy-jean-3.jpg', 295000, NULL, NULL, NULL, 'Active', 'NO', 'Quần Jean Nam', '0', NULL, NULL);
 
+INSERT INTO `products` (`category_id`, `subcategory_id`, `product_name`, `product_summary`, `product_details`, `product_master_image`, `product_image_one`, `product_image_two`, `product_image_three`, `product_price`, `product_discount_price`, `discount_start`, `discount_ends`, `product_type`, `product_featured`, `product_tags`, `is_delete`, `created_at`, `updated_at`) VALUES
+(1, 19, 'Áo TankTop X Skel', 'Chất liệu vải 100% cotton mềm mịn, thoáng mát, thấm hút mồ hôi, không co bai', 'Áo TANKTOP X SKEL mang kiểu dáng unisex, form rộng, dáng suông. Áo được tráng gương tên thương hiệu ở 2 mặt áo, mặt sau có in hình nghệ thuật, là kiểu áo cổ tròn trendy của GenZ', 'img-product-tanktopxskel.jpg', 'img-product-tanktopxskel-1.jpg', 'img-product-tanktopxskel-2.jpg', 'img-product-tanktopxskel-3.jpg', 249000, NULL, NULL, NULL, 'Active', 'NO', 'Áo Tank Top Nam', '0', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -324,6 +327,10 @@ INSERT INTO `products_sc` (`id`, `product_id`, `product_size`, `product_color`, 
 (52, 9, 'L', 'cyan', 10, 'In Stock', '0', NULL, NULL),
 (53, 9, 'XL', 'cyan', 10, 'In Stock', '0', NULL, NULL);
 
+INSERT INTO `products_sc` (`product_id`, `product_size`, `product_color`, `product_quantity`, `product_status`, `is_delete`, `created_at`, `updated_at`) VALUES
+(10, 'M', 'black', 100, 'In Stock', '0', NULL, NULL),
+(10, 'L', 'black', 0, 'Out Stock', '0', NULL, NULL),
+(10, 'XL', 'black', 100, 'In Stock', '0', NULL, NULL)
 -- --------------------------------------------------------
 
 --
