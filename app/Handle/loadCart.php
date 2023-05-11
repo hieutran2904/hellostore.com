@@ -61,7 +61,7 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
         </div>
         <div class="shopping-cart-button">
             <a href="cart.php" class="outline">Giỏ hàng</a>
-            <a href="checkout.php">Thanh toán</a>
+            <a href="<?= isset($_SESSION['LIST_PRODUCT_CART']) ? "checkout.php" : "cart.php" ?>">Thanh toán</a>
         </div>
     </div>
 </div>
