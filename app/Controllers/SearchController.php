@@ -1,7 +1,7 @@
 <?php
 class SearchController extends Controller
 {
-    public function searchProduct($htmlKeywords)
+    public function searchProduct($htmlKeywords, $start, $end)
     {
         $arrayKeywords = explode(" ", $htmlKeywords);
 
@@ -16,7 +16,9 @@ class SearchController extends Controller
         }
         $sql2 = rtrim($sql2, " OR");
 
-        $sql_code = $sql1 . $sql2;
+        $sql3 = " ORDER BY id DESC LIMIT {$start}, {$end}";
+
+        $sql_code = $sql1 . $sql2 . $sql3;
 
         $query = $this->connection->prepare($sql_code);
 
