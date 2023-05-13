@@ -116,13 +116,15 @@
                         </div>
                         <div class="header-action-right">
                             <p><span>Xin Chào</span>
-                                <?php
-                                if (@$_SESSION['SSCF_login_id'] > 0) {
-                                    echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
-                                } else {
-                                    echo '<b> khách hàng </b>';
-                                }
-                                ?>
+                                <span id="customer_name_top">
+                                    <?php
+                                    if (@$_SESSION['SSCF_login_id'] > 0) {
+                                        echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
+                                    } else {
+                                        echo '<b> khách hàng </b>';
+                                    }
+                                    ?>
+                                </span>
                                 <span>&#9829;</span>
                             </p>
                             <!-- <div class="header-action-2">
@@ -211,14 +213,14 @@
                                     </li>
                                     <!-- <li><a href="blog.html">Blog </a></li>
                                     <li><a href="contact.html">Liên hệ </a></li> -->
-                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="my-account.php">Tài khoản<i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
+                                    <li class="<?= @$_SESSION['SSCF_login_id'] > 0 ? '' : 'd-none' ?>"><a href="my-account.php">Tài khoản<i class="fi-rs-angle-downsss"></i></a>
+                                        <!-- <ul class="sub-menu">
                                             <li><a href="#">Thông tin</a></li>
                                             <li><a href="#">Đơn hàng</a></li>
                                             <li><a href="#">Sản phẩm yêu thích</a></li>
                                             <li><a href="#">Đánh giá</a></li>
                                             <?php echo '<li><a href="?exit=yes">Đăng xuất</a></li>'; ?>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                 </ul>
                             </nav>

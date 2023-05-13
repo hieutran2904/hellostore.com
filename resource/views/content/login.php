@@ -18,6 +18,7 @@ if (isset($_POST['user_login'])) {
         $_SESSION['SSCF_login_id'] = $userLogin[0]['id'];
         $_SESSION['SSCF_login_user_name'] = $userLogin[0]['customer_name'];
         $_SESSION['SSCF_login_user_email'] = $userLogin[0]['customer_email'];
+        $_SESSION['SSCF_login_user_password'] = $_POST['user_pass'];
         $_SESSION['SSCF_login_user_mobile'] = $userLogin[0]['customer_mobile'];
         $_SESSION['SSCF_login_user_address'] = $userLogin[0]['customer_address'];
 

@@ -140,7 +140,7 @@
 
 
 <!--# ADD TO CART MESSAGE #-->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     function success_toast(details, title) {
         toastr.options = {
             "closeButton": true,
@@ -183,7 +183,7 @@
         }
         toastr["warning"](details, title)
     }
-</script> -->
+</script>
 
 <script>
     $(window).on('load', function() {
