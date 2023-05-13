@@ -1,7 +1,7 @@
 ﻿<?php
 $eloquent = new Eloquent();
 //get order
-$orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION['SSCF_login_id']]);
+$orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION['SSCF_login_id']], [], [], [], ['DESC' => 'id']);
 // print_r($orderList);
 ?>
 <main class="main">
