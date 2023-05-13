@@ -240,12 +240,13 @@
                         <!-- cart and wishlish -->
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="header-action-icon-2">
+                                <!-- comming favorites -->
+                                <!-- <div class="header-action-icon-2">
                                     <a href="favorites-list.php">
                                         <img class="svgInject" alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
                                         <span class="pro-count blue">...</span>
                                     </a>
-                                </div>
+                                </div> -->
                                 <div class="header-action-icon-2 cart_product">
                                 </div>
                             </div>
@@ -254,12 +255,13 @@
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
+                            <!-- comming soon favorites -->
+                            <!-- <div class="header-action-icon-2">
                                 <a href="favorites-list.php">
                                     <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-heart.svg">
                                     <span class="pro-count white">4</span>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="cart.php">
                                     <img alt="Surfside Media" src="public/assets/imgs/theme/icons/icon-cart.svg">
