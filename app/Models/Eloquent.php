@@ -142,7 +142,7 @@ class Eloquent
                 foreach ($inColumn as $eachColumn) {
                     $sql1 .= $eachColumn . " IN (";
                     foreach ($inValue as $eachValue) {
-                        if ($i == $j){
+                        if ($i == $j) {
                             $sql1 .= $eachValue . ", ";
                             break;
                         }
@@ -179,8 +179,6 @@ class Eloquent
                 $sql1 .= " LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             }
 
-            
-
             $query = $this->connection->prepare($sql1);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -191,9 +189,10 @@ class Eloquent
         }
     }
     // SELECT CART INFO
-    public function loadCartInfo($customerId){
+    public function loadCartInfo($customerId)
+    {
         try {
-            $sql = "SELECT `products`.`id`, `products_sc`.`id` as `idProductSC`, `shopcarts`.`id` as `idShopCarts`, `quantity`, `product_color`, `product_size`, `product_name`, `product_master_image`, `product_price` from `shopcarts` LEFT JOIN `products_sc` ON `shopcarts`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = ".$customerId;
+            $sql = "SELECT `products`.`id`, `products_sc`.`id` as `idProductSC`, `shopcarts`.`id` as `idShopCarts`, `quantity`, `product_color`, `product_size`, `product_name`, `product_master_image`, `product_price` from `shopcarts` LEFT JOIN `products_sc` ON `shopcarts`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `customer_id` = " . $customerId;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -204,9 +203,42 @@ class Eloquent
     }
 
     // SELECT ORDER ITEMS
-    public function selectOrderItems($customerId, $orderId){
+    public function selectOrderItems($customerId, $orderId)
+    {
         try {
-            $sql = "SELECT `products_sc`.`id` as `idProductSC`, `products`.`id` as `idProduct`, `product_name`, `product_size`, `product_color`, `order_items`.`product_quantity`, `order_items`.`product_price`, (`order_items`.`product_quantity` * `order_items`.`product_price`) as `sub_price`, `product_master_image` from `order_items` LEFT JOIN `orders` ON `order_items`.`order_id` = `orders`.`id` LEFT JOIN `products_sc` ON `order_items`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `order_items`.`customer_id` = ".$customerId ." AND `order_items`.`order_id` = ".$orderId;
+            $sql = "SELECT `products_sc`.`id` as `idProductSC`, `products`.`id` as `idProduct`, `product_name`, `product_size`, `product_color`, `order_items`.`product_quantity`, `order_items`.`product_price`, (`order_items`.`product_quantity` * `order_items`.`product_price`) as `sub_price`, `product_master_image` from `order_items` LEFT JOIN `orders` ON `order_items`.`order_id` = `orders`.`id` LEFT JOIN `products_sc` ON `order_items`.`product_sc_id` = `products_sc`.`id` LEFT JOIN `products` ON `products_sc`.`product_id` = `products`.`id` WHERE `order_items`.`customer_id` = " . $customerId . " AND `order_items`.`order_id` = " . $orderId;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //SELECT PRODUCT COlOR
+    public function selectProductColor($colorName, $paginate = ["START" => 0, "END" => 1000])
+    {
+        try {
+            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price` FROM `products` 
+            LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
+            WHERE `product_color` = '" . $colorName . "' GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //SELECT PRODUCT PRICE && COLOR
+    public function selectProductPriceAndColor($price, $colorName, $paginate = ["START" => 0, "END" => 1000])
+    {
+        try {
+            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price` FROM `products` 
+            LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
+            WHERE `product_color` = '" . $colorName . "' AND `product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . " GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

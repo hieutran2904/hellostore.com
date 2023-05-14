@@ -5,20 +5,129 @@ $homeController = new HomeController();
 $eloquent = new Eloquent();
 $searchCtrl = new SearchController;
 
+$price = "";
+$color = "";
+
 //check keywords
 if (isset($_POST['keywords'])) {
     //list product search
-    $_SESSION['search_keywords'] = strip_tags($_POST['keywords']);
-    $productList = $searchCtrl->searchProduct($_SESSION['search_keywords'], 0, 100);
-    $productNameSearch = $_SESSION['search_keywords'];
+    $keywords = strip_tags($_POST['keywords']);
+    $productList = $searchCtrl->searchProduct($keywords, 0, 100);
+    $productNameSearch = $keywords;
 } else if (isset($_GET['tags'])) {
     //list product search
-    $_SESSION['search_keywords'] = strip_tags($_GET['tags']);
-    $productList = $searchCtrl->searchProduct($_SESSION['search_keywords'], 0, 100);
-    $productNameSearch = $_SESSION['search_keywords'];
+    $keywords = strip_tags($_GET['tags']);
+    $productList = $searchCtrl->searchProduct($keywords, 0, 100);
+    $productNameSearch = $keywords;
+} else if (isset($_POST['submit-fillter'])) {
+    //list product search price and color fillter
+    $columnName = ['*'];
+    $tableName = 'products';
+    if (isset($_POST['checkbox-price'])) {
+        $price = $_POST['checkbox-price'];
+        if ($_POST['checkbox-price'] == "300k-399k") {
+            $priceMin = 300000;
+            $priceMax = 399000;
+        } else if ($_POST['checkbox-price'] == "200k-299k") {
+            $priceMin = 200000;
+            $priceMax = 299000;
+        } else if ($_POST['checkbox-price'] == "<200k") {
+            $priceMin = 0;
+            $priceMax = 200000;
+        } else if ($_POST['checkbox-price'] == ">400k") {
+            $priceMin = 400000;
+            $priceMax = 100000000;
+        }
+        $whereValue = [
+            'MIN' => $priceMin,
+            'MAX' => $priceMax
+        ];
+        $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], 0, [], $whereValue);
+        $productNameSearch = '';
+    } else if (isset($_POST['checkbox-color'])) {
+        $color = $_POST['checkbox-color'];
+        $productList = $eloquent->selectProductColor($color);
+        $productNameSearch = '';
+    }
+    if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
+        $price = $_POST['checkbox-price'];
+        $color = $_POST['checkbox-color'];
+        if ($_POST['checkbox-price'] == "300k-399k") {
+            $priceMin = 300000;
+            $priceMax = 399000;
+        } else if ($_POST['checkbox-price'] == "200k-299k") {
+            $priceMin = 200000;
+            $priceMax = 299000;
+        } else if ($_POST['checkbox-price'] == "<200k") {
+            $priceMin = 0;
+            $priceMax = 200000;
+        } else if ($_POST['checkbox-price'] == ">400k") {
+            $priceMin = 400000;
+            $priceMax = 100000000;
+        }
+        $priceArr = [
+            'MIN' => $priceMin,
+            'MAX' => $priceMax
+        ];
+        $productList = $eloquent->selectProductPriceAndColor($priceArr, $color);
+        $productNameSearch = '';
+    } else if (!isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])){
+        $productList = $eloquent->selectData($columnName, $tableName);
+        $productNameSearch = '';
+    }
+} else if (isset($_GET['price'])) {
+    $columnName = ['*'];
+    $tableName = 'products';
+    $price = $_GET['price'];
+    if ($_GET['price'] == "300k-399k") {
+        $priceMin = 300000;
+        $priceMax = 399000;
+    } else if ($_GET['price'] == "200k-299k") {
+        $priceMin = 200000;
+        $priceMax = 299000;
+    } else if ($_GET['price'] == "<200k") {
+        $priceMin = 0;
+        $priceMax = 200000;
+    } else if ($_GET['price'] == ">400k") {
+        $priceMin = 400000;
+        $priceMax = 100000000;
+    }
+    $whereValue = [
+        'MIN' => $priceMin,
+        'MAX' => $priceMax
+    ];
+    $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], [], $whereValue);
+    $productNameSearch = '';
+} else if (isset($_GET['color'])) {
+    $color = $_GET['color'];
+    $productList = $eloquent->selectProductColor($color);
+    $productNameSearch = '';
+} else if (isset($_GET['price']) && isset($_GET['color'])) {
+    $price = $_GET['price'];
+    $color = $_GET['color'];
+    echo $price;
+    echo $color;
+    if ($_GET['price'] == "300k-399k") {
+        $priceMin = 300000;
+        $priceMax = 399000;
+    } else if ($_GET['price'] == "200k-299k") {
+        $priceMin = 200000;
+        $priceMax = 299000;
+    } else if ($_GET['price'] == "<200k") {
+        $priceMin = 0;
+        $priceMax = 200000;
+    } else if ($_GET['price'] == ">400k") {
+        $priceMin = 400000;
+        $priceMax = 100000000;
+    }
+    $priceArr = [
+        'MIN' => $priceMin,
+        'MAX' => $priceMax
+    ];
+    $productList = $eloquent->selectProductPriceAndColor($priceArr, $color);
+    $productNameSearch = '';
 } else if (isset($_GET['subCategoryId'])) {
     //tim san pham theo subcategory
-    unset($_SESSION['search_keywords']);
     $columnName = ['*'];
     $tableName = 'products';
     $whereValue = ['subcategory_id' => $_GET['subCategoryId']];
@@ -26,7 +135,6 @@ if (isset($_POST['keywords'])) {
     $productNameSearch = $eloquent->selectData(['*'], 'subcategories', ['id' => $_GET['subCategoryId']])[0]['subcategory_name'];
 } else if (isset($_GET['categoryId'])) {
     //tim san pham theo category
-    unset($_SESSION['search_keywords']);
     $columnName = ['*'];
     $tableName = 'products';
     $whereValue = ['category_id' => $_GET['categoryId']];
@@ -39,7 +147,7 @@ if (isset($_POST['keywords'])) {
     $productList = $eloquent->selectData($columnName, $tableName);
     $productNameSearch = '';
 }
-$countItem = $productList != null ? count($productList) : 0;
+$countItem = $productList != [] ? count($productList) : 0;
 
 //phan trang
 if (!empty($productList)) {
@@ -73,16 +181,122 @@ if (!empty($productList)) {
     $url = "";
     if (isset($_POST['keywords'])) {
         //list product search
-        $_SESSION['search_keywords'] = strip_tags($_POST['keywords']);
-        $url = 'tags=' . $_SESSION['search_keywords'] . '&';
-        $productList = $searchCtrl->searchProduct($_SESSION['search_keywords'], $cp, $rpp);
-        $productNameSearch = $_SESSION['search_keywords'];
+        $keywords = strip_tags($_POST['keywords']);
+        $url = 'tags=' . $keywords . '&';
+        $productList = $searchCtrl->searchProduct($keywords, $cp, $rpp);
+        $productNameSearch = $keywords;
     } else if (isset($_GET['tags'])) {
         //list product search
-        $_SESSION['search_keywords'] = strip_tags($_GET['tags']);
-        $url = 'tags=' . $_SESSION['search_keywords'] . '&';
-        $productList = $searchCtrl->searchProduct($_SESSION['search_keywords'], $cp, $rpp);
-        $productNameSearch = $_SESSION['search_keywords'];
+        $keywords = strip_tags($_GET['tags']);
+        $url = 'tags=' . $keywords . '&';
+        $productList = $searchCtrl->searchProduct($keywords, $cp, $rpp);
+        $productNameSearch = $keywords;
+    } else if (isset($_POST['submit-fillter'])) {
+        //list product search price and color fillter
+        $columnName = ['*'];
+        $tableName = 'products';
+        if (isset($_POST['checkbox-price'])) {
+            $url = 'price=' . $_POST['checkbox-price'] . '&';
+            $price = $_POST['checkbox-price'];
+            $price = $_POST['checkbox-price'];
+            if ($_POST['checkbox-price'] == "300k-399k") {
+                $priceMin = 300000;
+                $priceMax = 399000;
+            } else if ($_POST['checkbox-price'] == "200k-299k") {
+                $priceMin = 200000;
+                $priceMax = 299000;
+            } else if ($_POST['checkbox-price'] == "<200k") {
+                $priceMin = 0;
+                $priceMax = 200000;
+            } else if ($_POST['checkbox-price'] == ">400k") {
+                $priceMin = 400000;
+                $priceMax = 100000000;
+            }
+            $whereValue = [
+                'MIN' => $priceMin,
+                'MAX' => $priceMax
+            ];
+            $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], ['START' => $cp, 'END' => $rpp], $whereValue);
+            $productNameSearch = '';
+        } else if (isset($_POST['checkbox-color'])) {
+            $url = 'color=' . $_POST['checkbox-color'] . '&';
+            $color = $_POST['checkbox-color'];
+            $productList = $eloquent->selectProductColor($color, ['START' => $cp, 'END' => $rpp]);
+            $productNameSearch = '';
+        } else if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
+            $url = 'price=' . $_POST['checkbox-price'] . '&color=' . $_POST['checkbox-color'] . '&';
+            $price = $_POST['checkbox-price'];
+            $color = $_POST['checkbox-color'];
+            if ($_POST['checkbox-price'] == "300k-399k") {
+                $priceMin = 300000;
+                $priceMax = 399000;
+            } else if ($_POST['checkbox-price'] == "200k-299k") {
+                $priceMin = 200000;
+                $priceMax = 299000;
+            } else if ($_POST['checkbox-price'] == "<200k") {
+                $priceMin = 0;
+                $priceMax = 200000;
+            } else if ($_POST['checkbox-price'] == ">400k") {
+                $priceMin = 400000;
+                $priceMax = 100000000;
+            }
+            $priceArr = [
+                'MIN' => $priceMin,
+                'MAX' => $priceMax
+            ];
+            $productList = $eloquent->selectProductPriceAndColor($priceArr, $color, ['START' => $cp, 'END' => $rpp]);
+            $productNameSearch = '';
+        }
+    } else if (isset($_GET['price'])) {
+        $url = 'price=' . $_GET['price'] . '&';
+        $price = $_GET['price'];
+        if ($_GET['price'] == "300k-399k") {
+            $priceMin = 300000;
+            $priceMax = 399000;
+        } else if ($_GET['price'] == "200k-299k") {
+            $priceMin = 200000;
+            $priceMax = 299000;
+        } else if ($_GET['price'] == "<200k") {
+            $priceMin = 0;
+            $priceMax = 200000;
+        } else if ($_GET['price'] == ">400k") {
+            $priceMin = 400000;
+            $priceMax = 100000000;
+        }
+        $whereValue = [
+            'MIN' => $priceMin,
+            'MAX' => $priceMax
+        ];
+        $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], ['START' => $cp, 'END' => $rpp], $whereValue);
+        $productNameSearch = '';
+    } else if (isset($_GET['color'])) {
+        $url = 'color=' . $_GET['color'] . '&';
+        $color = $_GET['color'];
+        $productList = $eloquent->selectProductColor($color, ['START' => $cp, 'END' => $rpp]);
+        $productNameSearch = '';
+    } else if (isset($_GET['price']) && isset($_GET['color'])) {
+        $url = 'price=' . $_GET['price'] . '&color=' . $_GET['color'] . '&';
+        $price = $_GET['price'];
+        $color = $_GET['color'];
+        if ($_GET['price'] == "300k-399k") {
+            $priceMin = 300000;
+            $priceMax = 399000;
+        } else if ($_GET['price'] == "200k-299k") {
+            $priceMin = 200000;
+            $priceMax = 299000;
+        } else if ($_GET['price'] == "<200k") {
+            $priceMin = 0;
+            $priceMax = 200000;
+        } else if ($_GET['price'] == ">400k") {
+            $priceMin = 400000;
+            $priceMax = 100000000;
+        }
+        $priceArr = [
+            'MIN' => $priceMin,
+            'MAX' => $priceMax
+        ];
+        $productList = $eloquent->selectProductPriceAndColor($priceArr, $color, ['START' => $cp, 'END' => $rpp]);
+        $productNameSearch = '';
     } else if (isset($_GET['subCategoryId'])) {
         //tim san pham theo subcategory
         $url = 'subCategoryId=' . $_GET['subCategoryId'] . '&';
@@ -140,7 +354,7 @@ if (!empty($productList)) {
                                 <?php
                                 if (!empty($productList)) {
                                     if ($text >= $countItem)
-                                    $text = $countItem;
+                                        $text = $countItem;
                                     echo '<label>📋Kết quả: ' . ($cp + 1) . '&rarr;' . $text . '</label>';
                                 }
                                 ?>
@@ -148,41 +362,10 @@ if (!empty($productList)) {
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
-                                <!-- <div class="sort-by-product-wrap">
-                                    <div class="sort-by">
-                                        <span><i class="fi-rs-apps"></i>Show:</span>
-                                    </div>
-                                    <div class="sort-by-dropdown-wrap">
-                                        <span> 50 <i class="fi-rs-angle-small-down"></i></span>
-                                    </div>
-                                </div> -->
-                                <div class="sort-by-dropdown">
-                                    <ul>
-                                        <li><a class="active" href="#">50</a></li>
-                                        <li><a href="#">100</a></li>
-                                        <li><a href="#">150</a></li>
-                                        <li><a href="#">200</a></li>
-                                        <li><a href="#">All</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sort-by-cover">
                                 <div class="sort-by-product-wrap">
                                     <div class="sort-by">
-                                        <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
+                                        <span>💸 <?= $price ?> | 🌈 <?= $color ?></span>
                                     </div>
-                                    <div class="sort-by-dropdown-wrap">
-                                        <span> Featured <i class="fi-rs-angle-small-down"></i></span>
-                                    </div>
-                                </div>
-                                <div class="sort-by-dropdown">
-                                    <ul>
-                                        <li><a class="active" href="#">Featured</a></li>
-                                        <li><a href="#">Price: Low to High</a></li>
-                                        <li><a href="#">Price: High to Low</a></li>
-                                        <li><a href="#">Release Date</a></li>
-                                        <li><a href="#">Avg. Rating</a></li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>

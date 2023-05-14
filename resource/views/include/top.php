@@ -43,7 +43,6 @@
         }
     </style>
 </head>
-
 <body class="preloading">
     <div class="load-customer">
         <img src="public/assets/imgs/loading/load70px.gif" alt="">
@@ -73,7 +72,7 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul style="line-height: 1.1;">
-                                    <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="product-detail.php">Chi tiết</a></li>
+                                    <!-- <li>Giữa tháng giảm giá đến 50% cho toàn bộ sản phẩm <a href="product-detail.php">Chi tiết</a></li> -->
                                     <li>Free Ship - Đơn hàng trên 200k</li>
                                     <li>Áo thun basic giảm giá lên đến 35% <a href="product-category.php">Mua ngay!</a></li>
                                 </ul>

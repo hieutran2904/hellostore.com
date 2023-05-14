@@ -22,15 +22,7 @@ class HomeController extends Controller
                         </div>
                     </div>
                     <div class="product-content-wrap">
-                        <div class="product-category">
-                            <a href="shop.html">Clothing</a>
-                        </div>
                         <h2><a href="product-detail.php?id=' . $eachProduct['id'] . '">' . $eachProduct['product_name'] . '</a></h2>
-                        <div class="rating-result" title="90%">
-                            <span>
-                                <span>90%</span>
-                            </span>
-                        </div>
                         <div class="product-price">
                             <span>' . number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
                             <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
