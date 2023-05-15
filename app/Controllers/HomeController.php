@@ -25,7 +25,7 @@ class HomeController extends Controller
                         <h2><a href="product-detail.php?id=' . $eachProduct['id'] . '">' . $eachProduct['product_name'] . '</a></h2>
                         <div class="product-price">
                             <span>' . number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
-                            <span class="old-price">' . number_format($eachProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
+                            <span class="old-price">' . number_format($eachProduct['virtual_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] . '</span>
                         </div>
                         <form class="product-action-1 show">
                             <input type="hidden" id="cart_product_name_' . $eachProduct['id'] . '" value="' . $eachProduct['product_name'] . '"/>

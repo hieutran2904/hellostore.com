@@ -154,8 +154,8 @@ if (!empty($productList)) {
     // nod = Number of Data
     $nod = $countItem;
     // rpp = Result Per Page
-    if ($nod > 3) {
-        $rpp = 3;
+    if ($nod > 9) {
+        $rpp = 9;
     } else {
         $rpp = $nod;
     }
