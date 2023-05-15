@@ -28,6 +28,9 @@ $colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['pr
 //fetch all size for product id
 $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $_SESSION['SSCF_product_product_id']], [], [], ['product_size' => 'product_size']);
 //print_r($productSizeList);
+
+//customer review
+$reviewProductList = $eloquent->selectReviewProduct($_SESSION['SSCF_product_product_id']);
 ?>
 <main class="main">
     <div class="page-header breadcrumb-wrap">
@@ -169,27 +172,17 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                 <li class="nav-item">
                                     <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">MÔ TẢ</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
-                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Đánh giá (3)</a>
+                                    <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Đánh giá (<?= $reviewProductList != [] ? count($reviewProductList) : 0 ?>)</a>
                                 </li>
                             </ul>
                             <div class="tab-content shop_info_tab entry-main-content">
                                 <div class="tab-pane fade show active" id="Description">
                                     <div class="">
                                         <p><?= $productList[0]['product_details'] ?></p>
-                                        <ul class="product-more-infor mt-30">
-                                            <li><span>Type Of Packing</span> Bottle</li>
-                                            <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                            <li><span>Quantity Per Case</span> 100ml</li>
-                                            <li><span>Ethyl Alcohol</span> 70%</li>
-                                            <li><span>Piece In One</span> Carton</li>
-                                        </ul>
-                                        <hr class="wp-block-separator is-style-dots">
-                                        <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward
-                                            energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>
                                         <h4 class="mt-30">Hướng dẫn chọn size</h4>
                                         <hr class="wp-block-separator is-style-wide">
                                         <p>Size M: 50-57kg / Cao 1m53 – 1m68</p>
@@ -199,7 +192,7 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                         <p>Tùy mỗi người thích body hoặc vừa người thì tăng hoặc giảm 1 size, chỉ số trên là tương đối mặc</p>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="Additional-info">
+                                <!-- <div class="tab-pane fade" id="Additional-info">
                                     <table class="font-md">
                                         <tbody>
                                             <tr class="stand-up">
@@ -288,153 +281,115 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> -->
                                 <div class="tab-pane fade" id="Reviews">
                                     <!--Comments-->
                                     <div class="comments-area">
                                         <div class="row">
                                             <div class="col-lg-8">
-                                                <h4 class="mb-30">Customer questions & answers</h4>
+                                                <!-- <h4 class="mb-30">Customer questions & answers</h4> -->
                                                 <div class="comment-list">
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="public/assets/imgs/page/avatar-6.jpg" alt="">
-                                                                <h6><a href="#">Jacky Chan</a></h6>
-                                                                <p class="font-xxs">Since 2012</p>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
+                                                    <?php
+                                                    if ($reviewProductList != []) {
+                                                        $countReview = count($reviewProductList);
+                                                        $totalStar = 0;
+                                                        $oneStar = 0;
+                                                        $twoStar = 0;
+                                                        $threeStar = 0;
+                                                        $fourStar = 0;
+                                                        $fiveStar = 0;
+                                                        foreach ($reviewProductList as $eachReview) {
+                                                            if ($eachReview['rating'] == 1) {
+                                                                $oneStar++;
+                                                                $percentRating = 20;
+                                                            } else if ($eachReview['rating'] == 2) {
+                                                                $twoStar++;
+                                                                $percentRating = 40;
+                                                            } else if ($eachReview['rating'] == 3) {
+                                                                $threeStar++;
+                                                                $percentRating = 60;
+                                                            } else if ($eachReview['rating'] == 4) {
+                                                                $fourStar++;
+                                                                $percentRating = 80;
+                                                            } else if ($eachReview['rating'] == 5) {
+                                                                $fiveStar++;
+                                                                $percentRating = 100;
+                                                            }
+                                                            $totalStar += $eachReview['rating'];
+                                                    ?>
+                                                            <div class="single-comment justify-content-between d-flex">
+                                                                <div class="user justify-content-between d-flex col-lg-12">
+                                                                    <div class="thumb text-center col-md-3">
+                                                                        <!-- <img src="public/assets/imgs/page/avatar-6.jpg" alt=""> -->
+                                                                        <h5><a href="#" class="text-brand"><?= $eachReview['customer_name'] ?></a></h5>
+                                                                        <!-- <p class="font-xxs">Since 2012</p> -->
                                                                     </div>
-                                                                </div>
-                                                                <p>Thank you very fast shipping from Poland only 3days.</p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
-                                                                        <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--single-comment -->
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="public/assets/imgs/page/avatar-7.jpg" alt="">
-                                                                <h6><a href="#">Ana Rosie</a></h6>
-                                                                <p class="font-xxs">Since 2008</p>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
-                                                                    </div>
-                                                                </div>
-                                                                <p>Great low price and works well.</p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
-                                                                        <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--single-comment -->
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="public/assets/imgs/page/avatar-8.jpg" alt="">
-                                                                <h6><a href="#">Steven Keny</a></h6>
-                                                                <p class="font-xxs">Since 2010</p>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
-                                                                    </div>
-                                                                </div>
-                                                                <p>Authentic and Beautiful, Love these way more than ever expected They are Great earphones</p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020 at 3:12 pm </p>
-                                                                        <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a>
+                                                                    <div class="desc col-md-9">
+                                                                        <div class="product-rate d-inline-block">
+                                                                            <div class="product-rating" style="width: <?= $percentRating ?>%">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p><?= $eachReview['review_details'] ?></p>
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <p class="font-xs mr-30"><?= $eachReview['created_at'] ?></p>
+                                                                                <!-- <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a> -->
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--single-comment -->
+                                                    <?php
+                                                        }
+                                                        $avgStar = round($totalStar / $countReview, 1);
+                                                        $percentAvgStar = ($avgStar / 5) * 100;
+                                                        $percentAvgOneStar = ($oneStar / $countReview) * 100;
+                                                        $percentAvgTwoStar = ($twoStar / $countReview) * 100;
+                                                        $percentAvgThreeStar = ($threeStar / $countReview) * 100;
+                                                        $percentAvgFourStar = ($fourStar / $countReview) * 100;
+                                                        $percentAvgFiveStar = ($fiveStar / $countReview) * 100;
+                                                    } else {
+                                                        echo "<h4 class='mb-30 text-brand'>Chưa có đánh giá nào</h4>";
+                                                        $avgStar = 0;
+                                                        $percentAvgStar = 0;
+                                                        $percentAvgOneStar = 0;
+                                                        $percentAvgTwoStar = 0;
+                                                        $percentAvgThreeStar = 0;
+                                                        $percentAvgFourStar = 0;
+                                                        $percentAvgFiveStar = 0;
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
-                                                <h4 class="mb-30">Customer reviews</h4>
+                                                <!-- <h4 class="mb-30">Customer reviews</h4> -->
                                                 <div class="d-flex mb-30">
                                                     <div class="product-rate d-inline-block mr-15">
-                                                        <div class="product-rating" style="width:90%">
+                                                        <div class="product-rating" style="width:<?= $percentAvgStar ?>%">
                                                         </div>
                                                     </div>
-                                                    <h6>4.8 out of 5</h6>
+                                                    <h6><?= $avgStar ?>⭐ / 5⭐</h6>
                                                 </div>
                                                 <div class="progress">
-                                                    <span>5 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+                                                    <span>5 ⭐</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?= $percentAvgOneStar ?>%;" aria-valuemin="0" aria-valuemax="100"><?= $percentAvgOneStar ?>%</div>
                                                 </div>
                                                 <div class="progress">
-                                                    <span>4 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                    <span>4 ⭐</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?= $percentAvgTwoStar ?>%;" aria-valuemin="0" aria-valuemax="100"><?= $percentAvgTwoStar ?>%</div>
                                                 </div>
                                                 <div class="progress">
-                                                    <span>3 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                                                    <span>3 ⭐</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?= $percentAvgThreeStar ?>%;" aria-valuemin="0" aria-valuemax="100"><?= $percentAvgThreeStar ?>%</div>
                                                 </div>
                                                 <div class="progress">
-                                                    <span>2 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                                    <span>2 ⭐</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?= $percentAvgFourStar ?>%;" aria-valuemin="0" aria-valuemax="100"><?= $percentAvgFourStar ?>%</div>
                                                 </div>
                                                 <div class="progress mb-30">
-                                                    <span>1 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                                    <span>1 ⭐</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?= $percentAvgFiveStar ?>%;" aria-valuemin="0" aria-valuemax="100"><?= $percentAvgFiveStar ?>%</div>
                                                 </div>
-                                                <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--comment form-->
-                                    <div class="comment-form">
-                                        <h4 class="mb-15">Add a review</h4>
-                                        <div class="product-rate d-inline-block mb-30">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-12">
-                                                <form class="form-contact comment_form" action="#" id="commentForm">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group">
-                                                                <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="button button-contactForm">Submit
-                                                            Review</button>
-                                                    </div>
-                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -490,130 +445,6 @@ $productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['prod
                                         echo '<h3>Không có sản phẩm liên quan</h3>';
                                     }
                                     ?>
-                                    <!-- <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap small hover-up">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="product-detail.php" tabindex="0">
-                                                        <img class="default-img" src="public/assets/imgs/shop/product-2-1.jpg" alt="">
-                                                        <img class="hover-img" src="public/assets/imgs/shop/product-2-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">Hot</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2><a href="product-detail.php" tabindex="0">Ulstra Bass Headphone</a></h2>
-                                                <div class="rating-result" title="90%">
-                                                    <span>
-                                                    </span>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>$238.85 </span>
-                                                    <span class="old-price">$245.8</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap small hover-up">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="product-detail.php" tabindex="0">
-                                                        <img class="default-img" src="public/assets/imgs/shop/product-3-1.jpg" alt="">
-                                                        <img class="hover-img" src="public/assets/imgs/shop/product-4-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="sale">-12%</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2><a href="product-detail.php" tabindex="0">Smart Bluetooth Speaker</a></h2>
-                                                <div class="rating-result" title="90%">
-                                                    <span>
-                                                    </span>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>$138.85 </span>
-                                                    <span class="old-price">$145.8</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap small hover-up">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="product-detail.php" tabindex="0">
-                                                        <img class="default-img" src="public/assets/imgs/shop/product-4-1.jpg" alt="">
-                                                        <img class="hover-img" src="public/assets/imgs/shop/product-4-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="new">New</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2><a href="product-detail.php" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
-                                                <div class="rating-result" title="90%">
-                                                    <span>
-                                                    </span>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>$738.85 </span>
-                                                    <span class="old-price">$1245.8</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap small hover-up mb-0">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="product-detail.php" tabindex="0">
-                                                        <img class="default-img" src="public/assets/imgs/shop/product-5-1.jpg" alt="">
-                                                        <img class="hover-img" src="public/assets/imgs/shop/product-3-2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">Hot</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <h2><a href="product-detail.php" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
-                                                <div class="rating-result" title="90%">
-                                                    <span>
-                                                    </span>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>$89.8 </span>
-                                                    <span class="old-price">$98.8</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>

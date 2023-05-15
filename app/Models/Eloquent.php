@@ -247,4 +247,22 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    //SELECT REVIEW PRODUCT
+    public function selectReviewProduct($idProduct)
+    {
+        try {
+            $sql = "SELECT `products`.`id`, `customer_name`, `review_details`, `rating`, `reviews`.`created_at` from `products`
+            LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
+            LEFT JOIN `reviews` ON `products_sc`.`id` = `reviews`.`product_sc_id`
+            LEFT JOIN `customers` ON `reviews`.`customer_id` = `customers`.`id`
+            WHERE `customer_name` IS NOT NULL AND `products`.`id` = " . $idProduct;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
