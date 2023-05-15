@@ -18,7 +18,9 @@ $imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_two']
 $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_three'];
 
 //san pham co lien quan
-$relateProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], 0, ['START' => 0, 'END' => 4]);
+$getCategoryID = $eloquent->selectData(['category_id'], 'products', ['id' => $_SESSION['SSCF_product_product_id']]);
+$whereValue = ['category_id' => $getCategoryID[0]['category_id']];
+$relateProductList = $eloquent->selectData(['*'], 'products', $whereValue, [], [], [], 0, ['START' => 0, 'END' => 8]);
 //print_r($relateProductList);
 
 //fetch all color for product id
