@@ -22,7 +22,7 @@ $productColorList = $eloquent->selectData(['*'], 'products_sc', [], [], [], ["pr
     </div>
     <!-- Fillter By Price -->
     <form action="product-category.php" method="POST" class="sidebar-widget price_range range mb-30">
-        <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">Giá</h5>
+        <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">GÍA</h5>
         <div class="custome-checkbox">
             <input class="form-check-input check_price_custom" type="checkbox" name="checkbox-price" id="CheckboxPrice1" value="300k-399k">
             <label class="form-check-label" for="CheckboxPrice1"><span>300k - 399k</span></label>
@@ -40,7 +40,7 @@ $productColorList = $eloquent->selectData(['*'], 'products_sc', [], [], [], ["pr
         </div>
         <div class="list-group">
             <div class="list-group-item mb-10 mt-20">
-                <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">Màu sắc</h5>
+                <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">MÀU SẮC</h5>
                 <!-- <label class="fw-900">Màu sắc</label> -->
                 <div class="custome-checkbox">
                     <?php
@@ -61,7 +61,7 @@ $productColorList = $eloquent->selectData(['*'], 'products_sc', [], [], [], ["pr
     </form>
     <!-- Product sidebar Widget -->
     <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
-        <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">Sản Phẩm Mới</h5>
+        <h5 class="section-title style-1 mb-10 wow fadeIn animated text-brand">SẢN PHẨM MỚI</h5>
         <?php
         foreach ($newProductList as $eachNewProduct) {
             $newProductImage = $GLOBALS['PRODUCT_DIRECTORY'] . $eachNewProduct['product_master_image'];
@@ -72,10 +72,10 @@ $productColorList = $eloquent->selectData(['*'], 'products_sc', [], [], [], ["pr
                 </div>
                 <div class="content pt-10">
                     <h5><a href="product-detail.php?id=<?= $eachNewProduct['id'] ?>"><?php echo $eachNewProduct['product_name'] ?></a></h5>
-                    <p class="price mb-0 mt-5"><?php echo number_format($eachNewProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></p>
-                    <div class="product-rate">
+                    <p class="price mb-0 mt-5"><?= number_format($eachNewProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></p>
+                    <!-- <div class="product-rate">
                         <div class="product-rating" style="width:90%"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         <?php

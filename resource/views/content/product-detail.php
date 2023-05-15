@@ -428,11 +428,11 @@ if ($reviewProductList != []) {
                                                 </div>
                                                 <div class="product-content-wrap">
                                                     <h2><a href="product-detail.php?id=<?= $eachRelateProduct['id'] ?>" tabindex="0"><?= $eachRelateProduct['product_name'] ?></a></h2>
-                                                    <div class="rating-result" title="90%">
+                                                    <!-- <div class="rating-result" title="90%">
                                                         <span>
                                                         </span>
-                                                    </div>
-                                                    <div class="product-price">
+                                                    </div> -->
+                                                    <div class="product-price mt-5">
                                                         <span><?= number_format($eachRelateProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
                                                         <span class="old-price"><?= number_format($eachRelateProduct['virtual_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
                                                     </div>
