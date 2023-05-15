@@ -59,11 +59,11 @@ if ($reviewProductList != []) {
     }
     $avgStar = round($totalStar / $countReview, 1);
     $percentAvgStar = ($avgStar / 5) * 100;
-    $percentAvgOneStar = ($oneStar / $countReview) * 100;
-    $percentAvgTwoStar = ($twoStar / $countReview) * 100;
-    $percentAvgThreeStar = ($threeStar / $countReview) * 100;
-    $percentAvgFourStar = ($fourStar / $countReview) * 100;
-    $percentAvgFiveStar = ($fiveStar / $countReview) * 100;
+    $percentAvgOneStar = round(($oneStar / $countReview) * 100, 0 );
+    $percentAvgTwoStar = round(($twoStar / $countReview) * 100, 0 );
+    $percentAvgThreeStar = round(($threeStar / $countReview) * 100, 0 );
+    $percentAvgFourStar = round(($fourStar / $countReview) * 100, 0 );
+    $percentAvgFiveStar = round(($fiveStar / $countReview) * 100, 0 );
 } else {
     $avgStar = 0;
     $percentAvgStar = 0;
