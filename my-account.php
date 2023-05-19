@@ -8,6 +8,21 @@ $view->loadContent('include', 'tail');
 ?>
 
 <script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var div_id = $(input).attr('set-to');
+            reader.onload = function(e) {
+                $('#' + div_id).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".default").change(function() {
+        readURL(this);
+    });
+
     var order_id = 0;
     $('.view-detail').click(function(e) {
         e.preventDefault();
@@ -72,43 +87,42 @@ $view->loadContent('include', 'tail');
         $('#backdrop').removeClass('backdrop');
     });
 
-    $('#submit-info-customer').click(function(e) {
-        e.preventDefault();
-        console.log("click submit info customer");
-        $.ajax({
-            url: 'app/Handle/updateInfoCustomer.php',
-            type: 'POST',
-            data: {
-                customer_name: $('.customer_name').val(),
-                customer_phone: $('.customer_phone').val(),
-                customer_address: $('.customer_address').val(),
-                customer_pass_current: $('.customer_pass_current').val(),
-                customer_npass: $('.customer_npass').val(),
-                customer_cpass: $('.customer_cpass').val(),
-            },
-            dataType: 'json',
-            success: function(data) {
-                if (data.type == "no_name") warning_toast("Vui lòng nhập tên!", "Thông báo");
-                else if (data.type == "no_phone") warning_toast("Vui lòng nhập số điện thoại!", "Thông báo");
-                else if (data.type == "no_address") warning_toast("Vui lòng nhập địa chỉ!", "Thông báo");
-                else if (data.type == "no_pass_current") warning_toast("Vui lòng nhập mật khẩu cũ!", "Thông báo");
-                else if (data.type == "no_match_pass_current") warning_toast("Mật khẩu cũ không khớp!", "Thông báo");
-                else if (data.type == "no_npass") warning_toast("Vui lòng nhập mật khẩu mới!", "Thông báo");
-                else if (data.type == "no_cpass") warning_toast("Vui lòng nhập lại mật khẩu mới!", "Thông báo");
-                else if (data.type == "no_match") warning_toast("Mật khẩu không khớp!", "Thông báo");
-                else if (data.type == "success_info") {
-                    success_toast("Cập nhật thông tin thành công!", "Thông báo");
-                    $('#customer_name_status').html(data.name);
-                    $('#customer_name_top').html(data.name);
-                } else if (data.type == "success_password") {
-                    success_toast("Cập nhật thông tin & mật khẩu thành công!", "Thông báo");
-                    $('#customer_name_status').html(data.name);
-                    $('#customer_name_top').html(data.name);
-                    $('.customer_pass_current').val(data.pass);
-                    $('.customer_npass').val("");
-                    $('.customer_cpass').val("");
-                } else if (data.type == "error") warning_toast("Cập nhật thông tin thất bại!", "Thông báo");
-            }
-        })
+    $(".customer_image").change(function(e) {
+        var file = this.files[0];
+        var imagefile = file.type;
+        var match = ["image/jpeg", "image/png", "image/jpg"];
+        if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
+            warning_toast("Vui lòng chọn file với định dạng JPEG/JPG/PNG", "LỖI");
+            $(".customer_image").val('');
+            return false;
+        } else if (file.size > 2000000) {
+            warning_toast("Ảnh quá lớn. Vui lòng chọn ảnh khác", "LỖI");
+            $(".customer_image").val('');
+            return false;
+        }
+    });
+    $(document).ready(function(e) {
+        $('#fupForm').on('submit', function(e) {
+            e.preventDefault();
+            console.log("click submit info customer");
+            $.ajax({
+                type: 'POST',
+                url: 'app/Handle/updateInfoCustomer.php',
+                data: new FormData(this),
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    if (data.type == "error") {
+                        warning_toast(data.message, data.title);
+                    } else {
+                        success_toast(data.message, data.title);
+                        $('#customer_name_status').html(data.name);
+                        $('.customer_name_top').html(data.name);
+                    }
+                }
+            })
+        });
     });
 </script>

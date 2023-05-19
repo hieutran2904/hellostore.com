@@ -4,106 +4,72 @@ include '../../config/site.php';
 $eloquent = new Eloquent();
 $arr = array();
 
-$name = $_POST['customer_name'];
-$phone = $_POST['customer_phone'];
-$address = $_POST['customer_address'];
-$pass_current = $_POST['customer_pass_current'];
-$npass = $_POST['customer_npass'];
-$cpass = $_POST['customer_cpass'];
-
-if ($name == "") {
-    $arr = ["type" => "no_name"];
-    echo json_encode($arr);
-    exit();
-} else if ($phone == "") {
-    $arr = ["type" => "no_phone"];
-    echo json_encode($arr);
-    exit();
-} else if ($address == "") {
-    $arr = ["type" => "no_address"];
-    echo json_encode($arr);
-    exit();
+$name = $_POST['dname'];
+$phone = $_POST['dphone'];
+$address = $_POST['address'];
+$typefile = explode('.', $_FILES['customer_image']['name']);
+$filename = "customer_" . date("YmdHis") . "." . end($typefile);
+// echo $_FILES['customer_image']['tmp_name'];
+// echo "<br>";
+// echo  $_SERVER['DOCUMENT_ROOT'] . '/' . $GLOBALS['CUSTOMER_DIRECTORY'] . $filename;
+// die();
+if ($_FILES['customer_image']['name'] == "") {
+    // echo "ko insert ảnh";
+    $data = [
+        'customer_name' => $name,
+        'customer_mobile' => $phone,
+        'customer_address' => $address,
+        'updated_at' => date("Y-m-d H:i:s")
+    ];
+} else {
+    // echo "thuc hien insert";
+    $data = [
+        'customer_name' => $name,
+        'customer_mobile' => $phone,
+        'customer_address' => $address,
+        'customer_image' => $filename,
+        'updated_at' => date("Y-m-d H:i:s")
+    ];
 }
-
-if ($npass == "" && $cpass == "") {
+$tableName = "customers";
+// $data = [
+//     'customer_name' => $name,
+//     'customer_mobile' => $phone,
+//     'customer_address' => $address,
+//     'customer_image' => $filename,
+//     'updated_at' => date("Y-m-d H:i:s")
+// ];
+$whereValue = [
+    'id' => $_SESSION['SSCF_login_id']
+];
+$updateCustomer = $eloquent->updateData($tableName, $data, $whereValue);
+if ($updateCustomer > 0) {
+    // if ($_FILES['customer_image']['name'] != "" || $_SESSION['SSCF_login_user_image'] != "no-image.png") {
+    //     unlink("../../" . $GLOBALS['CUSTOMER_DIRECTORY'] . $_SESSION['SSCF_login_user_image']);
+    // }
+    if ($_FILES['customer_image']['name'] != "") {
+        if ($_SESSION['SSCF_login_user_image'] != "no-image.png")
+            unlink("../../" . $GLOBALS['CUSTOMER_DIRECTORY'] . $_SESSION['SSCF_login_user_image']);
+        $_SESSION['SSCF_login_user_image'] = $filename;
+    }
     $_SESSION['SSCF_login_user_name'] = $name;
     $_SESSION['SSCF_login_user_mobile'] = $phone;
     $_SESSION['SSCF_login_user_address'] = $address;
-
-    $tableName = "customers";
-    $columnValue = [
-        "customer_name" => $_SESSION['SSCF_login_user_name'],
-        "customer_mobile" => $_SESSION['SSCF_login_user_mobile'],
-        "customer_address" => $_SESSION['SSCF_login_user_address'],
-        "updated_at" => date("Y-m-d H:i:s")
+    move_uploaded_file($_FILES['customer_image']['tmp_name'], "../../" . $GLOBALS['CUSTOMER_DIRECTORY'] . $filename);
+    $arr = [
+        'type' => 'success',
+        'title' => 'THÀNH CÔNG',
+        'message' => 'Cập nhật thông tin thành công!',
+        'name' => $name,
+        'image' => $filename,
+        'image_path' => $GLOBALS['CUSTOMER_DIRECTORY'] . $filename,
     ];
-    $whereValue = [
-        "id" => $_SESSION['SSCF_login_id']
-    ];
-    $updateCustomer = $eloquent->updateData($tableName, $columnValue, $whereValue);
-    if ($updateCustomer > 0) {
-        $arr = [
-            "type" => "success_info",
-            "name" => $_SESSION['SSCF_login_user_name'],
-        ];
-        echo json_encode($arr);
-        exit();
-    } else {
-        $arr = ["type" => "error"];
-        echo json_encode($arr);
-        exit();
-    }
+    echo json_encode($arr);
 } else {
-    if ($pass_current == "") {
-        $arr = ["type" => "no_pass_current"];
-        echo json_encode($arr);
-        exit();
-    } else if ($pass_current != $_SESSION['SSCF_login_user_password']) {
-        $arr = ["type" => "no_match_pass_current"];
-        echo json_encode($arr);
-        exit();
-    } else if ($npass == "") {
-        $arr = ["type" => "no_npass"];
-        echo json_encode($arr);
-        exit();
-    } else if ($cpass == "") {
-        $arr = ["type" => "no_cpass"];
-        echo json_encode($arr);
-        exit();
-    } else if ($npass != $cpass) {
-        $arr = ["type" => "no_match"];
-        echo json_encode($arr);
-        exit();
-    } else {
-        $_SESSION['SSCF_login_user_name'] = $name;
-        $_SESSION['SSCF_login_user_password'] = $npass;
-        $_SESSION['SSCF_login_user_mobile'] = $phone;
-        $_SESSION['SSCF_login_user_address'] = $address;
-
-        $tableName = "customers";
-        $columnValue = [
-            "customer_name" => $_SESSION['SSCF_login_user_name'],
-            "customer_password" => sha1($_SESSION['SSCF_login_user_password']),
-            "customer_mobile" => $_SESSION['SSCF_login_user_mobile'],
-            "customer_address" => $_SESSION['SSCF_login_user_address'],
-            "updated_at" => date("Y-m-d H:i:s")
-        ];
-        $whereValue = [
-            "id" => $_SESSION['SSCF_login_id']
-        ];
-        $updateCustomer = $eloquent->updateData($tableName, $columnValue, $whereValue);
-        if ($updateCustomer > 0) {
-            $arr = [
-                "type" => "success_password",
-                "name" => $_SESSION['SSCF_login_user_name'],
-                "pass" => $_SESSION['SSCF_login_user_password'],
-            ];
-            echo json_encode($arr);
-            exit();
-        } else {
-            $arr = ["type" => "error"];
-            echo json_encode($arr);
-            exit();
-        }
-    }
+    $arr = [
+        'type' => 'error',
+        'title' => 'CẢNH BÁO',
+        'message' => 'Cập nhật thông tin thất bại!'
+    ];
+    echo json_encode($arr);
 }

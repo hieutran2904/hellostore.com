@@ -17,6 +17,7 @@ if (isset($_POST['user_login'])) {
         $_SESSION['SSCF_login_time'] = date("Y-m-d H:i:s");
         $_SESSION['SSCF_login_id'] = $userLogin[0]['id'];
         $_SESSION['SSCF_login_user_name'] = $userLogin[0]['customer_name'];
+        $_SESSION['SSCF_login_user_image'] = $userLogin[0]['customer_image'];
         $_SESSION['SSCF_login_user_email'] = $userLogin[0]['customer_email'];
         $_SESSION['SSCF_login_user_password'] = $_POST['user_pass'];
         $_SESSION['SSCF_login_user_mobile'] = $userLogin[0]['customer_mobile'];

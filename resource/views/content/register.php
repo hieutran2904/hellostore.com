@@ -9,7 +9,8 @@ if (isset($_POST['userRegistration'])) {
         'customer_password' => sha1($_POST['password']),
         'customer_mobile' => trim($_POST['phone']),
         'customer_address' => trim($_POST['address']),
-        'created_at' => date('Y-m-d H:i:s')
+        'created_at' => date('Y-m-d H:i:s'),
+        'customer_image' => 'no-image.png'
     ];
     if ($_POST['password'] != $_POST['password-confirm']) {
         $_SESSION['confirm-password'] = '<div class="alert alert-danger">⚠ Mật khẩu không khớp. Vui lòng nhập lại!</div>';

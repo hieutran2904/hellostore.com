@@ -85,7 +85,7 @@
                                 <li>
                                     <?php
                                     if (isset($_SESSION['SSCF_login_id'])) {
-                                        echo '<i class="fi-rs-user"></i><a href="my-account.php">' . $_SESSION['SSCF_login_user_name'] . '</a>';
+                                        echo '<i class="fi-rs-user"></i><a href="my-account.php" class="customer_name_top">' . $_SESSION['SSCF_login_user_name'] . '</a>';
                                         echo '<span>/</span>';
                                         echo '<a href="?exit=yes">Đăng xuất</a>';
                                     } else {
@@ -115,7 +115,7 @@
                         </div>
                         <div class="header-action-right">
                             <p><span>Xin Chào</span>
-                                <span id="customer_name_top">
+                                <span class="customer_name_top">
                                     <?php
                                     if (@$_SESSION['SSCF_login_id'] > 0) {
                                         echo '<b>' . @$_SESSION['SSCF_login_user_name'] . '</b>';
