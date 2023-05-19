@@ -125,4 +125,30 @@ $view->loadContent('include', 'tail');
             })
         });
     });
+
+    //change password
+    $('#submit-change-password').click(function(e) {
+        e.preventDefault();
+        console.log("click submit change password");
+        $.ajax({
+            type: 'POST',
+            url: 'app/Handle/changePassword.php',
+            data: {
+                old_password: $('.customer_pass_current').val(),
+                new_password: $('.customer_npass').val(),
+                confirm_password: $('.customer_cpass').val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.type == "error") {
+                    warning_toast(data.message, data.title);
+                } else {
+                    success_toast(data.message, data.title);
+                    $('.customer_pass_current').val(data.password);
+                    $('.customer_npass').val('');
+                    $('.customer_cpass').val('');
+                }
+            }
+        })
+    });
 </script>
