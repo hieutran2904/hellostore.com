@@ -9,7 +9,7 @@ $eloquent = new Eloquent();
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
-$whereValue = [];
+$whereValue = ['product_type' => 'Active'];
 $inColumn = [];
 $inValue = [];
 $formatByGroup = [];
@@ -27,6 +27,12 @@ $productList = $eloquent->selectData($columnName, $tableName, $whereValue, $inCo
 // líst danh muc pho bien
 $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 6]);
 //print_r($subCategoryList);
+
+//list product pho bien
+$productListPopular = $eloquent->selectProductPopular();
+
+//list product moi nhat
+$productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'Active'], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 8]);
 
 ?>
 <main class="main">
@@ -148,7 +154,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                 <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3, ['hot' => 'hot']);
+                        $homeController->productLister($productListPopular, $col = 3, ['hot' => 'hot']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -157,7 +163,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                 <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3, ['new' => 'new']);
+                        $homeController->productLister($productListNew, $col = 3, ['new' => 'new']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -202,7 +208,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
             </div>
         </div>
     </section>
-    <section class="banners mb-15">
+    <!-- <section class="banners mb-15">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -237,7 +243,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <section class="section-padding">
         <div class="container wow fadeIn animated">
             <h3 class="section-title mb-20"><span>Sản Phẩm</span> Nổi Bật</h3>
@@ -245,7 +251,7 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
                 <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
                     <?php
-                    foreach ($productList as $eachProduct) {
+                    foreach ($productListPopular as $eachProduct) {
                         $imageProductDefault = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_master_image'];
                         $imageProductHover = $GLOBALS['PRODUCT_DIRECTORY'] . $eachProduct['product_image_one'];
                     ?>
@@ -257,22 +263,12 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
                                         <img class="hover-img w-100 h-100" src="<?= $imageProductHover ?>" alt="">
                                     </a>
                                 </div>
-                                <!-- <div class="product-action-1">
-                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                        <i class="fi-rs-eye"></i></a>
-                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                </div> -->
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
                                 </div>
                             </div>
                             <div class="product-content-wrap">
                                 <h2><a href="product-detail.php?id=<?= $eachProduct['id'] ?>"><?= $eachProduct['product_name'] ?></a></h2>
-                                <!-- <div class="rating-result" title="90%">
-                                    <span>
-                                    </span>
-                                </div> -->
                                 <div class="product-price mt-5">
                                     <span><?= number_format($eachProduct['product_price'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
                                     <span class="old-price"><?= number_format($eachProduct['product_price'] *= 1.1, 0, ",", ".") . $GLOBALS['CURRENCY'] ?></span>
@@ -286,37 +282,4 @@ $subCategoryList = $eloquent->selectData(['*'], 'subcategories', [], [], [], [],
             </div>
         </div>
     </section>
-
-    <section class="section-padding">
-        <div class="container">
-            <h3 class="section-title mb-20 wow fadeIn animated"><span>Featured</span> Brands</h3>
-            <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
-                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-3-arrows"></div>
-                <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-1.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-2.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-3.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-4.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-5.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-6.png" alt="">
-                    </div>
-                    <div class="brand-logo">
-                        <img class="img-grey-hover" src="public/assets/imgs/banner/brand-3.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 </main>

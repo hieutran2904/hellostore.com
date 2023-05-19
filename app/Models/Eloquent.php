@@ -266,4 +266,25 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    //SELECT PRODUCT POPULAR
+    public function selectProductPopular()
+    {
+        try {
+            $sql = "SELECT `products`.`id`, `product_name`, `products`.`product_price`, `virtual_price`, `product_master_image`, `product_image_one`, 
+            COUNT(`order_items`.`id`) AS `qty` 
+            FROM `products`
+            LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
+            LEFT JOIN `order_items` ON `order_items`.`product_sc_id` = `products_sc`.`id`
+            GROUP BY `products`.`id`, `product_name`, `products`.`product_price`, `virtual_price`, `product_master_image`, `product_image_one` 
+            ORDER BY `qty` DESC
+            LIMIT 0, 8";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
