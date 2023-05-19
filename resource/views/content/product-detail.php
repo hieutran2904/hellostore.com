@@ -59,11 +59,11 @@ if ($reviewProductList != []) {
     }
     $avgStar = round($totalStar / $countReview, 1);
     $percentAvgStar = ($avgStar / 5) * 100;
-    $percentAvgOneStar = round(($oneStar / $countReview) * 100, 0 );
-    $percentAvgTwoStar = round(($twoStar / $countReview) * 100, 0 );
-    $percentAvgThreeStar = round(($threeStar / $countReview) * 100, 0 );
-    $percentAvgFourStar = round(($fourStar / $countReview) * 100, 0 );
-    $percentAvgFiveStar = round(($fiveStar / $countReview) * 100, 0 );
+    $percentAvgOneStar = round(($oneStar / $countReview) * 100, 0);
+    $percentAvgTwoStar = round(($twoStar / $countReview) * 100, 0);
+    $percentAvgThreeStar = round(($threeStar / $countReview) * 100, 0);
+    $percentAvgFourStar = round(($fourStar / $countReview) * 100, 0);
+    $percentAvgFiveStar = round(($fiveStar / $countReview) * 100, 0);
 } else {
     $avgStar = 0;
     $percentAvgStar = 0;
@@ -339,9 +339,9 @@ if ($reviewProductList != []) {
                                                             <div class="single-comment justify-content-between d-flex">
                                                                 <div class="user justify-content-between d-flex col-lg-12">
                                                                     <div class="thumb text-center col-md-3">
-                                                                        <!-- <img src="public/assets/imgs/page/avatar-6.jpg" alt=""> -->
+                                                                        <img src="<?= $eachReview['customer_image'] == "no-image.png" ? $GLOBALS['NO_IMAGE'] : $GLOBALS['CUSTOMER_DIRECTORY'] . $eachReview['customer_image'] ?>" alt="">
                                                                         <h5><a href="#" class="text-brand"><?= $eachReview['customer_name'] ?></a></h5>
-                                                                        <!-- <p class="font-xxs">Since 2012</p> -->
+                                                                        <!-- <p class="font-xxs"><?= $eachReview['customer_name'] ?></p> -->
                                                                     </div>
                                                                     <div class="desc col-md-9">
                                                                         <div class="product-rate d-inline-block">

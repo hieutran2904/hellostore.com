@@ -252,7 +252,7 @@ class Eloquent
     public function selectReviewProduct($idProduct)
     {
         try {
-            $sql = "SELECT `products`.`id`, `customer_name`, `review_details`, `rating`, `reviews`.`created_at`, `reviews`.`updated_at`
+            $sql = "SELECT `products`.`id`, `customer_name`, `customer_image`, `review_details`, `rating`, `reviews`.`created_at`, `reviews`.`updated_at`
             from `products`
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
             LEFT JOIN `reviews` ON `products_sc`.`id` = `reviews`.`product_sc_id`
