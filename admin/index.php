@@ -1,5 +1,5 @@
 <?php
-include 'app/Controllers/View.php';
-$view = new View();
-$view->loadContent('content', 'login');
+include("app/Controllers/View.php");
+$view = new View;
+$view->loadContent("content", "login");
 ?>
