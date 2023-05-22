@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/ProductController.php");
+    $productController = new ProductController;
+    $eloquent = new Eloquent;
+    $productList = $eloquent->selectProduct();
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -45,60 +51,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <td><img style="width: 80px;" class="img-fluid rounded mx-auto d-block" src="public/images/member/1.jpg" alt="#"></td>
-                                        <td>Áo Thun VietNamese</td>
-                                        <td>219.000đ</td>
-                                        <td>Áo t-shirt</td>
-                                        <td>
-                                            <span class="text-warning">Inactive</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-success">Yes</span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-info mb-1" href="product-detail.php?id=1" data-toggle="tooltip" data-placement="top" title="View Detail">
-                                                    <i class="fa fa-eye color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-primary mb-1" href="manage-product.php?id=1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>321</td>
-                                        <td><img style="width: 80px;" class="img-fluid rounded mx-auto d-block" src="public/images/member/2.jpg" alt="#"></td>
-                                        <td>Áo Thun Cooler</td>
-                                        <td>219.000đ</td>
-                                        <td>Áo t-shirt</td>
-                                        <td>
-                                            <span class="text-success">Active</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-success">Yes</span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-info mb-1" href="product-detail.php?id=1" data-toggle="tooltip" data-placement="top" title="View Detail">
-                                                    <i class="fa fa-eye color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-primary mb-1" href="manage-product.php?id=2" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <!-- show data -->
+                                    <?php
+                                        $productController->ProductList($productList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

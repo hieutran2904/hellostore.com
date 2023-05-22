@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/CustomerController.php");
+    $customerController = new CustomerController;
+    $eloquent = new Eloquent;
+    $customerList = $eloquent->selectData(['*'],'customers');
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -39,28 +45,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <td><img style="width: 80px;" class="img-fluid rounded" src="public/images/member/1.jpg" alt="#"></td>
-                                        <td>Tran Trung Hieu</td>
-                                        <td>hihi@gmail.com</td>
-                                        <td>099988899</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn mb-1 btn-rounded btn-info" href="#" title="Featured">
-                                                    Active
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary" href="manage-customer.php" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $customerController->CustomerList($customerList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/ReviewController.php");
+    $reviewController = new ReviewController;
+    $eloquent = new Eloquent;
+    $reviewList = $eloquent->selectReview();
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -40,22 +46,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>Trần Trung Hiếu</td>
-                                        <td>Áo Thun VietNamese</td>
-                                        <td>cyan, XL</td>
-                                        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum alias unde nam commodi amet adipisci ducimus aspernatur, eum tenetur accusamus ea saepe reprehenderit perspiciatis enim quidem soluta dignissimos autem quasi.</td>
-                                        <td>5</td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <a class="btn btn-primary mb-1" href="" data-toggle="tooltip" data-placement="top" title="Change">
-                                                <!-- <i class="fa fa-pencil color-muted"></i> -->
-                                                Active
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $reviewController->ReviewList($reviewList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

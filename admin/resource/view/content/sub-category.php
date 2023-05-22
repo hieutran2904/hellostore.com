@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/SubCategoryController.php");
+    $subCategoryController = new SubCategoryController;
+    $eloquent = new Eloquent;
+    $categoryList = $eloquent->selectSubCategory();
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -43,30 +49,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <td><img style="width: 80px;" class="img-fluid rounded" src="public/images/member/1.jpg" alt="#"></td>
-                                        <td>Áo T-shirt</td>
-                                        <td>Áo Nam</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn mb-1 btn-rounded btn-info" href="#" title="Featured">
-                                                    Active
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary" href="manage-subcategory.php" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <!-- show data -->
+                                    <?php
+                                        $subCategoryController->SubCategoryList($categoryList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

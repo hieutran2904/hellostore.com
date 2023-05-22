@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/CategoryController.php");
+    $categoryController = new CategoryController;
+    $eloquent = new Eloquent;
+    $categoryList = $eloquent->selectData(['*'],'categories');
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -41,29 +47,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>123</td>
-                                        <!-- <td><img style="width: 80px;" class="img-fluid rounded" src="public/images/member/1.jpg" alt="#"></td> -->
-                                        <td>Áo Nam</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn mb-1 btn-rounded btn-info" href="#" title="Featured">
-                                                    Active
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary" href="manage-category.php" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <!-- show data -->
+                                    <?php
+                                        $categoryController->CategoryList($categoryList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

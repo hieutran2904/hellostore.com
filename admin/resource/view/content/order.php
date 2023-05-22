@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/OrderController.php");
+    $orderController = new OrderController;
+    $eloquent = new Eloquent;
+    $orderList = $eloquent->selectOrder();
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -9,7 +15,7 @@
                     <a href="dashbroad.php">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="javascript:void(0)">Order</a>
+                    <a href="#">Order</a>
                 </li>
             </ol>
         </div>
@@ -42,29 +48,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Trần Trung Hiếu</td>
-                                        <td>2023/01/15</td>
-                                        <td>323.000đ</td>
-                                        <td>0đ</td>
-                                        <td>50.000đ</td>
-                                        <td>450.000đ</td>
-                                        <td>
-                                            <span class="text-warning">VNPAY</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-success">Paid</span>
-                                        </td>
-                                        <td>
-                                            <span class="text-success">Pending</span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary mb-1" href="edit-order.php?id=2" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="fa fa-pencil color-muted"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $orderController->OrderList($orderList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

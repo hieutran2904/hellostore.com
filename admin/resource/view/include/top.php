@@ -27,6 +27,10 @@
 </head>
 
 <body>
+    <?php
+    include 'app/Controllers/Controller.php';
+    include 'app/Models/Eloquent.php';
+    ?>
 
     <!--*******************
         Preloader start
