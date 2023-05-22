@@ -257,7 +257,7 @@ class Eloquent
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
             LEFT JOIN `reviews` ON `products_sc`.`id` = `reviews`.`product_sc_id`
             LEFT JOIN `customers` ON `reviews`.`customer_id` = `customers`.`id`
-            WHERE `customer_name` IS NOT NULL AND `products`.`id` = " . $idProduct;
+            WHERE `customer_name` IS NOT NULL AND `review_status` = 'Active' AND `products`.`id` = " . $idProduct;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
