@@ -240,7 +240,8 @@ class Eloquent
     public function selectReview()
     {
         try {
-            $sql = "SELECT *, `reviews`.`created_at` as `review_created_at`, `reviews`.`updated_at` as `review_updated_at`
+            $sql = "SELECT `customer_name`, `product_name`,`product_size`, `product_color`, `reviews`.`created_at` as `review_created_at`, `reviews`.`updated_at` as `review_updated_at`,
+            `review_details`, `rating`, `reviews`.`id` as `idReview`, `reviews`.`order_id` as `idOrderReview`, `review_status`
             FROM `reviews`
             LEFT JOIN `customers` ON `customers`.`id` = `reviews`.`customer_id`
             LEFT JOIN `products_sc` ON `products_sc`.`id` = `reviews`.`product_sc_id`

@@ -23,6 +23,7 @@
     <link href="public/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link href="public/plugins/summernote/dist/summernote.css" rel="stylesheet">
     <link href="public/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="public/plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link href="public/css/style.css" rel="stylesheet">
 </head>
 

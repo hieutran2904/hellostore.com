@@ -22,13 +22,13 @@ class ProductController extends Controller
                         <?= $eachProduct['product_featured'] ?>
                     </span>
                 </td>
-                <td><?= $eachProduct['product_created_at'] ?></td>
+                <td><?= $eachProduct['created_at'] ?></td>
                 <td>
                     <span>
-                        <a class="btn btn-info mb-1" href="product-detail.php?id=1" data-toggle="tooltip" data-placement="top" title="View Detail">
+                        <a class="btn btn-info mb-1" href="product-detail.php?id=<?= $eachProduct['id'] ?>" data-toggle="tooltip" data-placement="top" title="View Detail">
                             <i class="fa fa-eye color-muted"></i>
                         </a>
-                        <a class="btn btn-primary mb-1" href="manage-product.php?id=1" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <a class="btn btn-primary mb-1" href="manage-product.php?id=<?= $eachProduct['id'] ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil color-muted"></i>
                         </a>
                         <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">

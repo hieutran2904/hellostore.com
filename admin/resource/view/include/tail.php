@@ -5,6 +5,7 @@
     <div class="copyright">
         <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
     </div>
+    <div class="notification"></div>
 </div>
 <!--**********************************
             Footer end
@@ -54,6 +55,12 @@
 <script src="public/plugins/summernote/dist/summernote-init.js"></script>
 
 <script src="public/plugins/select2/js/select2.js"></script>
+
+<!-- Toastr -->
+<script src="public/plugins/toastr/js/toastr.min.js"></script>
+<script src="public/plugins/toastr/js/toastr.init.js"></script>
+
+<script src="public/js/main.js"></script>
 
 </body>
 

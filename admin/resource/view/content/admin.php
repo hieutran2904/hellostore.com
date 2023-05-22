@@ -46,10 +46,8 @@
                                         <!-- <td><img style="width: 80px;" class="img-fluid rounded" src="public/images/member/1.jpg" alt="#"></td> -->
                                         <td>Hieu Tran</td>
                                         <td>
-                                            <span>
-                                                <a class="btn mb-1 btn-rounded btn-info" href="#" title="Featured">
-                                                    Active
-                                                </a>
+                                            <span class="text-success">
+                                                Active
                                             </span>
                                         </td>
                                         <td>2023/01/15</td>

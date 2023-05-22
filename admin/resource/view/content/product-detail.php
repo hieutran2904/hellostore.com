@@ -1,3 +1,13 @@
+<?php
+    include("app/Controllers/ProductDetailController.php");
+    $productDetailController = new ProductDetailController;
+    $eloquent = new Eloquent;
+    $productDetailList = $eloquent->selectData(['*'],'products_sc', ['product_id' => $_GET['id']]);
+
+    //get name product
+    $productList = $eloquent->selectData(['product_name'],'products', ['id' => $_GET['id']]);
+    $productName = $productList[0]['product_name'];
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -12,7 +22,7 @@
                     <a href="product.php">Product</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="#">Áo Thun VietNamese</a>
+                    <a href="#" class="text-info"><?= $productName ?></a>
                 </li>
             </ol>
         </div>
@@ -46,46 +56,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>L</td>
-                                        <td>Yellow</td>
-                                        <td>0</td>
-                                        <td>
-                                            <span class="text-warning">Out of Stock</span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary mb-1" href="manage-product-detail.php?id=1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>XL</td>
-                                        <td>Yellow</td>
-                                        <td>120</td>
-                                        <td>
-                                            <span class="text-success">In Stock</span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                        $productDetailController->ProductDetailList($productDetailList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

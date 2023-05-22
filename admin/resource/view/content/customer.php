@@ -39,9 +39,8 @@
                                         <th>NAME</th>
                                         <th>EMAIL</th>
                                         <th>MOBILE</th>
-                                        <th>STATUS</th>
                                         <th>PUBLISHED ON</th>
-                                        <th>ACTION</th>
+                                        <th>STATUS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,9 +55,8 @@
                                         <th>NAME</th>
                                         <th>EMAIL</th>
                                         <th>MOBILE</th>
-                                        <th>STATUS</th>
                                         <th>PUBLISHED ON</th>
-                                        <th>ACTION</th>
+                                        <th>STATUS</th>
                                     </tr>
                                 </tfoot>
                             </table>
