@@ -30,6 +30,9 @@ class HomeController extends Controller
                         <form class="product-action-1 show">
                             <input type="hidden" id="cart_product_name_' . $eachProduct['id'] . '" value="' . $eachProduct['product_name'] . '"/>
                             <input type="hidden" id="qty_' . $eachProduct['id'] . '" value="1"/>
+                            <a href="product-detail.php?id=' . $eachProduct['id'] . '" aria-label="Mua ngay" class="action-btn hover-up">
+                                <i class="fi-rs-shopping-bag-add"></i>
+                            </a>
                         </form>
                     </div>
                 </div>

@@ -145,7 +145,7 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productList, $col = 3, ['best' => 'best sell']);
+                        $homeController->productLister($productList, $col = 3, ['hot' => 'hot']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
@@ -154,7 +154,7 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                 <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                     <div class="row product-grid-4">
                         <?php
-                        $homeController->productLister($productListPopular, $col = 3, ['hot' => 'hot']);
+                        $homeController->productLister($productListPopular, $col = 3, ['best' => 'best sell']);
                         ?>
                     </div>
                     <!--End product-grid-4-->
