@@ -8,7 +8,7 @@ class CustomerController extends Controller
 ?>
             <tr>
                 <td><?= $eachCustomer['id'] ?></td>
-                <td><img style="width: 80px;" class="img-fluid rounded" src="<?= $imageCustomer ?>" alt="#"></td>
+                <td><img style="width: 80px; height: 80px;" class="img-fluid rounded" src="<?= $imageCustomer ?>" alt="#"></td>
                 <td><?= $eachCustomer['customer_name'] ?></td>
                 <td><?= $eachCustomer['customer_email'] ?></td>
                 <td><?= $eachCustomer['customer_mobile'] ?></td>
