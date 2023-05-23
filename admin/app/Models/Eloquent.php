@@ -194,7 +194,8 @@ class Eloquent
         try {
             $sql = "SELECT `subcategories`.`id`, `subcategory_name`, `subcategory_banner`, `category_name`, `subcategory_status`, `subcategories`.`created_at`   
             FROM `subcategories` 
-            LEFT JOIN `categories` ON `subcategories`.`category_id` = `categories`.`id`";
+            LEFT JOIN `categories` ON `subcategories`.`category_id` = `categories`.`id`
+            ORDER BY `subcategories`.`id` DESC";
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -257,13 +258,10 @@ class Eloquent
     }
 
     // CHECK EXIST CATEGORY
-    public function checkExistData($tableName, $id, $categoryName)
+    public function checkExistData($tableName, $id, $columnName, $data)
     {
         try {
-
-
-
-            $sql = "SELECT * FROM `" . $tableName . "` WHERE is_delete = 0 AND `category_name` = '" . $categoryName . "'  AND `id` != " . $id;
+            $sql = "SELECT * FROM `" . $tableName . "` WHERE is_delete = '0' AND `" . $columnName . "` = '" . $data . "'  AND `id` != " . $id;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

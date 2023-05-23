@@ -28,7 +28,7 @@ if ($id == ''){
         $toastr->error_toast("Add category failed", "FAILED");
 } else {
     // update category
-    $checkCategory = $eloquent->checkExistData('categories', $id, $name);
+    $checkCategory = $eloquent->checkExistData('categories', $id, 'category_name', $name);
     if ($checkCategory){
         $toastr->error_toast("Category name already exists", "FAILED");
         exit();

@@ -1,3 +1,44 @@
+// show image when choose file
+$('#val-image').on('change', (e) => {
+    if(window.File && window.FileReader && window.FileList && window.Blob) {
+        const files = e.target.files;
+        console.log(files);
+        const output = document.querySelector('.result');
+        console.log(output);
+        output.innerHTML = '';
+        if (files.length == 1) {
+            if (!files[0].type.match('image')) return;
+            const picReader = new FileReader();
+            picReader.addEventListener('load', function(event){
+                const picFile = event.target;
+                console.log(picFile);
+                output.innerHTML += `<div class="col-md-12 text-center">
+                <img style="width: 50%; height: 250px; object-fit: cover;" class="img-fluid img-thumbnail rounded" src="${picFile.result}" alt="#">
+            </div>`;
+            });
+            picReader.readAsDataURL(files[0]);
+            return;
+        } else{
+        for (let i = 0; i < files.length; i++) {
+            if (i == 4) break;
+            console.log(files[i]);
+            if (!files[i].type.match('image')) continue;
+            const picReader = new FileReader();
+            picReader.addEventListener('load', function(event){
+                const picFile = event.target;
+                console.log(picFile);
+                output.innerHTML += `<div class="col-md-3">
+                <img style="width: 300px; height: 300px; object-fit: cover;" class="img-fluid img-thumbnail rounded" src="${picFile.result}" alt="#">
+            </div>`;
+            });
+            picReader.readAsDataURL(files[i]);
+        }
+    }
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+})
+
 $('.customerStatus').click(function(e) {
     e.preventDefault();
     const customerStatus = $(this).hasClass('btn-success') ? 'Inactive' : 'Active';
@@ -60,6 +101,22 @@ $('#submit-category').click(function(e) {
     })
 });
 
+$('#FormSubcategory').on('submit', function(e) {
+    e.preventDefault();
+    console.log("click submit info subcategory");
+    $.ajax({
+        type: 'POST',
+        url: 'app/Handle/subcategory.php',
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: (response) => {
+            $('.notification').html(response);
+        }
+    })
+});
+
 //delete category
 $('.sweet-confirm-custom').click(function(e) {
     e.preventDefault();
@@ -70,6 +127,10 @@ $('.sweet-confirm-custom').click(function(e) {
     if($('.sweet-confirm-custom').hasClass('sweet-confirm-category')){
         console.log('has class sweet-confirm-category');
         tableName = 'categories';
+    } else if($('.sweet-confirm-custom').hasClass('sweet-confirm-subcategory')){
+        console.log('has class sweet-confirm-subcategory');
+        console.log(id);
+        tableName = 'subcategories';
     }
 
     swal(

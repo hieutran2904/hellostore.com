@@ -2,7 +2,7 @@
     include("app/Controllers/CategoryController.php");
     $categoryController = new CategoryController;
     $eloquent = new Eloquent;
-    $categoryList = $eloquent->selectData(['*'],'categories');
+    $categoryList = $eloquent->selectData(['*'],'categories', [], [], [], [], ['DESC' => 'id']);
 ?>
 <!--**********************************
     Content body start
