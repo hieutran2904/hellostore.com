@@ -49,7 +49,7 @@
 <script src="public/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
 <script src="public/plugins/sweetalert/js/sweetalert.min.js"></script>
-<script src="public/plugins/sweetalert/js/sweetalert.init.js"></script>
+<!-- <script src="public/plugins/sweetalert/js/sweetalert.init.js"></script> -->
 
 <script src="public/plugins/summernote/dist/summernote.min.js"></script>
 <script src="public/plugins/summernote/dist/summernote-init.js"></script>

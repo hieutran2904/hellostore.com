@@ -255,4 +255,22 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    // CHECK EXIST CATEGORY
+    public function checkExistData($tableName, $id, $categoryName)
+    {
+        try {
+
+
+
+            $sql = "SELECT * FROM `" . $tableName . "` WHERE is_delete = 0 AND `category_name` = '" . $categoryName . "'  AND `id` != " . $id;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            if ($dataSelected != []) return true;
+            else return false;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

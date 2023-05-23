@@ -16,10 +16,10 @@ class CategoryController extends Controller
                 <td><?= $eachCategory['created_at'] ?></td>
                 <td>
                     <span>
-                        <a class="btn btn-primary" href="manage-category.php" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <a class="btn btn-primary" href="manage-category.php?id=<?= $eachCategory['id'] ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil color-muted"></i>
                         </a>
-                        <a class="btn btn-danger" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <a class="btn btn-danger sweet-confirm-custom sweet-confirm-category" href="#" data-itemid="<?= $eachCategory['id'] ?>" data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash color-danger"></i>
                         </a>
                     </span>
