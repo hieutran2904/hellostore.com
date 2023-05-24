@@ -164,3 +164,54 @@ $('.sweet-confirm-custom').click(function(e) {
         }
     );
 });
+
+// change category => subcategory
+$('#val-category').change(function(e) {
+    e.preventDefault();
+    const categoryId = $(this).val();
+    console.log(categoryId);
+    $.ajax({
+        url: 'app/handle/changeCategory.php',
+        data: { 
+            id: categoryId
+        },
+        method: 'post',
+        success: (response) => {
+            $('#val-sub-category').html(response);
+        }
+    })
+});
+
+// change size
+$('#choose-size').change(function(e) {
+    e.preventDefault();
+    const sizeId = $(this).val();
+    console.log(sizeId);
+    $('#val-size-render').val(sizeId);
+});
+
+// change color
+$('#choose-color').change(function(e) {
+    e.preventDefault();
+    const colorId = $(this).val();
+    console.log(colorId);
+    $('#val-color-render').val(colorId);
+});
+
+// handle form product
+$('#FormProduct').on('submit', function(e) {
+    e.preventDefault();
+    console.log("click submit info product");
+    $.ajax({
+        type: 'POST',
+        url: 'app/Handle/product.php',
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: (response) => {
+            $('.notification').html(response);
+            $('#val-product-name').val('');
+        }
+    })
+});
