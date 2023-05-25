@@ -193,11 +193,11 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                 <div class="carausel-6-columns" id="carausel-6-columns">
                     <?php
                     foreach ($subCategoryList as $eachSubCategory) {
-                        $imageSubCategory = $GLOBALS['PRODUCT_DIRECTORY'] . $eachSubCategory['subcategory_banner'];
+                        $imageSubCategory = $GLOBALS['BANNER_DIRECTORY'] . $eachSubCategory['subcategory_banner'];
                     ?>
                         <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><img src="<?= $imageSubCategory ?>" alt=""></a>
+                            <figure class="img-hover-scale overflow-hidden">
+                                <a style="width: 100%; height: 100px;" href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><img class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" src="<?= $imageSubCategory ?>" alt=""></a>
                             </figure>
                             <h5><a href="product-category.php?subCategoryId=<?= $eachSubCategory['id'] ?>"><?= $eachSubCategory['subcategory_name'] ?></a></h5>
                         </div>
