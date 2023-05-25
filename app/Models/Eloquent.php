@@ -220,7 +220,7 @@ class Eloquent
     public function selectProductColor($colorName, $paginate = ["START" => 0, "END" => 1000])
     {
         try {
-            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price` FROM `products` 
+            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price`, `virtual_price` FROM `products` 
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
             WHERE `product_color` = '" . $colorName . "' GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             $query = $this->connection->prepare($sql);
