@@ -131,6 +131,14 @@ $('.sweet-confirm-custom').click(function(e) {
         console.log('has class sweet-confirm-subcategory');
         console.log(id);
         tableName = 'subcategories';
+    } else if($('.sweet-confirm-custom').hasClass('sweet-confirm-product')){
+        console.log('has class sweet-confirm-product');
+        console.log(id);
+        tableName = 'products';
+    } else if ($('.sweet-confirm-custom').hasClass('sweet-confirm-product-detail')){
+        console.log('has class sweet-confirm-product-detail');
+        console.log(id);
+        tableName = 'products_sc';
     }
 
     swal(
@@ -212,6 +220,23 @@ $('#FormProduct').on('submit', function(e) {
         success: (response) => {
             $('.notification').html(response);
             $('#val-product-name').val('');
+        }
+    })
+});
+
+// handle form product detail
+$('#FormProductDetail').on('submit', function(e) {
+    e.preventDefault();
+    console.log("click submit info product detail");
+    $.ajax({
+        type: 'POST',
+        url: 'app/Handle/productDetail.php',
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: (response) => {
+            $('.notification').html(response);
         }
     })
 });

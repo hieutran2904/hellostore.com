@@ -212,7 +212,9 @@ class Eloquent
             $sql = "SELECT `products`.`id`, `product_master_image`, `product_name`, `product_price`, `product_type`, `product_featured`,
             `subcategory_name`, `products`.`created_at`
             FROM `products`
-            LEFT JOIN `subcategories` ON `subcategories`.`id` = `products`.`subcategory_id`";
+            LEFT JOIN `subcategories` ON `subcategories`.`id` = `products`.`subcategory_id`
+            WHERE `products`.`is_delete` = '0'
+            ORDER BY `products`.`id` DESC";
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

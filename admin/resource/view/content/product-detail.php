@@ -1,12 +1,16 @@
 <?php
-    include("app/Controllers/ProductDetailController.php");
-    $productDetailController = new ProductDetailController;
-    $eloquent = new Eloquent;
-    $productDetailList = $eloquent->selectData(['*'],'products_sc', ['product_id' => $_GET['id']]);
+include("app/Controllers/ProductDetailController.php");
+$productDetailController = new ProductDetailController;
+$eloquent = new Eloquent;
+$productDetailList = $eloquent->selectData(['*'], 'products_sc', ['product_id' => $_GET['id'], 'is_delete' => 0]);
 
-    //get name product
-    $productList = $eloquent->selectData(['product_name'],'products', ['id' => $_GET['id']]);
-    $productName = $productList[0]['product_name'];
+//get name product
+$productList = $eloquent->selectData(['*'], 'products', ['id' => $_GET['id']]);
+$productName = $productList[0]['product_name'];
+$productImage = $productList[0]['product_master_image'];
+$_SESSION['product_id'] = $_GET['id'];
+$_SESSION['product_name'] = $productName;
+$_SESSION['product_image'] = $productImage;
 ?>
 <!--**********************************
     Content body start
@@ -57,7 +61,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $productDetailController->ProductDetailList($productDetailList);
+                                    $productDetailController->ProductDetailList($productDetailList);
                                     ?>
                                 </tbody>
                                 <tfoot>

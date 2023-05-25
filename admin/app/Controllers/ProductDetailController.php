@@ -18,10 +18,10 @@ class ProductDetailController extends Controller
                 <td><?= $eachProductDetail['created_at'] ?></td>
                 <td>
                     <span>
-                        <a class="btn btn-primary mb-1" href="manage-product-detail.php?id=1" data-toggle="tooltip" data-placement="top" title="Edit">
+                        <a class="btn btn-primary mb-1" href="manage-product-detail.php?id=<?= $eachProductDetail['id'] ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil color-muted"></i>
                         </a>
-                        <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <a class="btn btn-danger mb-1 sweet-confirm-custom sweet-confirm-product-detail" href="#" data-itemid="<?= $eachProductDetail['id'] ?>" data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash color-danger"></i>
                         </a>
                     </span>

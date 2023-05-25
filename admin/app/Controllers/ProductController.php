@@ -31,7 +31,7 @@ class ProductController extends Controller
                         <a class="btn btn-primary mb-1" href="manage-product.php?id=<?= $eachProduct['id'] ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="fa fa-pencil color-muted"></i>
                         </a>
-                        <a class="btn btn-danger mb-1" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
+                        <a class="btn btn-danger mb-1 sweet-confirm-custom sweet-confirm-product" href="#" data-itemid="<?= $eachProduct['id'] ?>" data-toggle="tooltip" data-placement="top" title="Delete">
                             <i class="fa fa-trash color-danger"></i>
                         </a>
                     </span>

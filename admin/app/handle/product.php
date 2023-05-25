@@ -14,12 +14,7 @@ if ($_POST['val-category-id'] == '') {
     $toastr->error_toast("Subcategory is required", "FAILED");
     exit();
 }
-// $strSize = $_POST['val-size-render'];
-// $arrSize = explode(',', $strSize);
-// print_r($arrSize);
-// $strColor = $_POST['val-color-render'];
-// $arrColor = explode(',', $strColor);
-// print_r($arrColor);
+
 
 $str = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 $datetime = date('Y-m-d H:i:s');

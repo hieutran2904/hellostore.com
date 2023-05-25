@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../../config/database.php';
 include '../../config/site.php';
 include '../Models/Eloquent.php';
@@ -6,6 +7,8 @@ include '../Controllers/Controller.php';
 include '../Controllers/CategoryController.php';
 include '../Controllers/SubCategoryController.php';
 include '../Controllers/productController.php';
+include '../Controllers/ProductDetailController.php';
+
 
 
 $eloquent = new Eloquent();
@@ -34,11 +37,16 @@ if ($tableName == 'categories'){
     $subcategoryShow = new SubCategoryController();
     $subcategoryShow->SubCategoryList($subCategoryList);
 } else if ($tableName == 'products'){
-    $deleteData = $eloquent->deleteData($tableName, ['id' => $id]);
-    $productList = $eloquent->selectData(['*'], 'products', ['is_delete' => 0, 'product_status' => 'active']);
+    $deleteData = $eloquent->updateData($tableName, ['is_delete' => 1], ['id' => $id]);
+    $productList = $eloquent->selectProduct();
     $productShow = new ProductController();
     $productShow->ProductList($productList);
-}
+} else if ($tableName == 'products_sc'){
+    $deleteData = $eloquent->updateData($tableName, ['is_delete' => 1], ['id' => $id]);
+    $productSCList = $eloquent->selectData(['*'], 'products_sc', ['product_id' => $_SESSION['product_id'], 'is_delete' => 0]);
+    $productSCShow = new ProductDetailController();
+    $productSCShow->ProductDetailList($productSCList);
+} 
 
 ?>
 
