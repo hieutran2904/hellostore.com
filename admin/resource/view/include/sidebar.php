@@ -69,11 +69,11 @@
             <!-- End review -->
 
             <!-- Start slider -->
-            <li>
+            <!-- <li>
                 <a href="slides.php" aria-expanded="true">
                     <i class="icon-film menu-icon"></i><span class="nav-text">Slider</span>
                 </a>
-            </li>
+            </li> -->
             <!-- End slider -->
             
             <!-- Start Discount -->

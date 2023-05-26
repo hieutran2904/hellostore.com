@@ -139,6 +139,10 @@ $('.sweet-confirm-custom').click(function(e) {
         console.log('has class sweet-confirm-product-detail');
         console.log(id);
         tableName = 'products_sc';
+    } else if ($('.sweet-confirm-custom').hasClass('sweet-confirm-discount')){
+        console.log('has class sweet-confirm-discount');
+        console.log(id);
+        tableName = 'discounts';
     }
 
     swal(
@@ -252,6 +256,23 @@ $('#submit-order-detail').click(function(e) {
             status: $('#val-order').val()
         },
         method: 'post',
+        success: (response) => {
+            $('.notification').html(response);
+        }
+    })
+});
+
+//handle form discount
+$('#FormDiscount').on('submit', function(e) {
+    e.preventDefault();
+    console.log("click submit info discount");
+    $.ajax({
+        type: 'POST',
+        url: 'app/Handle/discount.php',
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
         success: (response) => {
             $('.notification').html(response);
         }

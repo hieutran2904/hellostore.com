@@ -36,23 +36,22 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
 
 ?>
 <main class="main">
-    <section class="home-slider position-_status pt-10">
+    <section class="home-slider position-_status">
         <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
             <div class="single-hero-slider single-animation-wrap">
                 <div class="container">
                     <div class="row align-items-center slider-animated-1">
                         <div class="col-lg-5 col-md-3">
                             <div class="hero-slider-content-2">
-                                <!-- <h4 class="animated">Trade-in offer</h4> -->
                                 <h2 class="animated fw-900">Siêu nhiều Voucher</h2>
                                 <h1 class="animated fw-900 text-brand">Dành cho tất cả sản phẩm</h1>
                                 <p class="animated">Giảm giá sản phẩm lên đến 50%</p>
                                 <a class="animated btn btn-brush btn-brush-3" href="product-category.php"> Mua Ngay </a>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-6">
+                        <div class="col-lg-7 col-md-9">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-1" src="public/uploads/banners/slider2.jpg" alt="">
+                                <img class="animated slider-1-1" src="public/uploads/slides/slides2.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -61,18 +60,18 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
             <div class="single-hero-slider single-animation-wrap">
                 <div class="container">
                     <div class="row align-items-center slider-animated-1">
-                        <div class="col-lg-5 col-md-6">
+                        <div class="col-lg-5 col-md-3">
                             <div class="hero-slider-content-2">
                                 <!-- <h4 class="animated">Hot promotions</h4> -->
                                 <h2 class="animated fw-900">Xu hướng thời trang</h2>
                                 <h1 class="animated fw-900 text-7">Bộ sưu tập đặc biệt</h1>
                                 <p class="animated">Chương trình khuyến mãi 4 mùa</p>
-                                <a class="animated btn btn-brush btn-brush-2" href="product-category.html"> Khám Phá Ngay </a>
+                                <a class="animated btn btn-brush btn-brush-2" href="product-category.php"> Khám Phá Ngay </a>
                             </div>
                         </div>
-                        <div class="col-lg-7 col-md-3">
+                        <div class="col-lg-7 col-md-9">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-2" src="public/uploads/banners/slider3.jpg" alt="">
+                                <img class="animated slider-1-2" src="public/uploads/slides/slides2.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -138,7 +137,7 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                         <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Mới</button>
                     </li>
                 </ul>
-                <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
+                <a href="product-category.php" class="view-more d-none d-md-flex">Xem thêm<i class="fi-rs-angle-double-small-right"></i></a>
             </div>
             <!--End nav-tabs-->
             <div class="tab-content wow fadeIn animated" id="myTabContent">
@@ -171,18 +170,6 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                 <!--En tab three (New added)-->
             </div>
             <!--End tab-content-->
-        </div>
-    </section>
-    <section class="banner-2 section-padding pb-0">
-        <div class="container">
-            <div class="banner-img banner-big wow fadeIn animated f-none">
-                <img src="public/assets/imgs/banner/banner-4.png" alt="">
-                <div class="banner-text d-md-block d-none">
-                    <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
-                    <h1 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h1>
-                    <a href="shop.html" class="btn">Learn More <i class="fi-rs-arrow-right"></i></a>
-                </div>
-            </div>
         </div>
     </section>
     <section class="popular-categories section-padding mt-15 mb-25">

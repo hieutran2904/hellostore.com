@@ -8,6 +8,7 @@ include '../Controllers/CategoryController.php';
 include '../Controllers/SubCategoryController.php';
 include '../Controllers/productController.php';
 include '../Controllers/ProductDetailController.php';
+include '../Controllers/DiscountController.php';
 
 
 
@@ -46,7 +47,12 @@ if ($tableName == 'categories'){
     $productSCList = $eloquent->selectData(['*'], 'products_sc', ['product_id' => $_SESSION['product_id'], 'is_delete' => 0]);
     $productSCShow = new ProductDetailController();
     $productSCShow->ProductDetailList($productSCList);
-} 
+} else if ($tableName == 'discounts'){
+    $deleteData = $eloquent->updateData($tableName, ['is_delete' => 1], ['id' => $id]);
+    $discountList = $eloquent->selectData(['*'], 'discounts', ['is_delete' => 0]);
+    $discountShow = new DiscountController();
+    $discountShow->DiscountList($discountList);
+}
 
 ?>
 

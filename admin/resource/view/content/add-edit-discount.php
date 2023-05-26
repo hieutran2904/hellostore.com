@@ -1,11 +1,31 @@
+<?php
+$eloquent = new Eloquent;
+if (isset($_GET['id'])) {
+    $typpForm = 'Edit Discount';
+    $discountItem = $eloquent->selectData(['*'], 'discounts', ['id' => $_GET['id'], 'is_delete' => '0']);
+    $discountItem = $discountItem[0];
+    $discountId = $discountItem['id'];
+    $discountCode = $discountItem['discount_code'];
+    $priceDiscountAmount = $discountItem['price_discount_amount'];
+    $quantity = $discountItem['quantity'];
+    $discountStatus = $discountItem['discount_status'];
+} else {
+    $typpForm = 'Add Discount';
+    $discountId = '';
+    $discountCode = '';
+    $priceDiscountAmount = '';
+    $quantity = '';
+    $discountStatus = '';
+}
+$arrStatus = ['Active', 'Inactive'];
+?>
 <div class="content-body">
-
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="discount.php">Discount</a></li>
-                <li class="breadcrumb-item active"><a href="manage-category.php">Add Category</a></li>
+                <li class="breadcrumb-item active"><a href="#"><?= $typpForm ?></a></li>
             </ol>
         </div>
     </div>
@@ -17,26 +37,30 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="#" method="post">
+                            <form id="FormDiscount" class="form-valide">
+                                <input type="hidden" name="val-discount-id" id="discountId" value="<?= $discountId ?>">
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-discount-code">Discount Code <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control" id="val-discount-code" name="val-discount-code" placeholder="Enter a discount code..">
+                                        <input required type="text" class="form-control" id="val-discount-code" name="val-discount-code" placeholder="Enter a discount code.."
+                                        value="<?= $discountCode ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-price-discount-amount">Price Discount Amount <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control" id="val-price-discount-amount" name="val-price-discount-amount" placeholder="Enter a price discount amount..">
+                                        <input required type="text" class="form-control" id="val-price-discount-amount" name="val-price-discount-amount" placeholder="Enter a price discount amount.."
+                                        value="<?= $priceDiscountAmount ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-discount-quantity">Discount Quantity <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control" id="val-discount-quantity" name="val-discount-quantity" placeholder="Enter a discount quantity..">
+                                        <input required type="text" class="form-control" id="val-discount-quantity" name="val-discount-quantity" placeholder="Enter a discount quantity.."
+                                        value="<?= $quantity ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -44,14 +68,21 @@
                                     </label>
                                     <div class="col-lg-9">
                                         <select class="form-control" id="val-status" name="val-status">
-                                            <option selected value="1">Active</option>
-                                            <option value="2">Inactive</option>
+                                            <?php
+                                            foreach ($arrStatus as $eachStatus) {
+                                                if ($eachStatus == $discountStatus) {
+                                                    echo '<option value="' . $eachStatus . '" selected>' . $eachStatus . '</option>';
+                                                } else {
+                                                    echo '<option value="' . $eachStatus . '">' . $eachStatus . '</option>';
+                                                }
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-lg-9 ml-auto">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="col-lg-12 ml-auto text-center">
+                                        <button class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </form>

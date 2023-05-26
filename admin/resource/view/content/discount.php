@@ -1,3 +1,9 @@
+<?php
+    include("app/Controllers/DiscountController.php");
+    $discountController = new DiscountController;
+    $eloquent = new Eloquent;
+    $discountList = $eloquent->selectData(['*'], 'discounts', ['is_delete' => '0']);
+?>
 <!--**********************************
     Content body start
 ***********************************-->
@@ -6,10 +12,10 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="dashboard.php">Dashboard</a>
+                    <a href="Dashboard.php">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <a href="javascript:void(0)">Discount</a>
+                    <a class="text-info" href="#">Discount</a>
                 </li>
             </ol>
         </div>
@@ -43,30 +49,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>hihi-giamgia</td>
-                                        <td>70000d</td>
-                                        <td>100</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn mb-1 btn-rounded btn-info" href="#" title="Featured">
-                                                    Active
-                                                </a>
-                                            </span>
-                                        </td>
-                                        <td>2023/01/15</td>
-                                        <td>
-                                            <span>
-                                                <a class="btn btn-primary" href="manage-discount.php?id=1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="fa fa-pencil color-muted"></i>
-                                                </a>
-                                                <a class="btn btn-danger" href="#" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                    <i class="fa fa-trash color-danger"></i>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                    <!-- show data -->
+                                    <?php
+                                        $discountController->DiscountList($discountList);
+                                    ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>

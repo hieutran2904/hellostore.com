@@ -8,9 +8,6 @@
                             <img class="icon-email" src="public/assets/imgs/theme/icons/icon-email.svg" alt="">
                             <h4 class="font-size-20 mb-0 ml-3">Đăng kí ngay để nhận các thông báo từ HelloStore's</h4>
                         </div>
-                        <div class="col my-4 my-md-0 des">
-                            <h5 class="font-size-15 ml-4 mb-0">...Nhận ngay <strong>25.000&#8363; cho đơn hàng đầu tiên</strong></h5>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
