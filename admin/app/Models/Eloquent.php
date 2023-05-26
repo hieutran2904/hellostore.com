@@ -195,6 +195,7 @@ class Eloquent
             $sql = "SELECT `subcategories`.`id`, `subcategory_name`, `subcategory_banner`, `category_name`, `subcategory_status`, `subcategories`.`created_at`   
             FROM `subcategories` 
             LEFT JOIN `categories` ON `subcategories`.`category_id` = `categories`.`id`
+            WHERE `subcategories`.`is_delete` = '0'
             ORDER BY `subcategories`.`id` DESC";
             $query = $this->connection->prepare($sql);
             $query->execute();
@@ -249,7 +250,7 @@ class Eloquent
             LEFT JOIN `customers` ON `customers`.`id` = `reviews`.`customer_id`
             LEFT JOIN `products_sc` ON `products_sc`.`id` = `reviews`.`product_sc_id`
             LEFT JOIN `products` ON `products`.`id` = `products_sc`.`product_id`
-            ORDER BY `reviews`.`created_at` DESC";
+            ORDER BY `reviews`.`updated_at` DESC";
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
