@@ -240,3 +240,20 @@ $('#FormProductDetail').on('submit', function(e) {
         }
     })
 });
+
+//handle form order
+$('#submit-order-detail').click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: 'app/handle/order.php',
+        data: { 
+            id: $('#val-order-id').val(),
+            transaction: $('#val-transaction').val(),
+            status: $('#val-order').val()
+        },
+        method: 'post',
+        success: (response) => {
+            $('.notification').html(response);
+        }
+    })
+});

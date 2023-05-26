@@ -229,8 +229,9 @@ class Eloquent
     public function selectOrder()
     {
         try {
-            $sql = "SELECT * FROM `orders`
-            LEFT JOIN `customers` ON `customers`.`id` = `orders`.`customer_id`";
+            $sql = "SELECT *, `orders`.`id` as `orderId` FROM `orders`
+            LEFT JOIN `customers` ON `customers`.`id` = `orders`.`customer_id`
+            ORDER BY `order_date` DESC";
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -270,6 +271,25 @@ class Eloquent
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
             if ($dataSelected != []) return true;
             else return false;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //Get Order Detail
+    public function getOrderDetail($id)
+    {
+        try {
+            $sql = "SELECT *, `order_items`.`product_quantity` as `quantity_order` FROM `orders`
+            LEFT JOIN `customers` ON `customers`.`id` = `orders`.`customer_id`
+            LEFT JOIN `order_items` ON `order_items`.`order_id` = `orders`.`id`
+            LEFT JOIN `products_sc` ON `products_sc`.`id` = `order_items`.`product_sc_id`
+            LEFT JOIN `products` ON `products`.`id` = `products_sc`.`product_id`
+            WHERE `orders`.`id` = ".$id;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

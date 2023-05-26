@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         'grand_total' => $_SESSION['priceTotal'],
         // 'payment_method' => 'COD',
         'transaction_id' => 'COD' . date('YmdHis'),
-        // 'transaction_status' => 'Unpaid',
+        'transaction_status' => 'Unpaid',
         'order_item_status' => 'Pending',
     ];
     $lastInsertOrderId = $eloquent->insertData($tableName, $dataOrders);

@@ -4,9 +4,13 @@ class OrderController extends Controller
     public function OrderList($orderList)
     {
         foreach ($orderList as $eachOrder) {
+            if ($eachOrder['order_item_status'] == 'Pending') $typeText = 'text-muted';
+            else if ($eachOrder['order_item_status'] == 'Processing') $typeText = 'text-info';
+            else if ($eachOrder['order_item_status'] == 'Completed') $typeText = 'text-success';
+            else $typeText = 'text-danger';
 ?>
             <tr>
-                <td><?= $eachOrder['id'] ?></td>
+                <td><?= $eachOrder['orderId'] ?></td>
                 <td><?= $eachOrder['customer_name'] ?></td>
                 <td><?= $eachOrder['order_date'] ?></td>
                 <td><?= number_format($eachOrder['sub_total'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?></td>
@@ -22,10 +26,10 @@ class OrderController extends Controller
                     </span>
                 </td>
                 <td>
-                    <span class="text-success">Pending</span>
+                    <span class="<?= $typeText ?>"><?= $eachOrder['order_item_status'] ?></span>
                 </td>
                 <td>
-                    <a class="btn btn-primary mb-1" href="edit-order.php?id=2" data-toggle="tooltip" data-placement="top" title="Edit">
+                    <a class="btn btn-primary" href="edit-order.php?id=<?= $eachOrder['orderId'] ?>" data-toggle="tooltip" data-placement="top" title="Edit">
                         <i class="fa fa-pencil color-muted"></i>
                     </a>
                 </td>
