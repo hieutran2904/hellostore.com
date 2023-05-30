@@ -278,3 +278,23 @@ $('#FormDiscount').on('submit', function(e) {
         }
     })
 });
+
+//handle form login
+$('.login-form__btn').click(function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: 'app/handle/login.php',
+        data: { 
+            email: $('#val-email').val(),
+            password: $('#val-password').val()
+        },
+        method: 'post',
+        // dataType: 'json',
+        success: (response) => {
+            if (response == 'dashboard.php') {  
+                window.location.href = response;
+            }
+            else $('.notification').html(response);
+        }
+    })
+});

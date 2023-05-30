@@ -13,11 +13,11 @@
             <!-- End dashboard -->
 
             <!-- Start admin -->
-            <li>
+            <!-- <li>
                 <a href="admin-account.php" aria-expanded="true">
                     <i class="icon-user menu-icon"></i><span class="nav-text">Admin Account</span>
                 </a>
-            </li>
+            </li> -->
             <!-- End admin -->
 
             <!-- Start customer -->
