@@ -58,7 +58,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="dashboard.php">
                     <b class="logo-abbr"><img src="images/small-logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="public/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
