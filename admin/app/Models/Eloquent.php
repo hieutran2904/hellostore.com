@@ -294,4 +294,55 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    //get data product for pie chart
+    public function getDataProductForPieChart()
+    {
+        try {
+            $sql = "SELECT `product_name`, SUM(`order_items`.`product_quantity`) as `total`  from `products`
+            LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
+            LEFT JOIN `order_items` ON `order_items`.`product_sc_id` = `products_sc`.`id`
+            WHERE `order_id` IS NOT null
+            GROUP BY `product_name`
+            ORDER BY `total` DESC";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //get data product for column chart
+    public function getDataProductForColumnChart()
+    {
+        try {
+            $sql = "SELECT `customer_name`, SUM(`transaction_amount`) AS `total` FROM `customers`
+            LEFT JOIN `invoices` ON `invoices`.`customer_id` = `customers`.`id`
+            GROUP BY `customer_name`
+            ORDER BY `total` DESC";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //get total item quantity product
+    public function getAllStatusOrder()
+    {
+        try {
+            $sql = "SELECT `order_item_status`, COUNT(`order_item_status`) as `total` FROM `orders`
+            GROUP BY `order_item_status`";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
