@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="form-validation">
                             <form class="form-valide">
-                                <input type="text" name="" id="val-category-id" value="<?= $id ?>">
+                                <input type="hidden" name="" id="val-category-id" value="<?= $id ?>">
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-category">Category name <span class="text-danger">*</span>
                                     </label>

@@ -80,7 +80,7 @@ $categoryList = $eloquent->selectData(['*'], 'categories', ['is_delete' => 0, 'c
                                 </div>
                             </div>
                             <form id="FormProduct" class="form-valide">
-                                <input type="text" name="val-product-id" id="" value="<?= $productId ?>">
+                                <input type="hidden" name="val-product-id" id="" value="<?= $productId ?>">
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-category">Category Name <span class="text-danger">*</span>
                                     </label>

@@ -44,7 +44,7 @@ $orderStatusArr = ['Pending', 'Processing', 'Completed', 'Cancelled'];
                                 <div class="form-group row">
                                     <div class="col-lg-12 ml-auto text-center">
                                         <h4>ORDER ID: <?= $id ?></h4>
-                                        <input type="text" name="" id="val-order-id" value="<?= $id ?>">
+                                        <input type="hidden" name="" id="val-order-id" value="<?= $id ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">

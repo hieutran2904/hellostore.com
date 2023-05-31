@@ -43,8 +43,8 @@ $categoryList = $eloquent->selectData(['*'], 'categories', ['category_status' =>
                     <div class="card-body">
                         <div class="form-validation">
                             <form class="form-valide" id="FormSubcategory">
-                                <input type="text" name="id-subcategory" id="" value="<?= $id ?>">
-                                <input type="text" name="old-image" id="" value="<?= $old_image_name ?>">
+                                <input type="hidden" name="id-subcategory" id="" value="<?= $id ?>">
+                                <input type="hidden" name="old-image" id="" value="<?= $old_image_name ?>">
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label" for="val-category">Sub-Category Name <span class="text-danger">*</span>
                                     </label>
