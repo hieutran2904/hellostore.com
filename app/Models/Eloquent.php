@@ -222,7 +222,23 @@ class Eloquent
         try {
             $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price`, `virtual_price` FROM `products` 
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
-            WHERE `product_color` = '" . $colorName . "' GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
+            WHERE `product_type` = 'Active' AND `product_color` = '" . $colorName . "' AND `products`.`is_delete` = '0' GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    //SELECT PRODUCT price
+    public function selectProductPrice($price, $paginate = ["START" => 0, "END" => 1000])
+    {
+        try {
+            $sql = "SELECT * FROM `products` 
+            WHERE `is_delete` = '0' AND `product_type` = 'Active' 
+            AND `product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . "
+            LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -238,7 +254,7 @@ class Eloquent
         try {
             $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price` FROM `products` 
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
-            WHERE `product_color` = '" . $colorName . "' AND `product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . " GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
+            WHERE `products`.`is_delete`='0' AND `product_type` = 'Active' AND `product_color` = '" . $colorName . "' AND `product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . " GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

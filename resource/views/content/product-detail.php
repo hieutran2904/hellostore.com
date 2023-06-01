@@ -2,14 +2,14 @@
 $control = new Controller;
 $eloquent = new Eloquent;
 
-if (isset($_REQUEST['id'])) {
-    $_SESSION['SSCF_product_product_id'] = $_REQUEST['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 }
 
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
-$whereValue = ['id' => $_SESSION['SSCF_product_product_id']];
+$whereValue = ['id' => $id];
 $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
 
 $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
@@ -20,21 +20,21 @@ $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_thr
 $percentDiscountPrice = ($productList[0]['virtual_price'] - $productList[0]['product_price']) / $productList[0]['virtual_price'];
 
 //san pham co lien quan
-$getCategoryID = $eloquent->selectData(['category_id'], 'products', ['id' => $_SESSION['SSCF_product_product_id']]);
+$getCategoryID = $eloquent->selectData(['category_id'], 'products', ['id' => $id]);
 $whereValue = ['category_id' => $getCategoryID[0]['category_id']];
 $relateProductList = $eloquent->selectData(['*'], 'products', $whereValue, [], [], [], 0, ['START' => 0, 'END' => 8]);
 //print_r($relateProductList);
 
 //fetch all color for product id
-$colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['product_id' => $_SESSION['SSCF_product_product_id']], [], [], ['product_color' => 'product_color']);
+$colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['product_id' => $id], [], [], ['product_color' => 'product_color']);
 //print_r($colorProductList);
 
 //fetch all size for product id
-$productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $_SESSION['SSCF_product_product_id']], [], [], ['product_size' => 'product_size']);
+$productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $id], [], [], ['product_size' => 'product_size']);
 //print_r($productSizeList);
 
 //customer review
-$reviewProductList = $eloquent->selectReviewProduct($_SESSION['SSCF_product_product_id']);
+$reviewProductList = $eloquent->selectReviewProduct($id);
 if ($reviewProductList != []) {
     $countReview = count($reviewProductList);
     $totalStar = 0;
@@ -121,6 +121,7 @@ if ($reviewProductList != []) {
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <form class="detail-info">
                                     <h2 class="title-detail"><?= $productList[0]['product_name'] ?></h2>
+                                    <input type="hidden" name="" id="productId" value="<?= $id ?>">
                                     <div class="product-detail-rating">
                                         <div class="pro-details-brand">
                                             <span> Brands: <a href="product.php">HTH</a></span>
@@ -162,6 +163,7 @@ if ($reviewProductList != []) {
                                             }
                                             ?>
                                         </ul>
+                                        <input type="hidden" name="val-color" id="val-color">
                                     </div>
                                     <div class="attr-detail attr-size">
                                         <strong class="mr-10">Size</strong>
@@ -172,9 +174,11 @@ if ($reviewProductList != []) {
                                             }
                                             ?>
                                         </ul>
+                                        <input type="hidden" name="val-size" id="val-size">
                                     </div>
                                     <div class="attr-detail mt-10">
                                         <span class="in-stock text-success load-status-quantity">
+                                            <p class="text-danger">Bạn chưa chọn size hoặc màu 🤔</p>
                                         </span>
                                     </div>
                                     <div class="bt-1 border-color-1 mt-30 mb-30"></div>

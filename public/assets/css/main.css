@@ -6867,8 +6867,8 @@ span.fi-rs-apps {
   margin-bottom: 0;
 }
 
-.main-menu > nav > ul > li ul.mega-menu li.sub-mega-menu-width-22 {
-  width: 22%;
+.main-menu > nav > ul > li ul.mega-menu li.sub-mega-menu-width-25 {
+  width: 25%;
 }
 
 .main-menu > nav > ul > li ul.mega-menu li.sub-mega-menu-width-34 {
@@ -6984,6 +6984,8 @@ span.fi-rs-apps {
   opacity: 1;
   visibility: visible;
   margin-top: 0;
+  background: rgb(212,211,226);
+  background: linear-gradient(90deg, rgba(212,211,226,1) 0%, rgba(210,221,193,1) 50%, rgba(202,202,233,1) 100%);
 }
 
 .main-menu.hover-boder > nav > ul > li > a {
@@ -9894,7 +9896,7 @@ span.fi-rs-apps {
   }
 }
 
-.zoomContainer{ z-index: 9999;}
+.zoomContainer{ z-index: 1;}
 .zoomWindow{ z-index: 9999;}
 
 .logo.logo-width-1 a img {

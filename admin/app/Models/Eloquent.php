@@ -155,9 +155,17 @@ class Eloquent
             }
 
             // where product_price between 1000 and 2000
+            // if ($price['MAX'] != 0) {
+            //     if ($whereValue == [])
+            //         $sql1 .= " WHERE product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
+            //     else
+            //         $sql1 .= " AND product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
+            // }
             if ($price['MAX'] != 0)
-                $sql1 .= " WHERE product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
-
+                if ($whereValue != [])
+                    $sql1 .= " AND (`product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . ")";
+                else
+                    $sql1 .= " WHERE product_price BETWEEN " . $price['MIN'] . " AND " . $price['MAX'];
             //group by
             if ($formatByGroup != []) {
                 $sql1 .= " GROUP BY ";
@@ -285,7 +293,7 @@ class Eloquent
             LEFT JOIN `order_items` ON `order_items`.`order_id` = `orders`.`id`
             LEFT JOIN `products_sc` ON `products_sc`.`id` = `order_items`.`product_sc_id`
             LEFT JOIN `products` ON `products`.`id` = `products_sc`.`product_id`
-            WHERE `orders`.`id` = ".$id;
+            WHERE `orders`.`id` = " . $id;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -341,6 +349,57 @@ class Eloquent
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
             return $dataSelected;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //check update isdelete category
+    public function checkUpdateIsDeleteCategory($id)
+    {
+        try {
+            $sql = "SELECT * FROM `categories`
+            LEFT JOIN `subcategories` ON `categories`.`id` = `subcategories`.`category_id`
+            WHERE `subcategories`.`category_id` = " . $id;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            if ($dataSelected != []) return true;
+            else return false;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //check update isdelete sub category
+    public function checkUpdateIsDeleteSubCategory($id)
+    {
+        try {
+            $sql = "SELECT * from `subcategories`
+            LEFT JOIN `products` ON `products`.`subcategory_id` = `subcategories`.`id`
+            WHERE `products`.`subcategory_id` = " . $id;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            if ($dataSelected != []) return true;
+            else return false;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //check update isdelete product
+    public function checkUpdateIsDeleteProduct($id)
+    {
+        try {
+            $sql = "SELECT * FROM `products`
+            LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
+            WHERE `products_sc`.`product_id` = " . $id;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            if ($dataSelected != []) return true;
+            else return false;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

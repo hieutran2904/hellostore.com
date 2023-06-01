@@ -6,20 +6,23 @@ include '../../config/site.php';
 
 $eloquent = new Eloquent();
 $idProductsSC = "";
-// if (isset($_POST['color'])) echo "<p class=\"text-danger\">Bạn chưa chọn size 🤔</p>";
-// else if (isset($_POST['size'])) echo "<p class=\"text-danger\">Bạn chưa chọn màu 🤔</p>";
-// echo "color: ".$_POST['color'].", size: ".$_POST['size'];
-// echo "<br>";
-// echo "product_id: ".$_POST['product_id']; 
-// $columnName = ['*'];
-// $tableName = 'products_sc';
-// $whereValue = [
-//     'product_id' => $_POST['product_id'],
-//     'product_color' => $_POST['color'],
-//     'product_size' => $_POST['size']
-// ];
+
+$color = $_POST['color'];
+$size = $_POST['size'];
+$product_id = $_POST['product_id'];
+
+//check
+if ($color == ""){
+    echo "<p class=\"text-danger\">Bạn chưa chọn màu 🤔</p>";
+    exit();
+}
+if ($size == ""){
+    echo "<p class=\"text-danger\">Bạn chưa chọn size 🤔</p>";
+    exit();
+}
+
 if (isset($_POST['color']) && isset($_POST['size']) && isset($_POST['product_id'])) {
-    echo "color: " . $_POST['color'] . ", size: " . $_POST['size'];
+    echo "Màu: " . $_POST['color'] . ", size: " . $_POST['size'];
     echo "<br>";
 
     $columnName = ['*'];
@@ -27,7 +30,8 @@ if (isset($_POST['color']) && isset($_POST['size']) && isset($_POST['product_id'
     $whereValue = [
         'product_id' => $_POST['product_id'],
         'product_color' => $_POST['color'],
-        'product_size' => $_POST['size']
+        'product_size' => $_POST['size'],
+        'is_delete' => '0'
     ];
     $productItem = $eloquent->selectData($columnName, $tableName, $whereValue);
     if ($productItem != []) {

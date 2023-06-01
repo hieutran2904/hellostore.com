@@ -165,14 +165,22 @@ $('.sweet-confirm-custom').click(function(e) {
                 },
                 method: 'post',
                 success: (response) => {
-                    $('tbody').html(response);
+                    if (response == 'categories') {
+                        sweetAlert("Oops...", "You cannot delete this category while the subcategory exists", "error");
+                    } else if (response == 'subcategories') {
+                        sweetAlert("Oops...", "You cannot delete this subcategory while the product exists", "error");
+                    } else if (response == 'products') {
+                        sweetAlert("Oops...", "You cannot delete this product while the product detail exists", "error");
+                    } else{
+                        $('tbody').html(response);
+                        swal(
+                            "Deleted !!",
+                            "Hey, your imaginary file has been deleted !!",
+                            "success"
+                        );
+                    }
                 }
             })
-            swal(
-                "Deleted !!",
-                "Hey, your imaginary file has been deleted !!",
-                "success"
-            );
         }
     );
 });

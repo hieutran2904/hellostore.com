@@ -56,10 +56,8 @@
     //fetch all products
     $columnName = ['*'];
     $tableName = 'categories';
-
-    $inColumn = ['category_status'];
-    $inValue = [1];
-    $categoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
+    $whereValue = ['category_status' => 'Active', 'is_delete' => '0'];
+    $categoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
 
     ?>
     <header class="header-area header-style-1 header-height-2">
@@ -155,11 +153,11 @@
                                     <!-- <li><a href="about.html">About</a></li> -->
                                     <li><a id="main_product_id" href="product-category.php">Sản phẩm </a></li>
                                     <li class="position-static"><a href="#">Danh mục <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="mega-menu">
+                                        <ul class="mega-menu row">
                                             <?php
                                             foreach ($categoryList as $eachCategory) {
                                             ?>
-                                                <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                <li class="sub-mega-menu sub-mega-menu-width-25">
                                                     <a class="menu-title" href="product-category.php?categoryId=<?= $eachCategory['id'] ?>">
                                                         <?= $eachCategory['category_name'] ?>
                                                     </a>
@@ -167,7 +165,7 @@
                                                     $columnName = ['*'];
                                                     $tableName = 'subcategories';
                                                     $whereValue = [
-                                                        'subcategory_status' => 1,
+                                                        'subcategory_status' => 'Active',
                                                         'category_id' => $eachCategory['id']
                                                     ];
                                                     $inColumn = ['category_id', 'subcategory_status'];
@@ -187,9 +185,9 @@
                                             <?php
                                             }
                                             ?>
-                                            <li class="sub-mega-menu sub-mega-menu-width-34">
+                                            <!-- <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="product-detail.php"><img src="public/assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
+                                                    <a href="product-detail.php"><img src="public/assets/imgs/banner/menclothing.jpg" alt=""></a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -207,7 +205,7 @@
                                                         </h3>
                                                     </div>
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </li>
                                     <!-- <li><a href="blog.html">Blog </a></li>

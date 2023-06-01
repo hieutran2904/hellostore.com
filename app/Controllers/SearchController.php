@@ -9,13 +9,12 @@ class SearchController extends Controller
         $sql1 = "
 			SELECT * 
 			FROM products 
-			WHERE 
-		";
+			WHERE";
         foreach ($arrayKeywords as $eachKey) {
-            $sql2 .= "product_tags LIKE '%" . $eachKey . "%' OR ";
+            $sql2 .= " product_tags LIKE '%" . $eachKey . "%' OR ";
         }
         $sql2 = rtrim($sql2, " OR");
-
+        // $sql2 .= ")";
         $sql3 = " ORDER BY id DESC LIMIT {$start}, {$end}";
 
         $sql_code = $sql1 . $sql2 . $sql3;

@@ -42,7 +42,7 @@ if (isset($_POST['keywords'])) {
             'MIN' => $priceMin,
             'MAX' => $priceMax
         ];
-        $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], 0, [], $whereValue);
+        $productList = $eloquent->selectProductPrice($whereValue);
         $productNameSearch = '';
     } else if (isset($_POST['checkbox-color'])) {
         $color = $_POST['checkbox-color'];
@@ -71,7 +71,7 @@ if (isset($_POST['keywords'])) {
         ];
         $productList = $eloquent->selectProductPriceAndColor($priceArr, $color);
         $productNameSearch = '';
-    } else if (!isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])){
+    } else if (!isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])) {
         $productList = $eloquent->selectData($columnName, $tableName);
         $productNameSearch = '';
     }
@@ -96,7 +96,7 @@ if (isset($_POST['keywords'])) {
         'MIN' => $priceMin,
         'MAX' => $priceMax
     ];
-    $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], [], $whereValue);
+    $productList = $eloquent->selectProductPrice($whereValue);
     $productNameSearch = '';
 } else if (isset($_GET['color'])) {
     $color = $_GET['color'];
@@ -144,7 +144,7 @@ if (isset($_POST['keywords'])) {
     //ko tim san pham ma click vao trang san pham
     $columnName = ['*'];
     $tableName = 'products';
-    $productList = $eloquent->selectData($columnName, $tableName);
+    $productList = $eloquent->selectData($columnName, $tableName, ['is_delete' => '0', 'product_type' => 'Active']);
     $productNameSearch = '';
 }
 $countItem = $productList != [] ? count($productList) : 0;
@@ -216,7 +216,7 @@ if (!empty($productList)) {
                 'MIN' => $priceMin,
                 'MAX' => $priceMax
             ];
-            $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], ['START' => $cp, 'END' => $rpp], $whereValue);
+            $productList = $eloquent->selectProductPrice($whereValue, ['START' => $cp, 'END' => $rpp]);
             $productNameSearch = '';
         } else if (isset($_POST['checkbox-color'])) {
             $url = 'color=' . $_POST['checkbox-color'] . '&';
@@ -267,7 +267,7 @@ if (!empty($productList)) {
             'MIN' => $priceMin,
             'MAX' => $priceMax
         ];
-        $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], [], ['START' => $cp, 'END' => $rpp], $whereValue);
+        $productList = $eloquent->selectProductPrice($whereValue, ['START' => $cp, 'END' => $rpp]);
         $productNameSearch = '';
     } else if (isset($_GET['color'])) {
         $url = 'color=' . $_GET['color'] . '&';
@@ -317,7 +317,7 @@ if (!empty($productList)) {
         //ko tim san pham ma click vao trang san pham
         $columnName = ['*'];
         $tableName = 'products';
-        $productList = $eloquent->selectData($columnName, $tableName, [], [], [], [], ['ASC' => 'id'], ['START' => $cp, 'END' => $rpp]);
+        $productList = $eloquent->selectData($columnName, $tableName, ['is_delete' => '0', 'product_type' => 'Active'], [], [], [], ['ASC' => 'id'], ['START' => $cp, 'END' => $rpp]);
         $productNameSearch = '';
     }
 
