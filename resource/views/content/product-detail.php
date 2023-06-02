@@ -9,15 +9,22 @@ if (isset($_GET['id'])) {
 //fetch all products
 $columnName = ['*'];
 $tableName = 'products';
-$whereValue = ['id' => $id];
+$whereValue = [
+    'id' => $id,
+    'is_delete' => '0',
+    'product_type' => 'Active'
+];
 $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
+if ($productList != []) {
+    $imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
+    $imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_one'];
+    $imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_two'];
+    $imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_three'];
 
-$imageMaster = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_master_image'];
-$imageOne = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_one'];
-$imageTwo = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_two'];
-$imageThree = $GLOBALS['PRODUCT_DIRECTORY'] . $productList[0]['product_image_three'];
-
-$percentDiscountPrice = ($productList[0]['virtual_price'] - $productList[0]['product_price']) / $productList[0]['virtual_price'];
+    $percentDiscountPrice = ($productList[0]['virtual_price'] - $productList[0]['product_price']) / $productList[0]['virtual_price'];
+} else {
+    echo "<script>window.location.href = 'not-found.php';</script>";
+}
 
 //san pham co lien quan
 $getCategoryID = $eloquent->selectData(['category_id'], 'products', ['id' => $id]);

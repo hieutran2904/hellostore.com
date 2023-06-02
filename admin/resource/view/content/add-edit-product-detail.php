@@ -19,7 +19,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $productColor = "";
     $productSize = "";
 }
-$arrSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+$arrSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL','one size'];
 $arrColor = ['red','beige','white','orange','cyan','green','purple','black','brown','blue','yellow','pink','gray','maroon','olive','navy','lime','teal','aqua','silver'];
 ?>
 <div class="content-body">

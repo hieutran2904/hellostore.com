@@ -1,12 +1,12 @@
 <?php
 //fetch all categories hot (product best sell)
-$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', [], [], [], [], 0, ['START' => 0, 'END' => 7]);
+$subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategories', ['subcategory_status' => 'Active', 'is_delete' => '0'], [], [], [], 0, ['START' => 0, 'END' => 7]);
 
 //fetch 3 items product add new
-$newProductList = $eloquent->selectData(['*'], 'products', [], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
+$newProductList = $eloquent->selectData(['*'], 'products', ['product_type' => 'Active', 'is_delete' => '0'], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
 
 //list color
-$productColorList = $eloquent->selectData(['*'], 'products_sc', [], [], [], ["product_color"], ['DESC' => 'id'], ['START' => 0, 'END' => 8]);
+$productColorList = $eloquent->selectData(['*'], 'products_sc', ['is_delete' => '0'], [], [], ["product_color"], ['DESC' => 'id'], ['START' => 0, 'END' => 8]);
 
 ?>
 <div class="col-lg-3 primary-sidebar sticky-sidebar">

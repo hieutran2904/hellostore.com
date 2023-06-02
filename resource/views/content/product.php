@@ -72,7 +72,7 @@ if (isset($_POST['keywords'])) {
         $productList = $eloquent->selectProductPriceAndColor($priceArr, $color);
         $productNameSearch = '';
     } else if (!isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])) {
-        $productList = $eloquent->selectData($columnName, $tableName);
+        $productList = $eloquent->selectData($columnName, $tableName, ['is_delete' => '0', 'product_type' => 'Active']);
         $productNameSearch = '';
     }
 } else if (isset($_GET['price'])) {
@@ -130,14 +130,22 @@ if (isset($_POST['keywords'])) {
     //tim san pham theo subcategory
     $columnName = ['*'];
     $tableName = 'products';
-    $whereValue = ['subcategory_id' => $_GET['subCategoryId']];
+    $whereValue = [
+        'subcategory_id' => $_GET['subCategoryId'],
+        'is_delete' => '0',
+        'product_type' => 'Active'
+    ];
     $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
     $productNameSearch = $eloquent->selectData(['*'], 'subcategories', ['id' => $_GET['subCategoryId']])[0]['subcategory_name'];
 } else if (isset($_GET['categoryId'])) {
     //tim san pham theo category
     $columnName = ['*'];
     $tableName = 'products';
-    $whereValue = ['category_id' => $_GET['categoryId']];
+    $whereValue = [
+        'category_id' => $_GET['categoryId'],
+        'is_delete' => '0',
+        'product_type' => 'Active'
+    ];
     $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
     $productNameSearch = $eloquent->selectData(['*'], 'categories', ['id' => $_GET['categoryId']])[0]['category_name'];
 } else {
@@ -245,6 +253,9 @@ if (!empty($productList)) {
                 'MAX' => $priceMax
             ];
             $productList = $eloquent->selectProductPriceAndColor($priceArr, $color, ['START' => $cp, 'END' => $rpp]);
+            $productNameSearch = '';
+        } else if (!isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])) {
+            $productList = $eloquent->selectData($columnName, $tableName, ['is_delete' => '0', 'product_type' => 'Active'], [], [], [], ['ASC' => 'id'], ['START' => $cp, 'END' => $rpp]);
             $productNameSearch = '';
         }
     } else if (isset($_GET['price'])) {

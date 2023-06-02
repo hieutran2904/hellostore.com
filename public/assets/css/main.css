@@ -596,7 +596,8 @@ h4 {
 /*TYPOGRAPHY*/
 body {
   color: #4f5d77;
-  font-family: "Lato", sans-serif;
+  /* font-family: "Lato", sans-serif; */
+	font-family: 'Roboto', sans-serif;
   font-size: 14px;
   line-height: 24px;
   font-style: normal;
@@ -610,7 +611,9 @@ h4,
 h5,
 h6 {
   /* font-family: "", sans-serif; */
-  font-family: monospace;
+  /* font-family: monospace; */
+	/* font-family: sans-serif; */
+	font-family: 'Pacifico', sans-serif;
   color: #222222;
   font-weight: 600;
   line-height: 1.2;

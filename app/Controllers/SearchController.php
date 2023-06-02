@@ -9,12 +9,12 @@ class SearchController extends Controller
         $sql1 = "
 			SELECT * 
 			FROM products 
-			WHERE";
+			WHERE (";
         foreach ($arrayKeywords as $eachKey) {
-            $sql2 .= " product_tags LIKE '%" . $eachKey . "%' OR ";
+            $sql2 .= "`product_tags` LIKE '%" . $eachKey . "%' OR ";
         }
         $sql2 = rtrim($sql2, " OR");
-        // $sql2 .= ")";
+        $sql2 .= ") AND `product_type` = 'Active' AND `is_delete` = '0'";
         $sql3 = " ORDER BY id DESC LIMIT {$start}, {$end}";
 
         $sql_code = $sql1 . $sql2 . $sql3;
@@ -24,11 +24,6 @@ class SearchController extends Controller
         $query->execute();
 
         $dataList = $query->fetchAll(PDO::FETCH_ASSOC);
-        $totalRowSelected = $query->rowCount();
-
-        if ($totalRowSelected > 0)
-            return $dataList;
-        else
-            return 0;
+        return $dataList;
     }
 }
