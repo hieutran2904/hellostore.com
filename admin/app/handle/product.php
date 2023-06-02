@@ -39,7 +39,7 @@ $lenghtFileImage = count($arrImage['name']);
 
 if ($productId == '') {
     //add product
-    $checkProduct = $eloquent->selectData(['*'], 'products', ['product_name' => $productName]);
+    $checkProduct = $eloquent->selectData(['*'], 'products', ['product_name' => $productName, 'is_delete' => '0']);
     if (count($checkProduct) > 0) {
         $toastr->error_toast("Product name already exists", "FAILED");
         exit();

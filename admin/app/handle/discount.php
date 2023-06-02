@@ -30,7 +30,7 @@ if (!is_numeric($quantity) || !is_numeric($price)) {
 
 if ($id == '') {
     //check if discount code already exists
-    $checkDiscountCode = $eloquent->selectData(['*'], 'discounts', ['discount_code' => $code]);
+    $checkDiscountCode = $eloquent->selectData(['*'], 'discounts', ['discount_code' => $code, 'is_delete' => '0']);
     if ($checkDiscountCode != []) {
         $toastr->error_toast('Discount code already exists!', 'Error');
         exit();

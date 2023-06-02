@@ -16,7 +16,7 @@ if ($name == ''){
 
 if ($id == ''){
     // add category
-    $checkCategory = $eloquent->selectData(['*'], 'categories', ['category_name' => $name]);
+    $checkCategory = $eloquent->selectData(['*'], 'categories', ['category_name' => $name, 'is_delete' => '0']);
     if (count($checkCategory) > 0){
         $toastr->error_toast("Category name already exists", "FAILED");
         exit();

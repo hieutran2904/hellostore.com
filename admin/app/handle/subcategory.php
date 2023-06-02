@@ -25,7 +25,7 @@ if ($id == '') {
         $toastr->error_toast("Subcategory banner is required", "FAILED");
         exit();
     }
-    $checkSubcategory = $eloquent->selectData(['*'], 'subcategories', ['subcategory_name' => $name]);
+    $checkSubcategory = $eloquent->selectData(['*'], 'subcategories', ['subcategory_name' => $name, 'is_delete' => '0']);
     if (count($checkSubcategory) > 0) {
         $toastr->error_toast("Subcategory name already exists", "FAILED");
         exit();
