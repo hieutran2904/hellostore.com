@@ -62,7 +62,7 @@ if ($tableName == 'categories') {
     }
 } else if ($tableName == 'products_sc') {
     $deleteData = $eloquent->updateData($tableName, ['is_delete' => 1], ['id' => $id]);
-    $productSCList = $eloquent->selectData(['*'], 'products_sc', ['product_id' => $_SESSION['product_id'], 'is_delete' => 0]);
+    $productSCList = $eloquent->selectData(['*'], 'products_sc', ['product_id' => $_SESSION['product_id'], 'is_delete' => '0']);
     $productSCShow = new ProductDetailController();
     $productSCShow->ProductDetailList($productSCList);
 } else if ($tableName == 'discounts') {

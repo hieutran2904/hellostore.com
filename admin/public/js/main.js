@@ -231,7 +231,7 @@ $('#FormProduct').on('submit', function(e) {
         processData: false,
         success: (response) => {
             $('.notification').html(response);
-            $('#val-product-name').val('');
+            // $('#val-product-name').val('');
         }
     })
 });

@@ -49,6 +49,13 @@ if ($productId == '') {
         $toastr->error_toast("You must select more than 4 image files", "FAILED");
         exit();
     }
+
+    //chekc exist product name
+    $checkProduct = $eloquent->selectData(['*'], 'products', ['product_name' => $productName]);
+    if (count($checkProduct) > 0) {
+        $toastr->error_toast("Product name already exists", "FAILED");
+        exit();
+    }
     
     $image0 = "product_master_" . date("Ymd") . substr(str_shuffle($str), 0, 5) . substr($arrImage['name'][0], strrpos($arrImage['name'][0], "."));
     $image1 = "product_one_" . date("Ymd") . substr(str_shuffle($str), 0, 5) . substr($arrImage['name'][1], strrpos($arrImage['name'][1], "."));
@@ -90,6 +97,14 @@ if ($productId == '') {
         $toastr->error_toast("Product name already exists", "FAILED");
         exit();
     }
+
+    //chekc exist product name
+    $checkProduct = $eloquent->checkExistData('products', $productId, 'product_name', $productName);
+    if ($checkProduct) {
+        $toastr->error_toast("Product name already exists", "FAILED");
+        exit();
+    }
+
     if ($_FILES['val-product-images']['name'][0] == ''){
         //update product without image
         $data = [

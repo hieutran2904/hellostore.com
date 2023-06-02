@@ -61,7 +61,7 @@ $categoryList = $eloquent->selectData(['*'], 'categories', ['is_delete' => 0, 'c
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="product.php">Product</a></li>
-                <li class="breadcrumb-item active"><a href="#"><?= $typeForm ?> Product</a></li>
+                <li class="breadcrumb-item active"><a class="text-info" href="#"><?= $typeForm ?> Product</a></li>
             </ol>
         </div>
     </div>

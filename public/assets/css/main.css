@@ -4502,6 +4502,53 @@ table .product-thumbnail img {
 .product-color-brown {
   background: #8B4513;
 }
+.product-color-blue {
+  background: #5c85de;
+}
+
+.product-color-yellow {
+  background: #f5e050;
+}
+
+.product-color-pink {
+  background: #ff8ff8;
+}
+
+.product-color-gray {
+  background: #808080;
+}
+
+.product-color-maroon {
+  background: #800000;
+}
+
+.product-color-olive {
+  background: #808000;
+}
+
+.product-color-navy {
+  background: #000080;
+}
+
+.product-color-lime {
+  background: #00ff00;
+}
+
+.product-color-teal {
+  background: #008080;
+}
+
+.product-color-aqua {
+  background: #00ffff;
+}
+
+.product-color-silver {
+  background: #c0c0c0;
+}
+
+
+
+
 
 .detail-gallery .slick-slider {
   background-color: #000;

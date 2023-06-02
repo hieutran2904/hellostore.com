@@ -20,7 +20,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     $productSize = "";
 }
 $arrSize = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
-$arrColor = ['black', 'white', 'red', 'blue', 'yellow', 'green', 'orange', 'pink', 'purple', 'brown', 'gray', 'silver', 'gold'];
+$arrColor = ['red','beige','white','orange','cyan','green','purple','black','brown','blue','yellow','pink','gray','maroon','olive','navy','lime','teal','aqua','silver'];
 ?>
 <div class="content-body">
     <div class="row page-titles mx-0">

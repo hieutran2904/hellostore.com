@@ -26,11 +26,11 @@ $relateProductList = $eloquent->selectData(['*'], 'products', $whereValue, [], [
 //print_r($relateProductList);
 
 //fetch all color for product id
-$colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['product_id' => $id], [], [], ['product_color' => 'product_color']);
+$colorProductList = $eloquent->selectData(['product_color'], 'products_sc', ['product_id' => $id, 'is_delete' => '0'], [], [], ['product_color' => 'product_color']);
 //print_r($colorProductList);
 
 //fetch all size for product id
-$productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $id], [], [], ['product_size' => 'product_size']);
+$productSizeList = $eloquent->selectData(['product_size'], 'products_sc', ['product_id' => $id, 'is_delete' => '0'], [], [], ['product_size' => 'product_size']);
 //print_r($productSizeList);
 
 //customer review
