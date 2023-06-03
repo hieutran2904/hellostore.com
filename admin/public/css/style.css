@@ -14700,3 +14700,93 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
+
+.product-color-red {
+  background: #ff596d;
+}
+
+.product-color-beige {
+  background: #F5F5DC;
+}
+
+.product-color-white {
+  background: #ffffff;
+}
+
+.product-color-orange {
+  background: #ffbb51;
+}
+
+.product-color-cyan {
+  background: #6f8090;
+}
+
+.product-color-green {
+  background: #38cf46;
+}
+
+.product-color-purple {
+  background: #ff8ff8;
+}
+
+.product-color-black {
+  background: #141314;
+}
+
+.product-color-brown {
+  background: #8B4513;
+}
+.product-color-blue {
+  background: #5c85de;
+}
+
+.product-color-yellow {
+  background: #f5e050;
+}
+
+.product-color-pink {
+  background: #ff8ff8;
+}
+
+.product-color-gray {
+  background: #808080;
+}
+
+.product-color-maroon {
+  background: #800000;
+}
+
+.product-color-olive {
+  background: #808000;
+}
+
+.product-color-navy {
+  background: #000080;
+}
+
+.product-color-lime {
+  background: #00ff00;
+}
+
+.product-color-teal {
+  background: #008080;
+}
+
+.product-color-aqua {
+  background: #00ffff;
+}
+
+.product-color-silver {
+  background: #c0c0c0;
+}
+
+.color-render-item{
+  width: 20px;
+  height: 20px;
+  border-radius: 20%;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}

@@ -214,8 +214,13 @@ $('#choose-size').change(function(e) {
 $('#choose-color').change(function(e) {
     e.preventDefault();
     const colorId = $(this).val();
+    const colorRender = $('#color-render');
     console.log(colorId);
     $('#val-color-render').val(colorId);
+    colorRender.html('');
+    for (let i = 0; i < colorId.length; i++) {
+        colorRender.append(`<div class="color-render-item product-color-${colorId[i]}"></div>`);
+    }
 });
 
 // handle form product
