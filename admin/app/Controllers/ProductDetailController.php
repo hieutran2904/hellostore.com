@@ -4,11 +4,12 @@ class ProductDetailController extends Controller
     public function ProductDetailList($productDetailList)
     {
         foreach ($productDetailList as $eachProductDetail) {
+            $textColor = $eachProductDetail['product_color'] == 'white' ? '#333' : 'aliceblue';
 ?>
             <tr>
                 <td><?= $eachProductDetail['id'] ?></td>
                 <td><?= $eachProductDetail['product_size'] ?></td>
-                <td><?= $eachProductDetail['product_color'] ?></td>
+                <td><span style="color: <?= $textColor ?>; border: 1px solid #ccc;" class="label label-pill product-color-<?= $eachProductDetail['product_color'] ?>"><?= $eachProductDetail['product_color'] ?></span></td>
                 <td><?= $eachProductDetail['product_quantity'] ?></td>
                 <td>
                     <span class="<?= $eachProductDetail['product_status'] == 'In Stock' ? 'text-success' : 'text-warning' ?>">
