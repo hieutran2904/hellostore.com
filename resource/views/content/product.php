@@ -128,6 +128,9 @@ if (isset($_POST['keywords'])) {
     $productNameSearch = '';
 } else if (isset($_GET['subCategoryId'])) {
     //tim san pham theo subcategory
+    if (is_numeric($_GET['subCategoryId']) == false) {
+        echo "<script>window.location.href = 'not-found.php';</script>";
+    }
     $columnName = ['*'];
     $tableName = 'products';
     $whereValue = [
@@ -135,10 +138,15 @@ if (isset($_POST['keywords'])) {
         'is_delete' => '0',
         'product_type' => 'Active'
     ];
-    $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
-    $productNameSearch = $eloquent->selectData(['*'], 'subcategories', ['id' => $_GET['subCategoryId']])[0]['subcategory_name'];
+    $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
+    if ($productList == []) {
+        $productNameSearch = '';
+    } else $productNameSearch = $eloquent->selectData(['*'], 'subcategories', ['id' => $_GET['subCategoryId']])[0]['subcategory_name'];
 } else if (isset($_GET['categoryId'])) {
     //tim san pham theo category
+    if (is_numeric($_GET['categoryId']) == false) {
+        echo "<script>window.location.href = 'not-found.php';</script>";
+    }
     $columnName = ['*'];
     $tableName = 'products';
     $whereValue = [
@@ -146,8 +154,10 @@ if (isset($_POST['keywords'])) {
         'is_delete' => '0',
         'product_type' => 'Active'
     ];
-    $productList = $eloquent->selectData($columnName, $tableName, @$whereValue);
-    $productNameSearch = $eloquent->selectData(['*'], 'categories', ['id' => $_GET['categoryId']])[0]['category_name'];
+    $productList = $eloquent->selectData($columnName, $tableName, $whereValue);
+    if ($productList == []) {
+        $productNameSearch = '';
+    } else $productNameSearch = $eloquent->selectData(['*'], 'categories', ['id' => $_GET['categoryId']])[0]['category_name'];
 } else {
     //ko tim san pham ma click vao trang san pham
     $columnName = ['*'];
