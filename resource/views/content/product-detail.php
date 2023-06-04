@@ -4,6 +4,9 @@ $eloquent = new Eloquent;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+    if(is_numeric($id) == false) {
+        echo "<script>window.location.href = 'not-found.php';</script>";
+    }
 }
 
 //fetch all products
