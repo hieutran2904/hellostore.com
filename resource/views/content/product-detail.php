@@ -188,6 +188,7 @@ if ($reviewProductList != []) {
                                     </div>
                                     <div class="attr-detail mt-10">
                                         <span class="in-stock text-success load-status-quantity">
+                                            <input type="hidden" id="idProductsSC" value="0">
                                             <p class="text-danger">Bạn chưa chọn size hoặc màu 🤔</p>
                                         </span>
                                     </div>
@@ -375,7 +376,10 @@ if ($reviewProductList != []) {
                                                     <?php
                                                         }
                                                     } else {
-                                                        echo "<h4 class='mb-30 text-brand'>Chưa có đánh giá nào</h4>";
+                                                        echo "<div class='text-center'>
+                                                        <img src='public/assets/imgs/page/no-review.png' alt='' class='img-fluid'>
+                                                        <h4 class='mb-30 text-brand'>Chưa có đánh giá nào</h4>
+                                                        </div>";
                                                     }
                                                     ?>
                                                 </div>

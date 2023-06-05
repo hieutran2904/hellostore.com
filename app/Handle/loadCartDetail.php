@@ -41,7 +41,14 @@ if ($productListCart != [])
                 <?= number_format($eachProduct['product_price'] * $eachProduct['quantity'], 0, ",", ".") . $GLOBALS['CURRENCY'] ?>
             </span>
         </td>
+        <td class="d-none">
+            <span id="quantity_remain<?= $eachProduct['idShopCarts'] ?>">
+                <?= $eachProduct['product_quantity'] ?>
+            </span>
+        </td>
         <input type="hidden" name="" id="delete_product_cart_name">
+        <input type="hidden" id="product_sc_id<?= $eachProduct['idShopCarts'] ?>" value="<?= $eachProduct['idProductSC'] ?>">
+        <input type="hidden" id="product_sc_quantity<?= $eachProduct['idShopCarts'] ?>" value="<?= $eachProduct['quantity'] ?>">
         <td class="action"><a data-itemid="<?= $eachProduct['idShopCarts'] ?>" class="text-muted"><i class="fi-rs-trash"></i></a></td>
     </tr>
 <?php
@@ -61,13 +68,16 @@ else {
         var id = $(this).data('itemid');
         console.log(id);
         var name = $('#delete_product_cart_name' + id).val();
-        console.log(name);
+        var product_sc_id = $('#product_sc_id' + id).val();
+        var quantity = $('#product_sc_quantity' + id).val();
         $.ajax({
             url: 'app/Handle/deleteToCart.php',
             type: 'POST',
             data: {
                 product_id: id,
-                product_name: name
+                product_name: name,
+                product_sc_id: product_sc_id,
+                quantity: quantity
             },
             success: function(data) {
                 $('#load_product_detail').load("app/Handle/loadCartDetail.php");
@@ -85,38 +95,50 @@ else {
             qtyUp.addEventListener('click', () => {
                 const id = qtyUp.getAttribute('data-itemid');
                 console.log(id);
-                const getPrice = document.querySelector('#get_price_' + id);
-                const price = getPrice.getAttribute('data-itemprice');
-                console.log(price);
-                const qtyVal = qtyUp.parentElement.querySelector('.qty-val');
-                const qtyValNum = parseInt(qtyVal.textContent);
-                qtyVal.textContent = qtyValNum + 1;
-                console.log(qtyVal.textContent);
-                $.ajax({
-                    url: 'app/Handle/updateCartDetail.php',
-                    type: 'POST',
-                    data: {
-                        product_sc_id: id,
-                        product_price: price,
-                        product_quantity: qtyVal.textContent
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        $('.cart_product').load("app/Handle/loadCart.php");
-                        $('#load_price_cart').load("app/Handle/loadPriceCart.php");
-                        const sub_price = data.sub_price.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        });
-                        $('#update_cart_detail' + id).html(sub_price);
-                    }
-                });
+                const qtyRemain = document.querySelector('#quantity_remain' + id);
+                const qtyRemainNum = parseInt(qtyRemain.textContent);
+                if (qtyRemainNum > 0) {
+                    var product_type = $('#product_sc_id' + id).val();
+                    const getPrice = document.querySelector('#get_price_' + id);
+                    const price = getPrice.getAttribute('data-itemprice');
+                    console.log(price);
+                    const qtyVal = qtyUp.parentElement.querySelector('.qty-val');
+                    const qtyValNum = parseInt(qtyVal.textContent);
+                    qtyVal.textContent = qtyValNum + 1;
+                    console.log(qtyVal.textContent);
+                    $.ajax({
+                        url: 'app/Handle/updateCartDetail.php',
+                        type: 'POST',
+                        data: {
+                            product_sc_id: id,
+                            product_type: product_type,
+                            product_price: price,
+                            product_quantity: qtyVal.textContent,
+                            quantity_remain: qtyRemainNum,
+                            type: 'up'
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $('.cart_product').load("app/Handle/loadCart.php");
+                            $('#load_price_cart').load("app/Handle/loadPriceCart.php");
+                            const sub_price = data.sub_price.toLocaleString('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND'
+                            });
+                            $('#update_cart_detail' + id).html(sub_price);
+                            $('#quantity_remain' + id).html(data.quantity_remain);
+                        }
+                    });
+                }
             });
         });
         qtyDowns.forEach(qtyDown => {
             qtyDown.addEventListener('click', () => {
                 const id = qtyDown.getAttribute('data-itemid');
                 console.log(id);
+                const qtyRemain = document.querySelector('#quantity_remain' + id);
+                const qtyRemainNum = parseInt(qtyRemain.textContent);
+                var product_type = $('#product_sc_id' + id).val();
                 const getPrice = document.querySelector('#get_price_' + id);
                 const price = getPrice.getAttribute('data-itemprice');
                 console.log(price);
@@ -130,8 +152,11 @@ else {
                         type: 'POST',
                         data: {
                             product_sc_id: id,
+                            product_type: product_type,
                             product_price: price,
-                            product_quantity: qtyVal.textContent
+                            product_quantity: qtyVal.textContent,
+                            quantity_remain: qtyRemainNum,
+                            type: 'down'
                         },
                         dataType: 'json',
                         success: function(data) {
@@ -142,6 +167,7 @@ else {
                                 currency: 'VND'
                             });
                             $('#update_cart_detail' + id).html(sub_price);
+                            $('#quantity_remain' + id).html(data.quantity_remain);
                         }
                     });
                 }

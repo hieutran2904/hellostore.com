@@ -36,6 +36,7 @@ if ($productListCart != [])
                                     <th scope="col">Giá</th>
                                     <th scope="col">Số lượng</th>
                                     <th scope="col">Tổng</th>
+                                    <th class="d-none" scope="col">quantity remain</th>
                                     <th scope="col">Xóa</th>
                                 </tr>
                             </thead>

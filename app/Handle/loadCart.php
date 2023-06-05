@@ -39,6 +39,8 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
                 </div>
                 <form class="shopping-cart-delete">
                     <input type="hidden" id="delete_product_cart_name<?= $product['idShopCarts'] ?>" value="<?= $product['product_name'] ?>">
+                    <input type="hidden" id="product_sc_id<?= $product['idShopCarts'] ?>" value="<?= $product['idProductSC'] ?>">
+                    <input type="hidden" id="product_sc_quantity<?= $product['idShopCarts'] ?>" value="<?= $product['quantity'] ?>">
                     <a class="delete_product_cart" data-itemid="<?= $product['idShopCarts'] ?>"><i class="fi-rs-cross-small"></i></a>
                 </form>
             </li>
@@ -75,13 +77,17 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
         var id = $(this).data('itemid');
         console.log(id);
         var name = $('#delete_product_cart_name' + id).val();
+        var product_sc_id = $('#product_sc_id' + id).val();
+        var quantity = $('#product_sc_quantity' + id).val();
         console.log(name);
         $.ajax({
             url: 'app/Handle/deleteToCart.php',
             type: 'POST',
             data: {
                 product_id: id,
-                product_name: name
+                product_name: name,
+                product_sc_id: product_sc_id,
+                quantity: quantity
             },
             success: function(data) {
                 $('.cart_product').load("app/Handle/loadCart.php");

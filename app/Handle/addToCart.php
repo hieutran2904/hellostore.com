@@ -11,12 +11,38 @@ $id = $_POST['product_sc_id'];
 $name = $_POST['product_name'];
 $qty = $_POST['product_qty'];
 
-if ($id == ""){
-    $toastr->error_toast('Sản phầm '. $name . ' đã hết hàng' , 'THẤT BẠI');
+if ($id == 0) {
+    $toastr->error_toast('Bạn chưa chọn size hoặc màu', 'THẤT BẠI');
+    exit();
+}
+
+$productSC = $eloquent->selectData(['*'], 'products_sc', ['id' => $id]);
+$productQty = $productSC[0]['product_quantity'];
+$productSize = $productSC[0]['product_size'];
+$productColor = $productSC[0]['product_color'];
+if ($productQty == 0) {
+    $toastr->error_toast('Sản phầm ' . $name . ' đã hết hàng', 'THẤT BẠI');
+    exit();
+}
+if ($productQty < $qty) {
+    $toastr->warning_toast($name . '(size: ' . $productSize . ' ,màu: ' . $productColor . ') chỉ còn ' . $productQty . ' sản phẩm', 'CẢNH BÁO');
     exit();
 }
 
 if (isset($_SESSION['SSCF_login_id'])) {
+    //update quantity in productsc
+    $quantityRemain = $productQty - $qty;
+    if ($quantityRemain == 0) {
+        $data = [
+            'product_quantity' => $quantityRemain,
+            'product_status' => 'Out of Stock'
+        ];
+    } else {
+        $data = [
+            'product_quantity' => $quantityRemain,
+        ];
+    }
+    $updateQuantity = $eloquent->updateData('products_sc', $data, ['id' => $id]);
     //check1: kiem tra xem san pham da co trong gio hang chua?
     $columnName = ['*'];
     $tableName = "shopcarts";
