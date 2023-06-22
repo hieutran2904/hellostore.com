@@ -311,3 +311,26 @@ $('.login-form__btn').click(function(e) {
         }
     })
 });
+
+// get value of date
+$('#val-date').change(function(e) {
+    console.log('change date');
+    e.preventDefault();
+    const date = $(this).val();
+    let dateArr = date.split('-');
+    let fromDate = dateArr[0].split('/');
+    let toDate = dateArr[1].split('/');
+    let fromDateStr = fromDate[2] + '-' + fromDate[0] + '-' + fromDate[1];
+    let toDateStr = toDate[2] + '-' + toDate[0] + '-' + toDate[1];
+    $.ajax({
+        url: 'app/handle/revenue.php',
+        data: { 
+            fromDate: fromDateStr.replace(/\s/g, ''),
+            toDate: toDateStr.replace(/\s/g, '')
+        },
+        method: 'post',
+        success: (response) => {
+            $('.res-data').html(response);
+        }
+    })
+});

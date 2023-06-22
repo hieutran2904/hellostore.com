@@ -75,12 +75,22 @@
                 </a>
             </li> -->
             <!-- End slider -->
-            
+
             <!-- Start Discount -->
             <li>
                 <a href="discount.php" aria-expanded="true">
                     <i class="icon-tag menu-icon"></i><span class="nav-text">Discount</span>
                 </a>
+            </li>
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-graph menu-icon"></i> <span class="nav-text">Statistical</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="revenue.php">Revenue</a></li>
+                    <li><a href="product-sold.php">Products sold</a></li>
+                    <li><a href="product-remain.php">Product remain</a></li>
+                </ul>
             </li>
             <!-- End Discount -->
             <!-- <li class="mega-menu mega-menu-sm">

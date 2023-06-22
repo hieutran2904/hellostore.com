@@ -51,7 +51,7 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                         </div>
                         <div class="col-lg-7 col-md-9">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-1" style="width: 100%; height: 370px;" src="public/uploads/slides/slides2.jpg" alt="">
+                                <img class="animated slider-1-1" src="public/uploads/slides/slides2.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ $productListNew = $eloquent->selectData(['*'], 'products', ['product_type' => 'A
                         </div>
                         <div class="col-lg-7 col-md-9">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-1" style="width: 100%; height: 370px;" src="public/uploads/slides/slides3.jpg" alt="">
+                                <img class="animated slider-1-1" src="public/uploads/slides/slides3.jpg" alt="">
                             </div>
                         </div>
                     </div>

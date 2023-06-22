@@ -130,7 +130,7 @@ $dataPointsColumnOrderStatus = $arrColumnChartOrderStatus;
                 <div class="card gradient-2">
                     <div class="card-body">
                         <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
-                        <h3 class="card-title text-white">Net Profit</h3>
+                        <h3 class="card-title text-white">Revenue</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white"><?= number_format($totalMoney, 0, ',', '.') . $GLOBALS['CURRENCY'] ?></h2>
                         </div>

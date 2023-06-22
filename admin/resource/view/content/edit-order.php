@@ -3,6 +3,9 @@ $eloquent = new Eloquent;
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $id = $_GET['id'];
     $orderDetailArr = $eloquent->getOrderDetail($id);
+    if ($orderDetailArr == []){
+        echo "<script>window.location.href = 'page404.php';</script>";
+    }
     $orderDetail = $orderDetailArr[0];
     $customerName = $orderDetail['customer_name'];
     $orderDate = $orderDetail['order_date'];
@@ -16,7 +19,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
     $disabled = $paymentMethod == 'Cash On Delivery' ? '' : 'disabled';
 } else {
-    header('Location: order.php');
+    // header('Location: order.php');
+    echo "<script>window.location.href = 'order.php';</script>";
 }
 $transactionStatusArr = ['Paid', 'Unpaid'];
 $orderStatusArr = ['Pending', 'Processing', 'Completed', 'Cancelled'];

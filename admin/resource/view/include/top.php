@@ -16,14 +16,27 @@
     <!-- Pignose Calender -->
     <link href="public/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
-    <link rel="stylesheet" href="public/plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="public/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- <link rel="stylesheet" href="public/plugins/chartist/css/chartist.min.css"> -->
+    <!-- <link rel="stylesheet" href="public/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css"> -->
     <!-- Custom Stylesheet -->
     <link href="public/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="public/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
     <link href="public/plugins/summernote/dist/summernote.css" rel="stylesheet">
     <link href="public/plugins/select2/css/select2.min.css" rel="stylesheet">
     <link href="public/plugins/toastr/css/toastr.min.css" rel="stylesheet">
+
+    <!-- Custom Stylesheet -->
+    <link href="public/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- Page plugins css -->
+    <link href="public/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">
+    <!-- Color picker plugins css -->
+    <link href="public/plugins/jquery-asColorPicker-master/css/asColorPicker.css" rel="stylesheet">
+    <!-- Date picker plugins css -->
+    <link href="public/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="public/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="public/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <link href="public/css/style.css" rel="stylesheet">
 </head>
 
@@ -212,7 +225,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img class="img-fluid" style="object-fit: cover;" src="images/admin-hieu.jpg" height="40" width="40" alt="">
+                                <img class="img-fluid" style="object-fit: cover;" src="images/jerry.jpg" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">

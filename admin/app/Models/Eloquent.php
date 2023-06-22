@@ -404,4 +404,63 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    // SELECT REVENUE
+    public function selectReVenue($fromDate, $toDate)
+    {
+        try {
+            $sql = "SELECT *, `orders`.`id` as `orderId` FROM `orders`
+            LEFT JOIN `customers` ON `customers`.`id` = `orders`.`customer_id`
+            where `order_date` BETWEEN '" .  $fromDate . "'AND '" . $toDate . "'
+            ORDER BY `order_date` DESC
+            ";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // SELECT Product sold
+    public function selectProductSold()
+    {
+        try {
+            $sql = "SELECT `products`.`id` as `productId`, `product_master_image`,`product_name`, `products`.`product_price` AS `productPrice`, `subcategory_name`,
+            SUM(`products_sc`.`product_quantity`) AS `quantity_remain`, 
+            SUM(`order_items`.`product_quantity`) AS `quantity_sold` from `products`
+            LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
+            LEFT JOIN `order_items` ON `order_items`.`product_sc_id` = `products_sc`.`id`
+            LEFT JOIN `subcategories` ON `subcategories`.`id` = `products`.`subcategory_id`
+            WHERE `products_sc`.`is_delete` = '0'
+            GROUP BY `product_master_image`,`product_name`, `productPrice`, `subcategory_name` , `productId`";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // SELECT Product remain
+    public function selectProductRemain()
+    {
+        try {
+            $sql = "SELECT `products`.`id` as `productId`, `product_master_image`,`product_name`, `products`.`product_price` AS `productPrice`, `subcategory_name`,
+            SUM(`product_quantity`) AS `quantity_remain`
+            FROM `products`
+            LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
+            LEFT JOIN `subcategories` ON `subcategories`.`id` = `products`.`subcategory_id`
+            WHERE `products_sc`.`is_delete` = '0'
+            GROUP BY `product_master_image`,`product_name`, `productPrice`, `subcategory_name` , `productId`";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

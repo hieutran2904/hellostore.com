@@ -20,6 +20,8 @@ if (isset($_POST['submit'])) {
         'transaction_id' => 'COD' . date('YmdHis'),
         'transaction_status' => 'Unpaid',
         'order_item_status' => 'Pending',
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
     ];
     $lastInsertOrderId = $eloquent->insertData($tableName, $dataOrders);
     if ($lastInsertOrderId > 0) {
