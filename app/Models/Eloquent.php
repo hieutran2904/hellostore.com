@@ -252,7 +252,7 @@ class Eloquent
     public function selectProductPriceAndColor($price, $colorName, $paginate = ["START" => 0, "END" => 1000])
     {
         try {
-            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price` FROM `products` 
+            $sql = "SELECT `products`.`id`, `product_name`, `product_master_image`, `product_price`, `virtual_price` FROM `products` 
             LEFT JOIN `products_sc` ON `products`.`id` = `products_sc`.`product_id`
             WHERE `products`.`is_delete`='0' AND `product_type` = 'Active' AND `product_color` = '" . $colorName . "' AND `product_price` BETWEEN " . $price['MIN'] . " AND " . $price['MAX'] . " GROUP BY `products`.`id`, `product_name`, `product_master_image`, `product_price` LIMIT " . $paginate['START'] . ", " . $paginate['END'];
             $query = $this->connection->prepare($sql);

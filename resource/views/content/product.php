@@ -23,7 +23,7 @@ if (isset($_POST['keywords'])) {
     //list product search price and color fillter
     $columnName = ['*'];
     $tableName = 'products';
-    if (isset($_POST['checkbox-price'])) {
+    if (isset($_POST['checkbox-price']) && !isset($_POST['checkbox-color'])) {
         $price = $_POST['checkbox-price'];
         if ($_POST['checkbox-price'] == "300k-399k") {
             $priceMin = 300000;
@@ -44,12 +44,11 @@ if (isset($_POST['keywords'])) {
         ];
         $productList = $eloquent->selectProductPrice($whereValue);
         $productNameSearch = '';
-    } else if (isset($_POST['checkbox-color'])) {
+    } else if (isset($_POST['checkbox-color']) && !isset($_POST['checkbox-price'])) {
         $color = $_POST['checkbox-color'];
         $productList = $eloquent->selectProductColor($color);
         $productNameSearch = '';
-    }
-    if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
+    } else if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
         $price = $_POST['checkbox-price'];
         $color = $_POST['checkbox-color'];
         if ($_POST['checkbox-price'] == "300k-399k") {
@@ -75,7 +74,7 @@ if (isset($_POST['keywords'])) {
         $productList = $eloquent->selectData($columnName, $tableName, ['is_delete' => '0', 'product_type' => 'Active']);
         $productNameSearch = '';
     }
-} else if (isset($_GET['price'])) {
+} else if (isset($_GET['price']) && !isset($_GET['color'])) {
     $columnName = ['*'];
     $tableName = 'products';
     $price = $_GET['price'];
@@ -98,15 +97,15 @@ if (isset($_POST['keywords'])) {
     ];
     $productList = $eloquent->selectProductPrice($whereValue);
     $productNameSearch = '';
-} else if (isset($_GET['color'])) {
+} else if (isset($_GET['color']) && !isset($_GET['price'])) {
     $color = $_GET['color'];
     $productList = $eloquent->selectProductColor($color);
     $productNameSearch = '';
 } else if (isset($_GET['price']) && isset($_GET['color'])) {
     $price = $_GET['price'];
     $color = $_GET['color'];
-    echo $price;
-    echo $color;
+    // echo $price;
+    // echo $color;
     if ($_GET['price'] == "300k-399k") {
         $priceMin = 300000;
         $priceMax = 399000;
@@ -172,8 +171,8 @@ if (!empty($productList)) {
     // nod = Number of Data
     $nod = $countItem;
     // rpp = Result Per Page
-    if ($nod > 9) {
-        $rpp = 9;
+    if ($nod > 12) {
+        $rpp = 12;
     } else {
         $rpp = $nod;
     }
@@ -241,7 +240,8 @@ if (!empty($productList)) {
             $color = $_POST['checkbox-color'];
             $productList = $eloquent->selectProductColor($color, ['START' => $cp, 'END' => $rpp]);
             $productNameSearch = '';
-        } else if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
+        }
+        if (isset($_POST['checkbox-price']) && isset($_POST['checkbox-color'])) {
             $url = 'price=' . $_POST['checkbox-price'] . '&color=' . $_POST['checkbox-color'] . '&';
             $price = $_POST['checkbox-price'];
             $color = $_POST['checkbox-color'];
@@ -295,7 +295,8 @@ if (!empty($productList)) {
         $color = $_GET['color'];
         $productList = $eloquent->selectProductColor($color, ['START' => $cp, 'END' => $rpp]);
         $productNameSearch = '';
-    } else if (isset($_GET['price']) && isset($_GET['color'])) {
+    }
+    if (isset($_GET['price']) && isset($_GET['color'])) {
         $url = 'price=' . $_GET['price'] . '&color=' . $_GET['color'] . '&';
         $price = $_GET['price'];
         $color = $_GET['color'];

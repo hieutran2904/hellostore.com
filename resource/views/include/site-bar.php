@@ -6,7 +6,7 @@ $subCategoryList = $eloquent->selectData(['id', 'subcategory_name'], 'subcategor
 $newProductList = $eloquent->selectData(['*'], 'products', ['product_type' => 'Active', 'is_delete' => '0'], [], [], [], ['DESC' => 'id'], ['START' => 0, 'END' => 3]);
 
 //list color
-$productColorList = $eloquent->selectData(['*'], 'products_sc', ['is_delete' => '0'], [], [], ["product_color"], ['DESC' => 'id'], ['START' => 0, 'END' => 8]);
+$productColorList = $eloquent->selectData(['*'], 'products_sc', ['is_delete' => '0'], [], [], ["product_color"], ['DESC' => 'id'], ['START' => 0, 'END' => 100]);
 
 ?>
 <div class="col-lg-3 primary-sidebar sticky-sidebar">
