@@ -3,9 +3,10 @@
 date_default_timezone_set("Asia/Ho_Chi_Minh");
 
 ### SET SMTP CONFIGURATION
-$GLOBALS['SMTPHOST'] = "mail.servername.com";
-$GLOBALS['SMTPUSER'] = "noreply@servername.com";
-$GLOBALS['SMTPPORT'] = "465";
+$GLOBALS['SMTPHOST'] = 'smtp.gmail.com';
+$GLOBALS['SMTPUSER'] = 'hellostorehth@gmail.com';
+$GLOBALS['SMTPPORT'] = '587';
 $GLOBALS['SMTPAUTH'] = "ssl";
-$GLOBALS['SMTPPASS'] = "abc123";
+$GLOBALS['SMTPSECURE'] = "tls";
+$GLOBALS['SMTPPASS'] = 'gsqdyedgdfullort';
 ?>

@@ -70,7 +70,7 @@ if (isset($_POST['user_login'])) {
                                                     <label class="form-check-label" for="exampleCheckbox1"><span>Nhớ mật khẩu</span></label>
                                                 </div>
                                             </div>
-                                            <a class="text-muted" href="#">Quên mật khẩu?</a>
+                                            <a class="text-muted" href="forgot-password.php">Quên mật khẩu?</a>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-fill-out btn-block hover-up" name="user_login">Đăng nhập</button>
