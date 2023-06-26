@@ -8,7 +8,7 @@ class SubCategoryController extends Controller
 ?>
             <tr>
                 <td><?= $eachSubCategory['id'] ?></td>
-                <td><img style="width: 80px;" class="img-fluid rounded" src="<?= $imageBanner ?>" alt="#"></td>
+                <td><img style="width: 80px; height: 40px; object-fit: cover;" class="img-fluid rounded" src="<?= $imageBanner ?>" alt="#"></td>
                 <td><?= $eachSubCategory['subcategory_name'] ?></td>
                 <td><?= $eachSubCategory['category_name'] ?></td>
                 <td>

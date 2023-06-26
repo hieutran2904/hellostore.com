@@ -7035,7 +7035,7 @@ span.fi-rs-apps {
   visibility: visible;
   margin-top: 0;
   background: rgb(212,211,226);
-  background: linear-gradient(90deg, rgba(212,211,226,1) 0%, rgba(210,221,193,1) 50%, rgba(202,202,233,1) 100%);
+  background: beige;
 }
 
 .main-menu.hover-boder > nav > ul > li > a {

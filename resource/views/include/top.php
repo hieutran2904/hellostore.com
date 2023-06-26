@@ -157,7 +157,7 @@
                                             <?php
                                             foreach ($categoryList as $eachCategory) {
                                             ?>
-                                                <li class="sub-mega-menu sub-mega-menu-width-25">
+                                                <li class="sub-mega-menu sub-mega-menu-width-25 col-md-3 mt-3">
                                                     <a class="menu-title" href="product-category.php?categoryId=<?= $eachCategory['id'] ?>">
                                                         <?= $eachCategory['category_name'] ?>
                                                     </a>
@@ -166,11 +166,12 @@
                                                     $tableName = 'subcategories';
                                                     $whereValue = [
                                                         'subcategory_status' => 'Active',
-                                                        'category_id' => $eachCategory['id']
+                                                        'category_id' => $eachCategory['id'],
+                                                        'is_delete' => '0'
                                                     ];
-                                                    $inColumn = ['category_id', 'subcategory_status'];
-                                                    $inValue = [$eachCategory['id'], 1];
-                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, [], $inColumn, $inValue);
+                                                    // $inColumn = ['category_id', 'subcategory_status'];
+                                                    // $inValue = [$eachCategory['id'], 1];
+                                                    $subCategoryList = $eloquent->selectData($columnName, $tableName, $whereValue);
                                                     ?>
                                                     <ul>
                                                         <?php
@@ -185,10 +186,10 @@
                                             <?php
                                             }
                                             ?>
-                                            <!-- <li class="sub-mega-menu sub-mega-menu-width-34">
+                                            <li class="sub-mega-menu sub-mega-menu-width-30 col-md-3">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="product-detail.php"><img src="public/assets/imgs/banner/menclothing.jpg" alt=""></a>
-                                                    <div class="menu-banner-content">
+                                                    <a href="product-detail.php"><img class="img-fluid" src="public/assets/imgs/banner/menclothing.jpg" alt=""></a>
+                                                    <!-- <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
                                                         <div class="menu-banner-price">
@@ -197,15 +198,15 @@
                                                         <div class="menu-banner-btn">
                                                             <a href="product-details.html">Shop now</a>
                                                         </div>
-                                                    </div>
-                                                    <div class="menu-banner-discount">
+                                                    </div> -->
+                                                    <!-- <div class="menu-banner-discount">
                                                         <h3>
                                                             <span>35%</span>
                                                             off
                                                         </h3>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
-                                            </li> -->
+                                            </li>
                                         </ul>
                                     </li>
                                     <!-- <li><a href="blog.html">Blog </a></li>

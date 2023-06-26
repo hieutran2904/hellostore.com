@@ -360,7 +360,7 @@ class Eloquent
         try {
             $sql = "SELECT * FROM `categories`
             LEFT JOIN `subcategories` ON `categories`.`id` = `subcategories`.`category_id`
-            WHERE `subcategories`.`category_id` = " . $id;
+            WHERE `subcategories`.`is_delete`= '0' AND `subcategories`.`category_id` = " . $id;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -377,7 +377,7 @@ class Eloquent
         try {
             $sql = "SELECT * from `subcategories`
             LEFT JOIN `products` ON `products`.`subcategory_id` = `subcategories`.`id`
-            WHERE `products`.`subcategory_id` = " . $id;
+            WHERE `products`.`is_delete` = '0' AND `products`.`subcategory_id` = " . $id;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -394,7 +394,7 @@ class Eloquent
         try {
             $sql = "SELECT * FROM `products`
             LEFT JOIN `products_sc` ON `products_sc`.`product_id` = `products`.`id`
-            WHERE `products_sc`.`product_id` = " . $id;
+            WHERE `products_sc`.`is_delete` = '0' AND `products_sc`.`product_id` = " . $id;
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
