@@ -845,6 +845,11 @@ h5.widget-title {
   border-color: #F15412;
 }
 
+.btn-success{
+  background-color: #20db84 !important;
+  border-color: #33f79a !important;
+}
+
 button.submit, button[type='submit'] {
   font-size: 15px;
   font-weight: 500;
@@ -861,7 +866,8 @@ button.submit:hover, button[type='submit']:hover {
 }
 
 .btn-brand:hover {
-  background-color: #F15412 !important;
+  background-color: #ff4d00 !important;
+  border-color: #ffffff !important;
 }
 
 .btn-login {

@@ -151,4 +151,29 @@ $view->loadContent('include', 'tail');
             }
         })
     });
+
+    //save coupon
+    $('.save-coupon').click(function(e) {
+        e.preventDefault();
+        let discountId = $(this).data('itemid');
+        let quantity = $('#quantity-discount-' + discountId).val();
+        $.ajax({
+            type: 'POST',
+            url: 'app/Handle/saveCoupons.php',
+            data: {
+                discountId: discountId,
+                quantity: quantity,
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.type == "error") {
+                    warning_toast(data.message, data.title);
+                } else {
+                    success_toast(data.message, data.title);
+                    $('#coupon-' + discountId).html('<a class="btn border border-success px-4 rounded code btn-success">Đã lưu</a>');
+                    $('#progress-' + discountId).html('<div class="progress-bar" role="progressbar" style="width: ' + data.persent + '%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="10000">' + data.persent +'%</div>');
+                }
+            }
+        })
+    });
 </script>

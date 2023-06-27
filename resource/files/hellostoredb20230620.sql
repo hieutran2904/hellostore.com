@@ -633,6 +633,23 @@ INSERT INTO `subcategories` (`id`, `category_id`, `subcategory_name`, `subcatego
 -- Table structure for table `wishlist`
 --
 
+-- CREATE coupons
+CREATE TABLE `coupons` (
+  `id` int(11) NOT NULL COMMENT 'COUPON ID',
+  `customer_id` int(11) NOT NULL,
+  `discount_id` int(11) NOT NULL,
+  `is_use` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Alter table coupons
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+
+
+
 CREATE TABLE `wishlist` (
   `id` int(11) NOT NULL COMMENT 'WISHLIST ID',
   `product_id` int(11) NOT NULL,
@@ -923,6 +940,12 @@ ALTER TABLE `wishlist`
   ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 COMMIT;
+
+--
+ALTER TABLE `coupons`
+  ADD CONSTRAINT `coupons_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `coupons_ibfk_2` FOREIGN KEY (`discount_id`) REFERENCES `discounts` (`id`);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

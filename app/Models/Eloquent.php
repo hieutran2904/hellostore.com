@@ -303,4 +303,48 @@ class Eloquent
             echo $e->getMessage();
         }
     }
+
+    //SELECT COUPONS
+    public function selectCoupons()
+    {
+        try {
+            $sql = "SELECT * FROM `discounts`
+            WHERE `is_delete` = '0' AND `discount_status` = 'Active'";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //SELECT COUPONS save
+    public function selectCouponsSave($id)
+    {
+        try {
+            $sql = "SELECT `discount_id` FROM `coupons` 
+            WHERE `discount_id` = '" . $id . "'";
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);
+            return count($dataSelected);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    //check save coupons
+    public function checkSaveCoupons($customerId, $discountId)
+    {
+        try {
+            $sql = "SELECT * FROM `coupons` WHERE `customer_id` = " . $customerId . " AND `discount_id` = " . $discountId;
+            $query = $this->connection->prepare($sql);
+            $query->execute();
+            $dataSelected = $query->fetch(PDO::FETCH_ASSOC);
+            return $dataSelected; //array
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

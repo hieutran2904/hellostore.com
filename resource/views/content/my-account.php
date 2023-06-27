@@ -4,6 +4,11 @@ $eloquent = new Eloquent();
 $orderList = $eloquent->selectData(['*'], 'orders', ['customer_id' => $_SESSION['SSCF_login_id']], [], [], [], ['DESC' => 'id']);
 // print_r($orderList);
 
+//get coupons
+$customerId = $_SESSION['SSCF_login_id'];
+// $couponList = $eloquent->selectData(['*'], 'discounts', ['is_delete' => '0', 'discount_status' => 'Active'], [], [], [], ['DESC' => 'id']);
+$couponList = $eloquent->selectCoupons();
+
 if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
     $customerImageName = "no-image.png";
     $customerImagePath = $GLOBALS['NO_IMAGE'];
@@ -68,6 +73,9 @@ if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Đơn hàng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="coupons-tab" data-bs-toggle="tab" href="#coupons" role="tab" aria-controls="coupons" aria-selected="false"><i class="fi-rs-ticket mr-10"></i>Coupons</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="?exit=yes"><i class="fi-rs-sign-out mr-10"></i>Đăng xuất</a>
@@ -197,60 +205,70 @@ if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
                                         <!-- load order items -->
                                     </div>
                                 </div>
-                                <!-- <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
+                                <!-- coupons -->
+                                <div class="tab-pane fade" id="coupons" role="tabpanel" aria-labelledby="coupons-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5 class="mb-0">Orders tracking</h5>
+                                            <h5 class="mb-0">Phiếu giảm giá dành cho bạn</h5>
                                         </div>
-                                        <div class="card-body contact-from-area">
-                                            <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <form class="contact-form-style mt-30 mb-50" action="#" method="post">
-                                                        <div class="input-style mb-20">
-                                                            <label>Order ID</label>
-                                                            <input name="order-id" placeholder="Found in your order confirmation email" type="text" class="square">
-                                                        </div>
-                                                        <div class="input-style mb-20">
-                                                            <label>Billing email</label>
-                                                            <input name="billing-email" placeholder="Email you used during checkout" type="email" class="square">
-                                                        </div>
-                                                        <button class="submit submit-auto-width" type="submit">Track</button>
-                                                    </form>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <div class="container mt-5">
+                                                    <div class="row">
+                                                        <?php
+                                                        foreach ($couponList as $eachCoupon) {
+                                                            //check save coupon
+                                                            $checkSaveCoupon = $eloquent->checkSaveCoupons($customerId, $eachCoupon['id']);
+                                                            if ($checkSaveCoupon != []) {
+                                                                $typeSave = 'saved-coupon btn-success';
+                                                                $nameSave = 'Đã lưu';
+                                                            } else {
+                                                                $typeSave = 'save-coupon btn-brand';
+                                                                $nameSave = 'Lưu';
+                                                            }
+
+                                                            //handle persent for progress bar
+                                                            $couponSaved = $eloquent->selectCouponsSave($eachCoupon['id']);
+                                                            $persent = ($couponSaved / ($eachCoupon['quantity'] + $couponSaved)) * 100;
+                                                            $persent = round($persent, 0);
+                                                        ?>
+                                                            <div class="col-md-6 mb-15">
+                                                                <div class="coupon p-2 coupon-bg">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <img src="./public/assets/imgs/logo/logoshop2023.png">
+                                                                            <div id="coupon-<?= $eachCoupon['id'] ?>">
+                                                                                <input type="hidden" name="" id="quantity-discount-<?= $eachCoupon['id'] ?>" value="<?= $eachCoupon['quantity'] ?>">
+                                                                                <a data-itemid="<?= $eachCoupon['id'] ?>" class="d-flex flex-row justify-content-center btn border border-success px-4 rounded code <?= $typeSave ?>"><?= $nameSave ?></a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <div>
+                                                                                <div class="d-flex flex-row justify-content-center off">
+                                                                                    <h3 class="font-xl text-brand fw-900"><?= number_format($eachCoupon['price_discount_amount'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?></h3>
+                                                                                </div>
+                                                                                <div class="d-flex flex-row justify-content-center off px-3 p-2">
+                                                                                    <span class="font-xl text-brand">Mã giảm giá: <?= $eachCoupon['discount_code'] ?></span>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <div class="progress" id="progress-<?= $eachCoupon['id'] ?>">
+                                                                                        <div class="progress-bar" role="progressbar" style="width: <?= $persent ?>%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="10000"><?= $persent . '%' ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card mb-3 mb-lg-0">
-                                                <div class="card-header">
-                                                    <h5 class="mb-0">Billing Address</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <address>000 Interstate<br> 00 Business Spur,<br> Sault Ste. <br>Marie, MI 00000</address>
-                                                    <p>New York</p>
-                                                    <a href="#" class="btn-small">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5 class="mb-0">Shipping Address</h5>
-                                                </div>
-                                                <div class="card-body">
-                                                    <address>4299 Express Lane<br>
-                                                        Sarasota, <br>FL 00000 USA <br>Phone: 1.000.000.0000</address>
-                                                    <p>Sarasota</p>
-                                                    <a href="#" class="btn-small">Edit</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
