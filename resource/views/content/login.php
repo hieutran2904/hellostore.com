@@ -8,12 +8,12 @@ if (isset($_POST['user_login'])) {
     $tableName = "customers";
     $whereValue = [
         "customer_email" => $_POST['user_email'],
-        "customer_password" => sha1($_POST['user_pass'])
+        "customer_password" => sha1($_POST['user_pass']),
     ];
     $userLogin = $eloquent->selectData($columnName, $tableName, $whereValue);
 
     #== AFTER VALIDATAION CREATE A SESSION FOR USER ENTIRE FRONT END APPLICATION
-    if (!empty($userLogin)) {
+    if (!empty($userLogin) && $userLogin[0]['customer_status'] == 'Active') {
         $_SESSION['SSCF_login_time'] = date("Y-m-d H:i:s");
         $_SESSION['SSCF_login_id'] = $userLogin[0]['id'];
         $_SESSION['SSCF_login_user_name'] = $userLogin[0]['customer_name'];
@@ -46,6 +46,9 @@ if (isset($_POST['user_login'])) {
                     if (isset($_POST['user_login'])) {
                         if (empty($userLogin)) {
                             echo '<div class="alert alert-danger">⚠ Bạn đã nhập sai tài khoản hoặc mật khẩu. Vui lòng nhập lại!</div>';
+                        }
+                        if ($userLogin[0]['customer_status'] == 'Inactive') {
+                            echo '<div class="alert alert-danger">⚠ Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với quản trị viên để biết thêm chi tiết!</div>';
                         }
                     }
                     ?>
