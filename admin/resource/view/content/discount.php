@@ -42,6 +42,7 @@
                                         <th>ID</th>
                                         <th>DISCOUNT CODE</th>
                                         <th>PRICE DISCOUNT AMOUNT</th>
+                                        <th>DISCOUNT CONDITION</th>
                                         <th>QUANTITY</th>
                                         <th>STATUS</th>
                                         <th>PUBLISHED ON</th>
@@ -59,6 +60,7 @@
                                         <th>ID</th>
                                         <th>DISCOUNT CODE</th>
                                         <th>PRICE DISCOUNT AMOUNT</th>
+                                        <th>DISCOUNT CONDITION</th>
                                         <th>QUANTITY</th>
                                         <th>STATUS</th>
                                         <th>PUBLISHED ON</th>

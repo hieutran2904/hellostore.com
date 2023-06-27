@@ -4,6 +4,9 @@ if (isset($_SESSION['SSCF_login_id'])) {
     $productListCart = $eloquent->loadCartInfo($_SESSION['SSCF_login_id']);
 } else {
     $productListCart = [];
+    echo '<script>
+            window.location.href = "login.php";
+        </script>';
 }
 
 $priceSub = 0;

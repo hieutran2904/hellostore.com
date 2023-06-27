@@ -850,6 +850,11 @@ h5.widget-title {
   border-color: #33f79a !important;
 }
 
+.btn-info{
+  background-color: #6eb0b8 !important;
+  border-color: #6eb0b8 !important;
+}
+
 button.submit, button[type='submit'] {
   font-size: 15px;
   font-weight: 500;

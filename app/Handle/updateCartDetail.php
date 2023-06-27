@@ -5,6 +5,9 @@ $toastr = new Toastr();
 $eloquent = new Eloquent();
 $arr = array();
 
+//reset session discount
+$_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
+
 //update quantity remain
 $type = $_POST['type'];
 $quantityRemain = $type == 'up' ? $_POST['quantity_remain'] - 1 : $_POST['quantity_remain'] + 1;

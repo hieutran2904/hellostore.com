@@ -11,6 +11,7 @@ class DiscountController extends Controller
                 <td><?= $eachDiscount['id'] ?></td>
                 <td><?= $eachDiscount['discount_code'] ?></td>
                 <td><?= number_format($eachDiscount['price_discount_amount'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?></td>
+                <td><?= number_format($eachDiscount['discount_condition'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?></td>
                 <td><?= $eachDiscount['quantity'] ?></td>
                 <td><span class="<?= $typeText ?>"><?= $eachDiscount['discount_status'] ?></span></td>
                 <td><?= $eachDiscount['updated_at'] ?></td>

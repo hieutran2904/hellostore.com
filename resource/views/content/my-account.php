@@ -220,8 +220,13 @@ if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
                                                             //check save coupon
                                                             $checkSaveCoupon = $eloquent->checkSaveCoupons($customerId, $eachCoupon['id']);
                                                             if ($checkSaveCoupon != []) {
-                                                                $typeSave = 'saved-coupon btn-success';
-                                                                $nameSave = 'Đã lưu';
+                                                                if ($checkSaveCoupon['is_use'] == '1') {
+                                                                    $typeSave = 'saved-coupon btn-info';
+                                                                    $nameSave = 'Đã dùng';
+                                                                } else {
+                                                                    $typeSave = 'saved-coupon btn-success';
+                                                                    $nameSave = 'Đã lưu';
+                                                                }
                                                             } else {
                                                                 $typeSave = 'save-coupon btn-brand';
                                                                 $nameSave = 'Lưu';
@@ -239,7 +244,7 @@ if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
                                                                             <img src="./public/assets/imgs/logo/logoshop2023.png">
                                                                             <div id="coupon-<?= $eachCoupon['id'] ?>">
                                                                                 <input type="hidden" name="" id="quantity-discount-<?= $eachCoupon['id'] ?>" value="<?= $eachCoupon['quantity'] ?>">
-                                                                                <a data-itemid="<?= $eachCoupon['id'] ?>" class="d-flex flex-row justify-content-center btn border border-success px-4 rounded code <?= $typeSave ?>"><?= $nameSave ?></a>
+                                                                                <a data-itemid="<?= $eachCoupon['id'] ?>" class="d-flex flex-row justify-content-center mt-1 btn border border-success px-4 rounded code <?= $typeSave ?>"><?= $nameSave ?></a>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-8">
@@ -247,8 +252,11 @@ if ($_SESSION['SSCF_login_user_image'] == "no-image.png") {
                                                                                 <div class="d-flex flex-row justify-content-center off">
                                                                                     <h3 class="font-xl text-brand fw-900"><?= number_format($eachCoupon['price_discount_amount'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?></h3>
                                                                                 </div>
-                                                                                <div class="d-flex flex-row justify-content-center off px-3 p-2">
+                                                                                <div class="d-flex flex-row justify-content-center off px-3 pt-2">
                                                                                     <span class="font-xl text-brand">Mã giảm giá: <?= $eachCoupon['discount_code'] ?></span>
+                                                                                </div>
+                                                                                <div class="d-flex flex-row justify-content-center off">
+                                                                                    <span class="text-brand">(Áp dụng với đơn hàng từ <?= number_format($eachCoupon['discount_condition'], 0, ',', '.') . $GLOBALS['CURRENCY'] ?>)</span>
                                                                                 </div>
                                                                                 <div>
                                                                                     <div class="progress" id="progress-<?= $eachCoupon['id'] ?>">

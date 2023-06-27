@@ -150,6 +150,19 @@
                                     ];
                                     $eloquent->insertData($tableName, $dataInvoices);
 
+                                    //update coupon
+                                    if ($_SESSION['PRICE_DISCOUNT_AMOUNT'] > 0) {
+                                        $tableName = "coupons";
+                                        $dataCoupons = [
+                                            'is_use' => '1',
+                                            'updated_at' => date('Y-m-d H:i:s'),
+                                        ];
+                                        $condition = [
+                                            'customer_id' => $_SESSION['SSCF_login_id'],
+                                            'discount_id' => $_SESSION['DISCOUNT_ID'],
+                                        ];
+                                        $eloquent->updateData($tableName, $dataCoupons, $condition);
+                                    }
                                     // echo '<script>window.location="status.php"</script>';
                                 }
                             }

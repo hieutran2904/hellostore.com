@@ -153,7 +153,7 @@
                                     <!-- <li><a href="about.html">About</a></li> -->
                                     <li><a id="main_product_id" href="product-category.php">Sản phẩm </a></li>
                                     <li class="position-static"><a href="#">Danh mục <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="mega-menu row">
+                                        <ul class="mega-menu row" style="margin-left: 1px;">
                                             <?php
                                             foreach ($categoryList as $eachCategory) {
                                             ?>

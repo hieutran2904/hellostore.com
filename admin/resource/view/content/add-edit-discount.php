@@ -7,6 +7,7 @@ if (isset($_GET['id'])) {
     $discountId = $discountItem['id'];
     $discountCode = $discountItem['discount_code'];
     $priceDiscountAmount = $discountItem['price_discount_amount'];
+    $discountCondition = $discountItem['discount_condition'];
     $quantity = $discountItem['quantity'];
     $discountStatus = $discountItem['discount_status'];
 } else {
@@ -14,6 +15,7 @@ if (isset($_GET['id'])) {
     $discountId = '';
     $discountCode = '';
     $priceDiscountAmount = '';
+    $discountCondition = '';
     $quantity = '';
     $discountStatus = '';
 }
@@ -53,6 +55,14 @@ $arrStatus = ['Active', 'Inactive'];
                                     <div class="col-lg-9">
                                         <input required type="text" class="form-control" id="val-price-discount-amount" name="val-price-discount-amount" placeholder="Enter a price discount amount.."
                                         value="<?= $priceDiscountAmount ?>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label" for="val-price-discount-condition">Price Discount Condition <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        <input required type="text" class="form-control" id="val-price-discount-condition" name="val-price-discount-condition" placeholder="Enter a price discount condition.."
+                                        value="<?= $discountCondition ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">

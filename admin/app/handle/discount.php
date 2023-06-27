@@ -8,6 +8,7 @@ $eloquent = new Eloquent();
 $id = $_POST['val-discount-id'];
 $code = $_POST['val-discount-code'];
 $price = $_POST['val-price-discount-amount'];
+$discountCondition = $_POST['val-price-discount-condition'];
 $quantity = $_POST['val-discount-quantity'];
 $status = $_POST['val-status'];
 $datetime = date('Y-m-d H:i:s');
@@ -39,6 +40,7 @@ if ($id == '') {
     $data = [
         'discount_code' => $code,
         'price_discount_amount' => $price,
+        'discount_condition' => $discountCondition,
         'quantity' => $quantity,
         'discount_status' => $status,
         'created_at' => $datetime,
@@ -57,6 +59,7 @@ if ($id == '') {
     $data = [
         'discount_code' => $code,
         'price_discount_amount' => $price,
+        'discount_condition' => $discountCondition,
         'quantity' => $quantity,
         'discount_status' => $status,
         'updated_at' => $datetime
