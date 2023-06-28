@@ -152,7 +152,7 @@ $view->loadContent('include', 'tail');
         })
     });
 
-    //save coupon
+    // //save coupon
     $('.save-coupon').click(function(e) {
         e.preventDefault();
         let discountId = $(this).data('itemid');

@@ -43,6 +43,7 @@ if ($quantity == 0) {
         'type' => 'success',
         'title' => 'Thông báo',
         'message' => 'Lưu mã giảm giá thành công',
+        'discountId' => $discountId,
         'persent' => $persent,
     ];
     echo json_encode($arr);

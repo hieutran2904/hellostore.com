@@ -7,6 +7,7 @@ $arr = array();
 
 //reset session discount
 $_SESSION['PRICE_DISCOUNT_AMOUNT'] = 0;
+unset($_SESSION['SELECTED_COUPON']);
 
 //update quantity remain
 $type = $_POST['type'];

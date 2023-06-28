@@ -312,7 +312,8 @@ class Eloquent
             LEFT JOIN `order_items` ON `order_items`.`product_sc_id` = `products_sc`.`id`
             WHERE `order_id` IS NOT null
             GROUP BY `product_name`
-            ORDER BY `total` DESC";
+            ORDER BY `total` DESC
+            LIMIT 10";
             $query = $this->connection->prepare($sql);
             $query->execute();
             $dataSelected = $query->fetchAll(PDO::FETCH_ASSOC);

@@ -302,6 +302,10 @@ ul.amounts li.grand-total {
 	background: #fcffc3;
 	border: dashed rgb(253, 98, 98);
 }
+.coupon-bg-selected {
+	background: #f8ff7b !important;
+	border: dashed rgb(253, 98, 98);
+}
 
 .code:hover {
 	background: #F15412;
@@ -329,6 +333,10 @@ ul.amounts li.grand-total {
 	white-space: nowrap;
 	background-color: #ff7403;
 	transition: width 0.6s ease;
+}
+
+.is-used{
+	opacity: 0.5;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {

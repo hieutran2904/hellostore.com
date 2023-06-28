@@ -83,6 +83,7 @@ else {
                 $('#load_product_detail').load("app/Handle/loadCartDetail.php");
                 $('#load_price_cart').load("app/Handle/loadPriceCart.php");
                 $('.cart_product').load("app/Handle/loadCart.php");
+                $('#load_coupons').load("app/Handle/loadCoupons.php");
                 $('.toastr_notification').html(data);
             }
         });
@@ -121,6 +122,7 @@ else {
                         success: function(data) {
                             $('.cart_product').load("app/Handle/loadCart.php");
                             $('#load_price_cart').load("app/Handle/loadPriceCart.php");
+                            $('#load_coupons').load("app/Handle/loadCoupons.php");
                             const sub_price = data.sub_price.toLocaleString('vi-VN', {
                                 style: 'currency',
                                 currency: 'VND'
@@ -162,6 +164,7 @@ else {
                         success: function(data) {
                             $('.cart_product').load("app/Handle/loadCart.php");
                             $('#load_price_cart').load("app/Handle/loadPriceCart.php");
+                            $('#load_coupons').load("app/Handle/loadCoupons.php");
                             const sub_price = data.sub_price.toLocaleString('vi-VN', {
                                 style: 'currency',
                                 currency: 'VND'

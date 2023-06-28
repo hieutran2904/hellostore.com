@@ -37,7 +37,7 @@
                             <strong>Số điện thoại: </strong>+84 123 456 789
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Email: </strong>hellostore@gmail.com
+                            <strong>Email: </strong>hellostorehth@gmail.com
                         </p>
                         <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow HelloStore's</h5>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
@@ -81,7 +81,9 @@
                         </div>
                         <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                             <p class="mb-20 wow fadeIn animated">Các phương thức thanh toán</p>
-                            <img class="wow fadeIn animated" src="public/assets/imgs/theme/payment-method.png" alt="">
+                            <!-- <img class="wow fadeIn animated" src="public/assets/imgs/theme/payment-method.png" alt=""> -->
+                            <img class="col-md-5" src="https://pay.vnpay.vn/images/brands/logo-en.svg" alt="">
+                            <img class="col-md-7" style="width:50px;" src="public/assets/imgs/payment_cod.png" alt="">
                         </div>
                     </div>
                 </div>

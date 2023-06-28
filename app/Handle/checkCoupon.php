@@ -38,6 +38,7 @@ if ($couponItem != []) {
                 exit();
             }
             $_SESSION['PRICE_DISCOUNT_AMOUNT'] = $couponItem[0]['price_discount_amount'];
+            $_SESSION['SELECTED_COUPON'] = $discountId;
             $toastr->success_toast("Mã giảm giá đã được áp dụng", 'THÀNH CÔNG');
         }
     }

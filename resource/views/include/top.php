@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="public/assets/css/toastr.css">
     <link rel="stylesheet" href="public/assets/css/invoice.css">
     <link rel="stylesheet" href="public/assets/css/popup-review.css">
+    <link rel="stylesheet" href="public/assets/css/scroll.css">
     <style>
         .load-customer {
             width: 100%;

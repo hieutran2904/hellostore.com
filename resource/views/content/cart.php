@@ -9,6 +9,7 @@ if (isset($_SESSION['SSCF_login_id'])) {
         </script>';
 }
 
+
 $priceSub = 0;
 if ($productListCart != [])
     foreach ($productListCart as $eachProduct) {
@@ -62,9 +63,17 @@ if ($productListCart != [])
                     <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                     <div class="row mb-50">
                         <div class="col-lg-6 col-md-12">
-                            <div class="mb-30 mt-0">
+                            <div class="mt-0">
                                 <div class="heading_s1 mb-3">
-                                    <h4>Hello Store's Voucher</h4>
+                                    <h4>Danh sách Voucher</h4>
+                                </div>
+                                <div id="load_coupons" class="card example-1 scrollbar-ripe-malinka p-10">
+                                    <!-- load data from load coupons -->
+                                </div>
+                            </div>
+                            <!-- <div class="mb-30 mt-0 d-none">
+                                <div class="heading_s1 mb-3">
+                                    <h4>Voucher của bạn</h4>
                                 </div>
                                 <div class="total-amount">
                                     <div class="left">
@@ -72,8 +81,7 @@ if ($productListCart != [])
                                             <form action="#" target="_blank">
                                                 <div class="form-row row justify-content-center">
                                                     <div class="form-group col-lg-6">
-                                                        <input class="font-medium" id="coupon_code" name="Coupon" placeholder="Nhập mã giảm giá" 
-                                                        value="">
+                                                        <input class="font-medium" id="coupon_code" name="Coupon" placeholder="Nhập mã giảm giá" value="">
                                                     </div>
                                                     <div class="form-group col-lg-6">
                                                         <button class="btn btn-sm check_coupon"><i class="fi-rs-label mr-10"></i>Kiểm tra</button>
@@ -83,7 +91,7 @@ if ($productListCart != [])
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="border p-md-4 p-30 border-radius cart-totals" id="load_price_cart">

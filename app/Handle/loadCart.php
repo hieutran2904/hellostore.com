@@ -93,6 +93,7 @@ $SESSION['LIST_PRODUCT_CART'] = $productListCart;
                 $('.cart_product').load("app/Handle/loadCart.php");
                 $('#load_product_detail').load("app/Handle/loadCartDetail.php");
                 $('#load_price_cart').load("app/Handle/loadPriceCart.php");
+                $('#load_coupons').load("app/Handle/loadCoupons.php");
                 $('.toastr_notification').html(data);
             }
         });
