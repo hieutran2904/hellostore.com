@@ -47,7 +47,7 @@ if (isset($_POST['user_login'])) {
                         if (empty($userLogin)) {
                             echo '<div class="alert alert-danger">⚠ Bạn đã nhập sai tài khoản hoặc mật khẩu. Vui lòng nhập lại!</div>';
                         }
-                        if ($userLogin[0]['customer_status'] == 'Inactive') {
+                        if ($userLogin != [] && $userLogin[0]['customer_status'] == 'Inactive') {
                             echo '<div class="alert alert-danger">⚠ Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với quản trị viên để biết thêm chi tiết!</div>';
                         }
                     }
