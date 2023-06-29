@@ -295,8 +295,7 @@ if (!empty($productList)) {
         $color = $_GET['color'];
         $productList = $eloquent->selectProductColor($color, ['START' => $cp, 'END' => $rpp]);
         $productNameSearch = '';
-    }
-    if (isset($_GET['price']) && isset($_GET['color'])) {
+    } else if (isset($_GET['price']) && isset($_GET['color'])) {
         $url = 'price=' . $_GET['price'] . '&color=' . $_GET['color'] . '&';
         $price = $_GET['price'];
         $color = $_GET['color'];
