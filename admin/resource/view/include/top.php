@@ -225,7 +225,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img class="img-fluid" style="object-fit: cover;" src="images/jerry.jpg" height="40" width="40" alt="">
+                                <img class="img-fluid" style="object-fit: cover;" src="images/hieu-admin.jpg" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
